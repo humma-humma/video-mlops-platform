@@ -24,6 +24,12 @@ class InferenceConfig:
         default=False,
         metadata={"help": "Whether to compile the model for faster inference."},
     )
+    attention_implementation: str | None = field(
+        default=None,
+        metadata={
+            "help": "Attention implementation to use. If None, the default implementation is used.",
+        },
+    )
 
     # ===== Output folders =====
     csv_folder: Path = field(metadata={"help": "Path to folder to save CSV outputs"})

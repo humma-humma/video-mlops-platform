@@ -15,6 +15,9 @@ def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
         device_map="auto",
         dtype=torch.bfloat16,
         use_cache=cfg.use_kv_cache,
+        model_kwargs={"_attn_implementation": cfg.attention_implementation}
+        if cfg.attention_implementation
+        else {},
     )
     if cfg.torch_compile:
         print("🚀 Compiling model...")

@@ -5,6 +5,7 @@ requires-python = ">=3.12"
 dependencies = [
     "argparse-dataclass>=2",
     "bert-score>=0.3",
+    "flash-attn>=2.8.3;sys_platform != 'darwin'",
     "moviepy>=2.2",
     "numpy>=2.4",
     "opencv-python-headless>=4.13",
@@ -15,6 +16,18 @@ dependencies = [
     "torchvision>=0.24",
     "transformers[accelerate,num2words,sklearn,torch-vision,video]>=4.57",
 ]
+
+[tool.uv.extra-build-dependencies]
+flash-attn = [{ requirement = "torch", match-runtime = true }]
+
+[tool.uv.extra-build-variables]
+# The FLASH_ATTENTION_SKIP_CUDA_BUILD environment variable ensures that
+# flash-attn is installed from a compatible, pre-built wheel, rather than
+# attempting to build it from source, which requires access to the CUDA
+# development toolkit. If the CUDA toolkit is not available, the environment
+# variable can be omitted, and flash-attn will be installed from a pre-built
+# wheel if one is available for the current platform, Python version, and PyTorch version.
+flash-attn = { FLASH_ATTENTION_SKIP_CUDA_BUILD = "TRUE" }
 
 [tool.uv.sources]
 torch = { index = "pytorch", marker = "sys_platform != 'darwin'" }
