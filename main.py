@@ -2,10 +2,9 @@ import itertools
 import time
 
 import pandas as pd
-from tqdm import tqdm
 
 from src.audio_utils import get_audio_transcript
-from src.config import ConfigClass
+from src.config import InferenceConfig
 from src.evaluation_utils import evaluate_with_stats
 from src.inference_utils import (
     create_messages,
@@ -16,20 +15,21 @@ from src.inference_utils import (
 from src.model_utils import load_model
 
 
-def main(cfg: ConfigClass) -> None:
+def main(cfg: InferenceConfig) -> None:
+    print(f"🚀 Starting inference...\n{cfg}")
     start_time = time.perf_counter()
 
-    pipe, model_load_time = load_model(cfg.model_name)
+    pipe, model_load_time = load_model(cfg)
 
     video_id_iter = cfg.video_folder.glob("*.mp4")
     if cfg.num_video_samples > 0:
-        video_ids = itertools.islice(video_id_iter, cfg.num_video_samples)
+        video_id_iter = itertools.islice(video_id_iter, cfg.num_video_samples)
     video_ids = tuple(video_id_iter)
     print(f"Processing {len(video_ids)} videos...")
 
     summary_messages: list[str] = []
     category_messages: list[str] = []
-    for video_path in tqdm(video_ids, desc="Processing videos"):
+    for video_path in video_ids:
         video_id = video_path.stem
 
         transcript = get_audio_transcript(
@@ -48,10 +48,16 @@ def main(cfg: ConfigClass) -> None:
         category_messages.append(category_msg)
 
     # Run Summary Inference
+    print("Running summary inference...")
     summaries, summary_time = run_inference(pipe, summary_messages, mode="summary")
+    print(f"Summaries generated in {summary_time:.2f} seconds")
 
     # Run Category Inference
+    print("Running category inference...")
     categories, category_time = run_inference(pipe, category_messages, mode="category")
+    print(f"Categories generated in {category_time:.2f} seconds")
+
+    total_time = time.perf_counter() - start_time
 
     res_dict: dict[str, dict[str, str]] = {}
     for video_path, summary, category in zip(
@@ -62,8 +68,6 @@ def main(cfg: ConfigClass) -> None:
     ):
         video_id = video_path.stem
         res_dict[video_id] = {"summary": summary, "category": category}
-
-    total_time = time.perf_counter() - start_time
 
     output_csv_path = cfg.csv_folder / f"{cfg.file_name}.csv"
     response_df = save_results_to_csv(res_dict, output_csv_path)
@@ -111,6 +115,6 @@ def main(cfg: ConfigClass) -> None:
 if __name__ == "__main__":
     from argparse_dataclass import ArgumentParser
 
-    parser = ArgumentParser(ConfigClass, description="Run VLM Inference")
+    parser = ArgumentParser(InferenceConfig, description="Run VLM Inference")
     cfg = parser.parse_args()
     main(cfg)

@@ -68,7 +68,7 @@ def run_inference(
         max_new_tokens = 64
 
     output = pipe(text=messages, max_new_tokens=max_new_tokens, do_sample=False)  # type:ignore[no-matching-overload]
-    text = [out["generated_text"].rsplit("Assistant:", 1)[-1].strip() for out in output]
+    text = [out[0]["generated_text"][-1]["content"].strip() for out in output]
 
     return text, time.perf_counter() - start
 
@@ -107,7 +107,7 @@ def save_stats_to_json(
             "mean": category_time,
             "min": category_time,
             "max": category_time,
-            "std": category_time,
+            "std": 0,
         },
         "evaluation_results": evaluation_results,
     }

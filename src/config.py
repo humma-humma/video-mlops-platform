@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 @dataclass(frozen=True, kw_only=True)
-class ConfigClass:
+class InferenceConfig:
     # ===== PATHS =====
     video_folder: Path = field(metadata={"help": "Path to folder with video files"})
     audio_folder: Path = field(metadata={"help": "Path to folder with audio files"})
