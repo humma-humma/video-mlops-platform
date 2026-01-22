@@ -67,7 +67,7 @@ def transcribe_audio_whisper(
         asr_pipeline = pipeline(
             "automatic-speech-recognition",
             model=model_name,
-            torch_dtype=torch.float16,
+            dtype=torch.float16,
             device=f"cuda:{device_id}",
         )
 

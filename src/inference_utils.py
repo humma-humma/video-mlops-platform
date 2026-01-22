@@ -66,7 +66,7 @@ def run_inference(
     mode: str = "category",
 ) -> tuple[str, float]:
     """Run inference and measure time."""
-    start = time.time()
+    start = time.perf_counter()
     inputs = processor.apply_chat_template(
         messages,
         add_generation_prompt=True,
@@ -77,9 +77,9 @@ def run_inference(
 
     if mode == "category":
         max_new_tokens = 64
-    ids = model.generate(**inputs, do_sample=False, max_new_tokens=max_new_tokens)
+    ids = model.generate(**inputs, do_sample=False, max_new_tokens=max_new_tokens)  # type:ignore[invalid-argument-type]
     text = processor.batch_decode(ids, skip_special_tokens=True)[0]
-    end = time.time()
+    end = time.perf_counter()
     return text.rsplit("Assistant:", 1)[-1].strip(), end - start
 
 

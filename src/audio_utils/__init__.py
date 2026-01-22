@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from utils.extract_audio import extract_audio_mp3, transcribe_audio_whisper
+from .extract_audio import extract_audio_mp3, transcribe_audio_whisper
 
 
 def get_audio_transcript(

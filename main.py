@@ -1,40 +1,41 @@
+import itertools
 import time
 
 import pandas as pd
+from tqdm import tqdm
 
-from audio_utils import get_audio_transcript
-from config import CFG
-from evaluation_utils import evaluate_with_stats
-from inference_utils import (
+from src.audio_utils import get_audio_transcript
+from src.config import ConfigClass
+from src.evaluation_utils import evaluate_with_stats
+from src.inference_utils import (
     create_messages,
     run_inference,
     save_results_to_csv,
     save_stats_to_json,
 )
-from model_utils import load_model
+from src.model_utils import load_model
 
 
-def main() -> None:
-    start_time = time.time()
+def main(cfg: ConfigClass) -> None:
+    start_time = time.perf_counter()
 
-    processor, model, model_load_time = load_model(CFG.MODEL_NAME, CFG.DEVICE)
+    processor, model, model_load_time = load_model(cfg.model_name, cfg.device)
 
-    res_dict, summary_times, category_times = {}, [], []
-
-    video_ids = tuple(CFG.VIDEO_FOLDER.glob("*.mp4"))
-    if CFG.SAMPLE_VIDEO:
-        video_ids = video_ids[: CFG.SAMPLE_SIZE]
+    video_id_iter = cfg.video_folder.glob("*.mp4")
+    if cfg.num_video_samples > 0:
+        video_ids = itertools.islice(video_id_iter, cfg.num_video_samples)
+    video_ids = tuple(video_id_iter)
     print(f"Processing {len(video_ids)} videos...")
 
-    for vid_file in video_ids:
-        video_id = vid_file.stem
-        video_path = CFG.VIDEO_FOLDER / vid_file
+    res_dict, summary_times, category_times = {}, [], []
+    for video_path in tqdm(video_ids, desc="Processing videos"):
+        video_id = video_path.stem
 
         transcript = get_audio_transcript(
             video_id,
             video_path,
-            CFG.AUDIO_FOLDER,
-            CFG.AUDIO_TRANSCRIPT_FOLDER,
+            cfg.audio_folder,
+            cfg.audio_transcript_folder,
         )
 
         # ---- Summary Generation ----
@@ -49,11 +50,12 @@ def main() -> None:
 
         res_dict[video_id] = {"summary": summary, "category": category}
 
-    total_time = time.time() - start_time
+    total_time = time.perf_counter() - start_time
 
-    response_df = save_results_to_csv(res_dict, CFG.CSV_PATH)
+    output_csv_path = cfg.csv_folder / f"{cfg.file_name}.csv"
+    response_df = save_results_to_csv(res_dict, output_csv_path)
 
-    ground_truth = pd.read_csv(CFG.GROUND_TRUTH_FILE)
+    ground_truth = pd.read_csv(cfg.ground_truth_file)
     # response_df = pd.DataFrame.from_dict(res_dict, orient="index").reset_index()
     # response_df.rename(columns={"index": "video_id"}, inplace=True)
 
@@ -78,18 +80,24 @@ def main() -> None:
 
     evaluation_results = evaluate_with_stats(ground_truth, response_df)
 
+    output_json_stat_path = cfg.statistics_folder / f"{cfg.file_name}_stats.json"
+
     save_stats_to_json(
-        CFG.MODEL_NAME,
+        cfg.model_name,
         model_load_time,
         total_time,
         summary_times,
         category_times,
         evaluation_results,
-        CFG.STAT_JSON_PATH,
+        output_json_stat_path,
     )
 
     print("✅ Inference completed.")
 
 
 if __name__ == "__main__":
-    main()
+    from argparse_dataclass import ArgumentParser
+
+    parser = ArgumentParser(ConfigClass, description="Run VLM Inference")
+    cfg = parser.parse_args()
+    main(cfg)

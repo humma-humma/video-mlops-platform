@@ -3,6 +3,7 @@ name = "vlm-inference"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "argparse-dataclass>=2.0.0",
     "bert-score>=0.3.13",
     "moviepy>=2.2.1",
     "numpy>=2.4.1",
@@ -10,11 +11,14 @@ dependencies = [
     "pandas>=2.3.3",
     "scikit-learn>=1.8",
     "torch>=2.9",
-    "transformers[accelerate]>=4.57.6",
+    "torchvision>=0.24",
+    "tqdm>=4.67.1",
+    "transformers[accelerate,num2words,sklearn,torch-vision,video]>=4.57.6",
 ]
 
 [tool.uv.sources]
 torch = { index = "pytorch", marker = "sys_platform != 'darwin'" }
+torchvision = { index = "pytorch", marker = "sys_platform != 'darwin'" }
 
 [[tool.uv.index]]
 name = "pytorch"
