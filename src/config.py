@@ -8,22 +8,19 @@ class ConfigClass:
     video_folder: Path = field(metadata={"help": "Path to folder with video files"})
     audio_folder: Path = field(metadata={"help": "Path to folder with audio files"})
     audio_transcript_folder: Path = field(
-        metadata={"help": "Path to folder with audio transcript files"}
+        metadata={"help": "Path to folder with audio transcript files"},
     )
     ground_truth_file: Path = field(
-        metadata={"help": "Path to ground truth file (CSV)"}
+        metadata={"help": "Path to ground truth file (CSV)"},
     )
 
     # ===== MODEL INFO =====
     model_name: str = field(metadata={"help": "Name of the model to be used"})
-    device: str = field(
-        metadata={"help": "Device to run the model on, e.g., 'cpu' or 'cuda'"}
-    )
 
     # ===== Output folders =====
     csv_folder: Path = field(metadata={"help": "Path to folder to save CSV outputs"})
     statistics_folder: Path = field(
-        metadata={"help": "Path to folder to save statistics outputs"}
+        metadata={"help": "Path to folder to save statistics outputs"},
     )
 
     # ===== OUTPUT FILES =====
@@ -31,7 +28,7 @@ class ConfigClass:
     num_video_samples: int = field(
         default=-1,
         metadata={
-            "help": "Number of video samples to process. Specify a number more than 0 to limit the samples."
+            "help": "Number of video samples to process. Specify a number more than 0 to limit the samples.",
         },
     )
 

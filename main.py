@@ -19,7 +19,7 @@ from src.model_utils import load_model
 def main(cfg: ConfigClass) -> None:
     start_time = time.perf_counter()
 
-    processor, model, model_load_time = load_model(cfg.model_name, cfg.device)
+    pipe, model_load_time = load_model(cfg.model_name)
 
     video_id_iter = cfg.video_folder.glob("*.mp4")
     if cfg.num_video_samples > 0:
@@ -27,7 +27,8 @@ def main(cfg: ConfigClass) -> None:
     video_ids = tuple(video_id_iter)
     print(f"Processing {len(video_ids)} videos...")
 
-    res_dict, summary_times, category_times = {}, [], []
+    summary_messages: list[str] = []
+    category_messages: list[str] = []
     for video_path in tqdm(video_ids, desc="Processing videos"):
         video_id = video_path.stem
 
@@ -38,16 +39,28 @@ def main(cfg: ConfigClass) -> None:
             cfg.audio_transcript_folder,
         )
 
-        # ---- Summary Generation ----
+        # ---- Summary Prompts ----
         summary_msg = create_messages(video_path, transcript, mode="summary")
-        summary, t1 = run_inference(processor, model, summary_msg, mode="summary")
-        summary_times.append(t1)
+        summary_messages.append(summary_msg)
 
-        # ---- Category Generation ----
+        # ---- Category Prompts ----
         category_msg = create_messages(video_path, transcript, mode="category")
-        category, t2 = run_inference(processor, model, category_msg, mode="category")
-        category_times.append(t2)
+        category_messages.append(category_msg)
 
+    # Run Summary Inference
+    summaries, summary_time = run_inference(pipe, summary_messages, mode="summary")
+
+    # Run Category Inference
+    categories, category_time = run_inference(pipe, category_messages, mode="category")
+
+    res_dict: dict[str, dict[str, str]] = {}
+    for video_path, summary, category in zip(
+        video_ids,
+        summaries,
+        categories,
+        strict=True,
+    ):
+        video_id = video_path.stem
         res_dict[video_id] = {"summary": summary, "category": category}
 
     total_time = time.perf_counter() - start_time
@@ -86,8 +99,8 @@ def main(cfg: ConfigClass) -> None:
         cfg.model_name,
         model_load_time,
         total_time,
-        summary_times,
-        category_times,
+        summary_time / len(video_ids),
+        category_time / len(video_ids),
         evaluation_results,
         output_json_stat_path,
     )

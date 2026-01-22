@@ -1,12 +1,10 @@
 import json
 import time
-from collections.abc import Sequence
 from pathlib import Path
+from typing import Literal
 
-import numpy as np
 import pandas as pd
-import torch
-from transformers import GenerationMixin, PreTrainedTokenizerBase
+from transformers import ImageTextToTextPipeline
 
 
 def create_messages(video_path: Path, transcript: str, mode: str = "summary"):
@@ -59,28 +57,20 @@ def create_messages(video_path: Path, transcript: str, mode: str = "summary"):
 
 
 def run_inference(
-    processor: PreTrainedTokenizerBase,
-    model: GenerationMixin,
-    messages: list[dict[str, str]] | list[list[dict[str, str]]],
+    pipe: ImageTextToTextPipeline,
+    messages: str | list[str] | list[dict],
     max_new_tokens: int = 140,
-    mode: str = "category",
-) -> tuple[str, float]:
+    mode: Literal["category", "summary"] = "category",
+) -> tuple[list[str], float]:
     """Run inference and measure time."""
     start = time.perf_counter()
-    inputs = processor.apply_chat_template(
-        messages,
-        add_generation_prompt=True,
-        tokenize=True,
-        return_dict=True,
-        return_tensors="pt",
-    ).to(model.device, dtype=torch.bfloat16)  # type:ignore[possibly-missing-attribute]
-
     if mode == "category":
         max_new_tokens = 64
-    ids = model.generate(**inputs, do_sample=False, max_new_tokens=max_new_tokens)  # type:ignore[invalid-argument-type]
-    text = processor.batch_decode(ids, skip_special_tokens=True)[0]
-    end = time.perf_counter()
-    return text.rsplit("Assistant:", 1)[-1].strip(), end - start
+
+    output = pipe(text=messages, max_new_tokens=max_new_tokens, do_sample=False)  # type:ignore[no-matching-overload]
+    text = [out["generated_text"].rsplit("Assistant:", 1)[-1].strip() for out in output]
+
+    return text, time.perf_counter() - start
 
 
 def save_results_to_csv(res_dict: dict, csv_path: str | Path) -> pd.DataFrame:
@@ -98,8 +88,8 @@ def save_stats_to_json(
     model_name: str,
     model_load_time: float,
     total_time: float,
-    summary_times: Sequence[float],
-    category_times: Sequence[float],
+    summary_time: float,
+    category_time: float,
     evaluation_results: object,
     output_path: Path,
 ) -> None:
@@ -108,16 +98,16 @@ def save_stats_to_json(
         "model_load_time": model_load_time,
         "total_time": total_time,
         "summary_inference": {
-            "mean": float(np.mean(summary_times)),
-            "min": float(np.min(summary_times)),
-            "max": float(np.max(summary_times)),
-            "std": float(np.std(summary_times)),
+            "mean": summary_time,
+            "min": summary_time,
+            "max": summary_time,
+            "std": 0,
         },
         "category_inference": {
-            "mean": float(np.mean(category_times)),
-            "min": float(np.min(category_times)),
-            "max": float(np.max(category_times)),
-            "std": float(np.std(category_times)),
+            "mean": category_time,
+            "min": category_time,
+            "max": category_time,
+            "std": category_time,
         },
         "evaluation_results": evaluation_results,
     }
