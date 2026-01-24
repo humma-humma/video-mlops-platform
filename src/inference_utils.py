@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Literal
 
 import pandas as pd
+from tqdm import tqdm
 from transformers import ImageTextToTextPipeline
 
 
@@ -60,7 +61,7 @@ def create_messages(
 
 def run_inference(
     pipe: ImageTextToTextPipeline,
-    messages: str | list[str] | list[dict] | list[list[dict]],
+    messages: list[list[dict]],
     max_new_tokens: int = 140,
     mode: Literal["category", "summary"] = "category",
 ) -> tuple[list[str], float]:
@@ -69,8 +70,11 @@ def run_inference(
     if mode == "category":
         max_new_tokens = 10
 
-    output = pipe(text=messages, max_new_tokens=max_new_tokens, do_sample=False)  # type:ignore[no-matching-overload]
-    text = [out[0]["generated_text"][-1]["content"].strip() for out in output]
+    output = pipe(text=messages, max_new_tokens=max_new_tokens, do_sample=False)  # type: ignore[reportCallIssue]
+    text = [
+        out[0]["generated_text"][-1]["content"].strip()
+        for out in tqdm(output, desc="Running Inference", total=len(messages))
+    ]
 
     return text, time.perf_counter() - start
 

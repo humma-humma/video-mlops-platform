@@ -31,6 +31,14 @@ class InferenceConfig:
             "help": "Attention implementation to use. If None, the default implementation is used.",
         },
     )
+    batch_size: int = field(
+        default=1,
+        metadata={"help": "Batch size for inference."},
+    )
+    num_workers: int = field(
+        default=0,
+        metadata={"help": "Number of worker threads for data loading."},
+    )
 
     # ===== Output folders =====
     csv_folder: Path = field(metadata={"help": "Path to folder to save CSV outputs"})

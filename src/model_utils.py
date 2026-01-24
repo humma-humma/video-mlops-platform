@@ -18,6 +18,8 @@ def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
         model_kwargs={"_attn_implementation": cfg.attention_implementation}
         if cfg.attention_implementation
         else {},
+        batch_size=cfg.batch_size,
+        num_workers=cfg.num_workers,
     )
     if cfg.torch_compile:
         print("🚀 Compiling model...")
