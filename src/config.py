@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Optional
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -24,7 +25,7 @@ class InferenceConfig:
         default=False,
         metadata={"help": "Whether to compile the model for faster inference."},
     )
-    attention_implementation: str | None = field(
+    attention_implementation: Optional[str] = field(
         default=None,
         metadata={
             "help": "Attention implementation to use. If None, the default implementation is used.",

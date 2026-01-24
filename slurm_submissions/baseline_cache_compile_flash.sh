@@ -13,7 +13,7 @@
 #
 #SBATCH --mem=64G          # Request 64GB RAM
 #
-#SBATCH -t 00-01:30        # Maximum run-time in D-HH:MM
+#SBATCH -t 00-02:00        # Maximum run-time in D-HH:MM
 
 # Print the commands executed to the logs
 set -x
@@ -23,6 +23,9 @@ export HF_TOKEN_PATH="~/.config/huggingface/token"
 
 INPUT_DATA_DIR="data/inputs"
 OUTPUT_DATA_DIR="data/outputs"
+
+export TORCHINDUCTOR_CACHE_DIR="/AIML/tinyllms/nobackup/.inductor_cache"
+export PYTORCH_ALLOC_CONF="backend:cudaMallocAsync"
 
 uv run main.py \
     --video-folder $INPUT_DATA_DIR/videos \

@@ -7,7 +7,9 @@ import pandas as pd
 from transformers import ImageTextToTextPipeline
 
 
-def create_messages(video_path: Path, transcript: str, mode: str = "summary"):
+def create_messages(
+    video_path: Path, transcript: str, mode: Literal["category", "summary"] = "summary"
+) -> list[dict[str, str | list[dict[str, str]]]]:
     """Create system messages for summary or category inference."""
     if mode == "summary":
         text = f"Describe this video in detail. Use the audio transcript to get more context. Audio Transcript: {transcript}"
@@ -58,14 +60,14 @@ def create_messages(video_path: Path, transcript: str, mode: str = "summary"):
 
 def run_inference(
     pipe: ImageTextToTextPipeline,
-    messages: str | list[str] | list[dict],
+    messages: str | list[str] | list[dict] | list[list[dict]],
     max_new_tokens: int = 140,
     mode: Literal["category", "summary"] = "category",
 ) -> tuple[list[str], float]:
     """Run inference and measure time."""
     start = time.perf_counter()
     if mode == "category":
-        max_new_tokens = 64
+        max_new_tokens = 10
 
     output = pipe(text=messages, max_new_tokens=max_new_tokens, do_sample=False)  # type:ignore[no-matching-overload]
     text = [out[0]["generated_text"][-1]["content"].strip() for out in output]

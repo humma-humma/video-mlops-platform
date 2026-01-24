@@ -24,11 +24,12 @@ def main(cfg: InferenceConfig) -> None:
     video_id_iter = cfg.video_folder.glob("*.mp4")
     if cfg.num_video_samples > 0:
         video_id_iter = itertools.islice(video_id_iter, cfg.num_video_samples)
-    video_ids = tuple(video_id_iter)
-    print(f"Processing {len(video_ids)} videos...")
 
-    summary_messages: list[str] = []
-    category_messages: list[str] = []
+    video_ids = tuple(video_id_iter)
+    print(f"🚀 Processing {len(video_ids)} videos...")
+
+    summary_messages: list[list[dict[str, str | list[dict[str, str]]]]] = []
+    category_messages: list[list[dict[str, str | list[dict[str, str]]]]] = []
     for video_path in video_ids:
         video_id = video_path.stem
 
@@ -48,14 +49,14 @@ def main(cfg: InferenceConfig) -> None:
         category_messages.append(category_msg)
 
     # Run Summary Inference
-    print("Running summary inference...")
+    print("🚀 Running summary inference...")
     summaries, summary_time = run_inference(pipe, summary_messages, mode="summary")
-    print(f"Summaries generated in {summary_time:.2f} seconds")
+    print(f"✅ Summaries generated in {summary_time:.2f} seconds")
 
     # Run Category Inference
-    print("Running category inference...")
+    print("🚀 Running category inference...")
     categories, category_time = run_inference(pipe, category_messages, mode="category")
-    print(f"Categories generated in {category_time:.2f} seconds")
+    print(f"✅ Categories generated in {category_time:.2f} seconds")
 
     total_time = time.perf_counter() - start_time
 
