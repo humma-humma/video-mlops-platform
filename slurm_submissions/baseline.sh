@@ -33,6 +33,7 @@ uv run main.py \
     --audio-transcript-folder $INPUT_DATA_DIR/audio_transcripts \
     --ground-truth-file $INPUT_DATA_DIR/ground_truth.csv \
     --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
+    --num-workers 4 \
     --csv-folder $OUTPUT_DATA_DIR/csv/ \
     --statistics-folder $OUTPUT_DATA_DIR/statistics/ \
     --file-name smol_vlm_2.2b_pipeline

@@ -39,6 +39,10 @@ class InferenceConfig:
         default=0,
         metadata={"help": "Number of worker threads for data loading."},
     )
+    max_frames: Optional[int] = field(
+        default=None,
+        metadata={"help": "Maximum number of frames to process from each video."},
+    )
 
     # ===== Output folders =====
     csv_folder: Path = field(metadata={"help": "Path to folder to save CSV outputs"})

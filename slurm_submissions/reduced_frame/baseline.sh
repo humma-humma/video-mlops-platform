@@ -4,8 +4,8 @@
 #SBATCH -D /AIML/tinyllms/work/ETLLM/VLM-Inference
 #
 # Standard output and error:
-#SBATCH -o slurm_outputs/baseline_pipeline_cache_compile-%A_%a.out
-#SBATCH -e slurm_outputs/baseline_pipeline_cache_compile-%A_%a.err
+#SBATCH -o slurm_outputs/baseline_pipeline_reduced_frames-%A_%a.out
+#SBATCH -e slurm_outputs/baseline_pipeline_reduced_frames-%A_%a.err
 #
 #SBATCH --partition=a100   # Partition to run the job
 #
@@ -33,9 +33,8 @@ uv run main.py \
     --audio-transcript-folder $INPUT_DATA_DIR/audio_transcripts \
     --ground-truth-file $INPUT_DATA_DIR/ground_truth.csv \
     --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
-    --use-kv-cache \
-    --torch-compile \
     --num-workers 4 \
+    --max-frames 16 \
     --csv-folder $OUTPUT_DATA_DIR/csv/ \
     --statistics-folder $OUTPUT_DATA_DIR/statistics/ \
-    --file-name smol_vlm_2.2b_pipeline_cache_compile
+    --file-name smol_vlm_2.2b_pipeline_reduced_frames

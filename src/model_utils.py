@@ -1,7 +1,7 @@
 import time
 
 import torch
-from transformers import ImageTextToTextPipeline, pipeline
+from transformers import BaseVideoProcessor, ImageTextToTextPipeline, pipeline
 
 from src.config import InferenceConfig
 
@@ -21,6 +21,15 @@ def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
         batch_size=cfg.batch_size,
         num_workers=cfg.num_workers,
     )
+
+    if cfg.max_frames is not None:
+        processor = pipe.processor
+        if processor is not None:
+            video_processor = getattr(processor, "video_processor", None)
+            if isinstance(video_processor, BaseVideoProcessor):
+                print(f"🚀 Setting max frames to {cfg.max_frames}...")
+                video_processor.num_frames = cfg.max_frames  # type: ignore[reportAttributeAccessIssue]
+
     if cfg.torch_compile:
         print("🚀 Compiling model...")
         # Copied the options from unsloth training repo

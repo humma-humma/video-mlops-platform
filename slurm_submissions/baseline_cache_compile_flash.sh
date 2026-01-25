@@ -35,6 +35,7 @@ uv run main.py \
     --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
     --use-kv-cache \
     --torch-compile \
+    --num-workers 4 \
     --attention-implementation flash_attention_2 \
     --csv-folder $OUTPUT_DATA_DIR/csv/ \
     --statistics-folder $OUTPUT_DATA_DIR/statistics/ \

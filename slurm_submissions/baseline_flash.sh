@@ -34,6 +34,7 @@ uv run main.py \
     --ground-truth-file $INPUT_DATA_DIR/ground_truth.csv \
     --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
     --attention-implementation flash_attention_2 \
+    --num-workers 4 \
     --csv-folder $OUTPUT_DATA_DIR/csv/ \
     --statistics-folder $OUTPUT_DATA_DIR/statistics/ \
     --file-name smol_vlm_2.2b_pipeline_flash

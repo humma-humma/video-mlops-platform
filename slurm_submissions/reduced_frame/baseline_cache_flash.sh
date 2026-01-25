@@ -4,8 +4,8 @@
 #SBATCH -D /AIML/tinyllms/work/ETLLM/VLM-Inference
 #
 # Standard output and error:
-#SBATCH -o slurm_outputs/baseline_pipeline_cache_compile-%A_%a.out
-#SBATCH -e slurm_outputs/baseline_pipeline_cache_compile-%A_%a.err
+#SBATCH -o slurm_outputs/baseline_pipeline_cache_flash_reduced_frames-%A_%a.out
+#SBATCH -e slurm_outputs/baseline_pipeline_cache_flash_reduced_frames-%A_%a.err
 #
 #SBATCH --partition=a100   # Partition to run the job
 #
@@ -27,6 +27,8 @@ OUTPUT_DATA_DIR="data/outputs"
 export TORCHINDUCTOR_CACHE_DIR="/AIML/tinyllms/nobackup/.inductor_cache"
 export PYTORCH_ALLOC_CONF="backend:cudaMallocAsync"
 
+max_frames=8
+
 uv run main.py \
     --video-folder $INPUT_DATA_DIR/videos \
     --audio-folder $INPUT_DATA_DIR/audios \
@@ -34,8 +36,9 @@ uv run main.py \
     --ground-truth-file $INPUT_DATA_DIR/ground_truth.csv \
     --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
     --use-kv-cache \
-    --torch-compile \
     --num-workers 4 \
+    --max-frames ${max_frames} \
+    --attention-implementation flash_attention_2 \
     --csv-folder $OUTPUT_DATA_DIR/csv/ \
     --statistics-folder $OUTPUT_DATA_DIR/statistics/ \
-    --file-name smol_vlm_2.2b_pipeline_cache_compile
+    --file-name smol_vlm_2.2b_pipeline_cache_flash_reduced_frames_max_frames_${max_frames}
