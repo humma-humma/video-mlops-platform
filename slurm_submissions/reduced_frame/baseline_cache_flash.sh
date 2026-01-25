@@ -27,7 +27,7 @@ OUTPUT_DATA_DIR="data/outputs"
 export TORCHINDUCTOR_CACHE_DIR="/AIML/tinyllms/nobackup/.inductor_cache"
 export PYTORCH_ALLOC_CONF="backend:cudaMallocAsync"
 
-max_frames=8
+max_frames=4
 
 uv run main.py \
     --video-folder $INPUT_DATA_DIR/videos \

@@ -1,0 +1,37 @@
+{
+    "model_name": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+    "model_load_time": 8.779739082965534,
+    "total_time": 1279.8941638789838,
+    "summary_inference": {
+        "mean": 3.89654754443715,
+        "min": 3.89654754443715,
+        "max": 3.89654754443715,
+        "std": 0
+    },
+    "category_inference": {
+        "mean": 0.8098211937629256,
+        "min": 0.8098211937629256,
+        "max": 0.8098211937629256,
+        "std": 0
+    },
+    "evaluation_results": {
+        "BERTScore": {
+            "Precision": {
+                "mean": 0.8885824084281921,
+                "std": 0.02233116514980793
+            },
+            "Recall": {
+                "mean": 0.8657591938972473,
+                "std": 0.021628977730870247
+            },
+            "F1": {
+                "mean": 0.8769201040267944,
+                "std": 0.019826067611575127
+            }
+        },
+        "Category": {
+            "Accuracy": 0.17777777777777778,
+            "F1_weighted": 0.20236354775828458
+        }
+    }
+}
