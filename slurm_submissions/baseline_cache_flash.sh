@@ -13,7 +13,7 @@
 #
 #SBATCH --mem=64G          # Request 64GB RAM
 #
-#SBATCH -t 00-02:00        # Maximum run-time in D-HH:MM
+#SBATCH -t 00-04:00        # Maximum run-time in D-HH:MM
 
 # Print the commands executed to the logs
 set -x
