@@ -239,6 +239,23 @@ pyrightconfig.json
 
 # Data Inputs
 data/inputs/*/
+data/assignment_videos/
+data/audio_transcripts/
+data/ground_truth.csv
+data/outputs/
+artifacts/
+
+# Model weights and local ML caches
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+.huggingface/
+
+# Local service state
+*.db
+*.sqlite
+*.sqlite3
 
 
 # Slurm Output Files

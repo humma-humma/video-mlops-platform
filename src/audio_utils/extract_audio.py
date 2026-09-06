@@ -1,8 +1,22 @@
+from functools import lru_cache
 from pathlib import Path
+from typing import Any
 
 import torch
 from moviepy import VideoFileClip
 from transformers import pipeline
+
+
+@lru_cache(maxsize=None)
+def load_whisper_pipeline(model_name: str, device_id: int) -> Any:
+    """Load one Whisper pipeline per model/device pair in this process."""
+    print(f"Initializing Whisper pipeline on cuda:{device_id}...")
+    return pipeline(
+        "automatic-speech-recognition",
+        model=model_name,
+        dtype=torch.float16,
+        device=f"cuda:{device_id}",
+    )
 
 
 def extract_audio_mp3(video_path: Path, video_id: str, output_folder: Path) -> None:
@@ -57,19 +71,12 @@ def transcribe_audio_whisper(
     output_folder.mkdir(parents=True, exist_ok=True)
     output_txt_path = output_folder / f"{video_id}.txt"
 
-    if not output_txt_path.is_file():
+    if not audio_path.is_file():
         print(f"Error: Audio file not found at {audio_path!s}")
         return
 
     try:
-        print(f"Initializing Whisper pipeline on cuda:{device_id}...")
-        # Consider making the pipeline object persistent if processing many files
-        asr_pipeline = pipeline(
-            "automatic-speech-recognition",
-            model=model_name,
-            dtype=torch.float16,
-            device=f"cuda:{device_id}",
-        )
+        asr_pipeline = load_whisper_pipeline(model_name, device_id)
 
         print(f"Transcribing {audio_path!s}...")
         # Adjust batch_size based on experiments for optimal throughput on H100

@@ -1,0 +1,51 @@
+{
+  "purpose": "economic real-GPU smoke test; not the 2.2B production baseline",
+  "video_id": "7203774185322188037",
+  "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+  "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "max_frames": 4,
+  "model_load_time": 4.8445562003180385,
+  "input_preparation_time": 0.00019850023090839386,
+  "peak_gpu_memory_bytes": 1616728576,
+  "environment": {
+    "python": "3.10.13 | packaged by Anaconda, Inc. | (main, Sep 11 2023, 13:24:38) [MSC v.1916 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.8.0+cu126",
+    "transformers": "4.56.1",
+    "gpu": "NVIDIA GeForce RTX 2080"
+  },
+  "runs": {
+    "per_video_two_pass": {
+      "summary_time": 55.19849499966949,
+      "category_time": 7.874049699865282,
+      "combined_time": 0.0,
+      "predictions": [
+        {
+          "video_id": "7203774185322188037",
+          "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white and black electronic device, possibly a computer or a printer, and then moves towards a white wall with a green exit sign. The text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will print the best, like no one else has) appears on the screen, indicating the person's intention to print something. The scene transitions to the person sitting at a desk, typing on a computer, with the text \"Vor der Abschlusspr\u00fcfung\"",
+          "category": "Entertainment & Shows",
+          "summary_time": 55.19849499966949,
+          "category_time": 7.874049699865282,
+          "combined_time": null
+        }
+      ],
+      "failures": []
+    },
+    "per_video_combined": {
+      "summary_time": 0.0,
+      "category_time": 0.0,
+      "combined_time": 81.26292730122805,
+      "predictions": [
+        {
+          "video_id": "7203774185322188037",
+          "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white and black electronic device, possibly a computer or a printer, and then moves towards a white wall with a green exit sign. The text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will print the best, like no one else has) appears on the screen, indicating the person's intention to print something. The scene transitions to the person sitting at a desk, typing on a computer, with the text \"Vor der Abschlusspr\u00fcfung\"",
+          "category": "Entertainment & Shows",
+          "summary_time": null,
+          "category_time": null,
+          "combined_time": 81.26292730122805
+        }
+      ],
+      "failures": []
+    }
+  }
+}

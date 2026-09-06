@@ -9,11 +9,17 @@ from src.config import InferenceConfig
 def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
     """Load processor and model with timing info."""
     start_time = time.perf_counter()
+    if cfg.model_dtype == "float16":
+        dtype = torch.float16
+    elif cfg.model_dtype == "bfloat16":
+        dtype = torch.bfloat16
+    else:
+        dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
     pipe = pipeline(
         "image-text-to-text",
         model=cfg.model_name,
         device_map="auto",
-        dtype=torch.bfloat16,
+        dtype=dtype,
         use_cache=cfg.use_kv_cache,
         model_kwargs={"_attn_implementation": cfg.attention_implementation}
         if cfg.attention_implementation

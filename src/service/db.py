@@ -1,0 +1,17 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
+from .config import settings
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+engine = create_engine(settings.database_url, pool_pre_ping=True)
+SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
+
+
+def init_db() -> None:
+    from .models import Job  # noqa: F401
+    Base.metadata.create_all(engine)

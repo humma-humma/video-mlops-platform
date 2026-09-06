@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -42,6 +42,22 @@ class InferenceConfig:
     max_frames: Optional[int] = field(
         default=None,
         metadata={"help": "Maximum number of frames to process from each video."},
+    )
+    whisper_device_id: int = field(
+        default=0,
+        metadata={"help": "CUDA device ID for Whisper transcript fallback."},
+    )
+    inference_strategy: Literal[
+        "batch_two_pass", "per_video_two_pass", "per_video_combined"
+    ] = field(
+        default="batch_two_pass",
+        metadata={
+            "help": "Batch throughput mode or isolated per-video timing strategy."
+        },
+    )
+    model_dtype: Literal["auto", "float16", "bfloat16"] = field(
+        default="auto",
+        metadata={"help": "Model dtype; auto selects a supported CUDA dtype."},
     )
 
     # ===== Output folders =====

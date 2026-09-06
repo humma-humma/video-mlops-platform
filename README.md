@@ -114,8 +114,14 @@ You have been provided with a basic template to begin with. You are welcome to m
 **Steps to run the code**
 
 1. Clone the repository to your local machine.
-2. Install `uv`, if you haven't from [here](https://docs.astral.sh/uv/getting-started/installation).
-3. Create a virtual environment and install the dependencies.
+2. Create and activate the conda environment.
+
+```bash
+conda create -n vlm-mlops python=3.12 -y
+conda activate vlm-mlops
+```
+
+3. Install `uv`, if you haven't from [here](https://docs.astral.sh/uv/getting-started/installation), then install the dependencies.
 
 ```bash
 uv sync
@@ -126,12 +132,76 @@ uv sync
 6. Run main.py to execute the video summarization pipeline. The pipeline processes each video sequentially, generates a summary and category for each video, and saves the results to a CSV file. It also records inference times and evaluation metrics.
 
 ```bash
-uv run main.py
+uv run main.py \
+    --video-folder data/inputs/videos \
+    --audio-folder data/inputs/audios \
+    --audio-transcript-folder data/inputs/audio_transcripts \
+    --ground-truth-file data/inputs/ground_truth.csv \
+    --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
+    --csv-folder data/outputs/csv \
+    --statistics-folder data/outputs/statistics \
+    --file-name smol_vlm_2.2b_pipeline
 ```
 
+For a quick smoke run, limit the number of videos:
+
+```bash
+uv run main.py \
+    --video-folder data/inputs/videos \
+    --audio-folder data/inputs/audios \
+    --audio-transcript-folder data/inputs/audio_transcripts \
+    --ground-truth-file data/inputs/ground_truth.csv \
+    --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
+    --csv-folder data/outputs/csv \
+    --statistics-folder data/outputs/statistics \
+    --file-name smoke_test \
+    --num-video-samples 2
+```
+
+To collect attributable per-video timings and continue past individual model
+output failures, add:
+
+```bash
+--inference-strategy per_video_two_pass
+```
+
+An experimental single-generation path requests a strict JSON summary and
+category together:
+
+```bash
+--inference-strategy per_video_combined
+```
+
+The original throughput-oriented behavior remains the default
+(`batch_two_pass`). Do not promote the combined strategy until its latency and
+quality have been compared against the same versioned evaluation subset.
+
 7. Sample output files with baseline performance can be found in the `data/outputs/` directory.
+
+Before running a benchmark, generate the versioned dataset manifest:
+
+```bash
+uv run python -m scripts.build_dataset_manifest
+```
+
+The manifest records the available inputs and their SHA-256 checksums. The
+category compatibility policy and current dataset counts are documented in
+[`docs/DATASET_CONTRACT.md`](docs/DATASET_CONTRACT.md).
+
+The production-service and MLOps implementation roadmap is documented in
+[`PLATFORM_IMPLEMENTATION_PLAN.md`](PLATFORM_IMPLEMENTATION_PLAN.md).
+
+A small real-GPU comparison can be run independently of BERTScore with:
+
+```bash
+uv run python -m scripts.gpu_smoke \
+    --video data/inputs/videos/7302484543691328810.mp4 \
+    --transcript data/inputs/audio_transcripts/7302484543691328810.txt \
+    --max-frames 4 \
+    --output reports/gpu_smoke_500m.json
+```
 
 **Possible issues**
 
 1. Ensure the paths in config.py are correctly set to your local directories.
-2. Ensure to use Python 3.11 as some dependencies may not be compatible with other versions.
+2. Ensure to use Python 3.12, matching `.python-version` and `pyproject.toml`.
