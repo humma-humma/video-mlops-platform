@@ -1,3 +1,11 @@
+# Video MLOps: Production GPU Inference Platform
+
+[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-3776AB.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Tests: 20 passing](https://img.shields.io/badge/tests-20%20passing-brightgreen.svg)](tests)
+
+![Video MLOps portfolio banner](assets/portfolio/video_mlops_banner.png)
+
 **Objective**
 
 Build and optimize a video summarization pipeline using an open-source model.
