@@ -214,6 +214,7 @@ poetry.toml
 
 # ruff
 .ruff_cache/
+.uv-cache/
 
 # LSP config files
 pyrightconfig.json

@@ -6,6 +6,8 @@
 
 ![Video MLOps portfolio banner](assets/portfolio/video_mlops_banner.png)
 
+> [Current implementation status and blockers](docs/PROJECT_STATUS.md)
+
 **Objective**
 
 Build and optimize a video summarization pipeline using an open-source model.
