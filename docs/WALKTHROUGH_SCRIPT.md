@@ -7,6 +7,9 @@ itself listens on port 8000. Use the project-created
 shared without third-party media. Its output is a functional example, not a
 quality benchmark. Hide other desktop windows and credentials.
 
+The newest persisted job opens automatically on page load. This gives a quick
+read-only tour of the result and lineage before recording a fresh submission.
+
 | Time | Screen and narration | Evidence to cite |
 |---|---|---|
 | 0:00–0:15 | Show the README architecture and the live demo health. Explain that the existing video model is the workload for an ML infrastructure exercise. | [README](../README.md) |

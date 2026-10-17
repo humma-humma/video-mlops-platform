@@ -34,6 +34,18 @@ function harness(handler) {
 const one = '11111111-1111-4111-8111-111111111111';
 const two = '22222222-2222-4222-8222-222222222222';
 
+test('opens the newest persisted job without submitting another video', async () => {
+  const h = harness(async path => {
+    if (path === '/api/v1/jobs?limit=12') return [{job_id:one, status:'SUCCEEDED'}];
+    if (path === `/api/v1/jobs/${one}`) return {status:'SUCCEEDED', result:{model_version:'real', summary:'saved result', category:'Demo'}};
+    if (path.endsWith('/events') || path.endsWith('/attempts')) return [];
+  });
+  await settle();
+  assert.equal(h.get('selected-id').textContent, one);
+  assert.equal(h.get('summary').textContent, 'saved result');
+  assert.equal(h.requests.filter(r => r.options.method === 'POST').length, 0);
+});
+
 test('renders fake result explicitly and treats generated HTML as text', async () => {
   const h = harness(async path => {
     if (path.endsWith('/events') || path.endsWith('/attempts')) return [];

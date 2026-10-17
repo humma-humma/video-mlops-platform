@@ -31,6 +31,7 @@ async function jobs() {
     button.addEventListener("click", () => selectJob(job.job_id)); $("jobs").append(button);
   }
   if (!data.length) $("jobs").textContent = "No jobs yet.";
+  else if (!selected) selectJob(data[0].job_id);
 }
 function clearDetail() {
   result = null; $("result").hidden = true; $("job-error").textContent = "";
