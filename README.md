@@ -12,6 +12,21 @@ Docker Desktop with GPU support and the [pinned model snapshot in the local Hugg
 docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build --wait
 ```
 
+That command reuses the original locally cached MinIO image and its named
+volume. On a fresh machine where the historical MinIO registries no longer
+allow an anonymous pull, use the S3 API test double from CI to try the UI and
+job flow:
+
+```powershell
+$env:VIDEO_S3_ENDPOINT_URL = 'http://minio:9090'
+docker compose -f docker-compose.yml -f docker-compose.ci.yml -f docker-compose.gpu.yml up -d --build --wait
+```
+
+S3Mock is for the fresh-clone smoke path, not the recorded MinIO persistence
+claims. Its objects should not be treated as a compatible copy of the MinIO
+volume. Do not switch storage backends on an existing stack with results you
+need to preserve.
+
 Open **http://127.0.0.1:8000/** and submit your own MP4 or the [project-created six-second sample](assets/portfolio/demo_shapes.mp4), which [passed a real GPU submission](reports/demo_shapes_probe.json). Follow its status, then inspect the summary/category, stage timings, model/config lineage and attempt history. For host GPU measurements alongside readiness, recent jobs and queue state, start the [loopback preview](docs/LOCAL_DEMO.md) and open **http://127.0.0.1:8080/operations**. The service also has a fake-worker mode for CPU-only development; fake results are clearly marked.
 
 ## What the system demonstrates
@@ -42,6 +57,7 @@ The API accepts a job before GPU execution. PostgreSQL owns durable job, attempt
 | Honest evaluation gate | [Rejected measured candidate](reports/local_demo_gate.json) under a [provisional policy](configs/gates/local-demo.json) |
 | GPU and request measurements | [GPU profile](reports/gpu_profile.md), [bounded serving measurements](reports/serving_measurement_smoke.md) |
 | Operational release and rollback | [Executed release report](reports/release_demo_20261017105931.json), [candidate probe](reports/release_candidate_20261017105931.json), [rollback probe](reports/release_rollback_20261017105931.json) |
+| Remote delivery checks | [Passing GitHub Actions run](https://github.com/humma-humma/video-mlops-platform/actions/runs/39025177821): CPU/UI tests and fake-worker Compose with S3Mock; see [CI scope](reports/ci_acceptance_2026-10-17.md) |
 
 The full local CPU suite passed **159 tests with one optional skip** on 2026-10-17; six Node UI/dashboard behavior checks and manifest verification also passed. See [delivery status](reports/delivery_status.md) for dated evidence and limits. The [reliability/release runbook](docs/LOCAL_RELEASE.md) reproduces the controlled worker interruption and operational rollout/rollback sequence.
 
@@ -49,6 +65,6 @@ The [two-minute walkthrough script](docs/WALKTHROUGH_SCRIPT.md) maps each claim 
 
 ## Scope and limitations
 
-This deployment has one host and one GPU. Short bursts establish admission behavior, not sustained capacity or production p95 latency. The gate rejection uses 2.2B experiment reports and does not approve the distinct 500M serving model. GPU usage on the dashboard is device-wide. Remote CI execution, visual browser review and a recorded walkthrough remain open. AWS and the proposed restricted-access diagnostic workbench are deferred; see the [portfolio direction](docs/PORTFOLIO_REFERENCE.md).
+This deployment has one host and one GPU. Short bursts establish admission behavior, not sustained capacity or production p95 latency. The gate rejection uses 2.2B experiment reports and does not approve the distinct 500M serving model. GPU usage on the dashboard is device-wide. CI exercises fake inference with an S3 API test double; the real GPU and MinIO checks are local. Visual browser review and a recorded walkthrough remain open. AWS and the proposed restricted-access diagnostic workbench are deferred; see the [portfolio direction](docs/PORTFOLIO_REFERENCE.md).
 
 The video model and dataset came from an [earlier assignment and research workflow](docs/ORIGINAL_ASSIGNMENT.md). That document preserves its original objective, data instructions, examples and optimization commands; those runs are separate from the serving demo.

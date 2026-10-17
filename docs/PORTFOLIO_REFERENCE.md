@@ -23,8 +23,9 @@ rejected under a provisional gate policy, and a controlled active-worker kill
 ended in a timeout followed by an explicit successful retry. The [operational
 release](../reports/release_demo_20261017105931.json) then passed candidate and
 rollback GPU probes, restoring the prior image IDs and preserving both old and
-candidate results. The [delivery report](../reports/delivery_status.md) records
-the remaining CI, visual review and recording work. Older
+candidate results. [Remote CI](../reports/ci_acceptance_2026-10-17.md) then
+passed CPU/UI and fake-worker Compose checks. The [delivery report](../reports/delivery_status.md)
+records the remaining visual review and recording work. Older
 pending language below describes the original plan, not a fresh status claim.
 
 ## Navigation
@@ -169,7 +170,7 @@ the preview applies a 64 MiB upload cap. Artifact retention/cleanup remains open
 | Native GPU diagnostics | [GPU profile](../reports/gpu_profile.md), [JSON evidence](../reports/gpu_profile.json) | Container acceptance, exclusive-device conditions and general performance conclusions. |
 | Evaluation and gate contracts | [Experiment lifecycle](EXPERIMENT_LIFECYCLE.md), [recorded provisional rejection](../reports/local_demo_gate.json) and automated tests | Approved 500M candidate and live registry. |
 | Operational release | [Candidate/rollback evidence](../reports/release_demo_20261017105931.json) with real GPU probes and preserved hashes | CI-linked immutable artifact and registry promotion. |
-| Delivery checks | Workflow source and recorded local tests | Executed remote CI and a release tied to its run and immutable artifact. |
+| Delivery checks | [Passing remote CI](../reports/ci_acceptance_2026-10-17.md), workflow source and recorded local tests | A real GPU release tied to its CI run and immutable registry artifact. |
 
 Two bounded load runs completed four real jobs at client concurrency two. Run
 elapsed times were 75.11 s and 34.13 s; one job waited 53.44 s for its initial
@@ -404,7 +405,7 @@ The recording is identified as historical, not a live hosted service.
 - [x] A rejected candidate has an inspectable provisional gate decision with honest provenance.
 - [x] A versioned local operational release and compatible rollback are executed.
 - [x] Persisted results survive the demonstrated upgrade/rollback sequence.
-- [ ] CI execution is linked; simulated and real checks are distinguished.
+- [x] CI execution is linked; simulated and real checks are distinguished.
 - [ ] UI receives visual review; architecture, setup and incident runbooks agree.
 - [ ] A short recording and evidence index support offline review.
 - [ ] Cloud, scale, model-quality and security limitations are explicit.
