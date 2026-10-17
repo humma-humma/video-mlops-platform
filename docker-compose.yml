@@ -1,6 +1,6 @@
 x-artifact-environment: &artifact-environment
   VIDEO_ARTIFACT_BACKEND: s3
-  VIDEO_S3_ENDPOINT_URL: http://minio:9000
+  VIDEO_S3_ENDPOINT_URL: ${VIDEO_S3_ENDPOINT_URL:-http://minio:9000}
   VIDEO_S3_BUCKET: video-artifacts
   VIDEO_S3_REGION: us-east-1
   VIDEO_S3_ACCESS_KEY_ID: minio

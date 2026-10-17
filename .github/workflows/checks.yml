@@ -26,6 +26,9 @@ jobs:
   compose:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
+      VIDEO_S3_ENDPOINT_URL: http://minio:9090
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

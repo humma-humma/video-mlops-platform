@@ -1,0 +1,9 @@
+# CI uses a small S3 API test double because the historical MinIO image is no
+# longer anonymously pullable on fresh GitHub runners. Local Compose keeps the
+# existing MinIO service and persistent named volume.
+services:
+  minio:
+    image: adobe/s3mock:5.2.3
+    command: null
+    environment:
+      COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: video-artifacts
