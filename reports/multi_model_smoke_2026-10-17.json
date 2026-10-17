@@ -1,0 +1,23 @@
+{
+  "schema_version": "1",
+  "purpose": "local_multi_model_serving_evidence",
+  "observed_at": "2026-10-17T21:29:02Z",
+  "deployment_id": "text-topic-v1",
+  "job_id": "48168988-af5a-4f1d-97eb-16f8cccc5ffd",
+  "status": "SUCCEEDED",
+  "output_label": "technology",
+  "model_version": "toy-text-topic-naive-bayes-v1",
+  "model_revision_sha256": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+  "local_artifact_sha256_matches": true,
+  "input_sha256": "9ac1175af88d4a5496e8da2ad1a1cf1b286e02497fbf812bbc2773d0cc0fec5a",
+  "timings_seconds": {
+    "input_download": 0.010006348951719701,
+    "inference_total": 0.0005012219771742821,
+    "total": 0.011622722027823329
+  },
+  "attempt_count": 1,
+  "attempt_status": "SUCCEEDED",
+  "events": ["submitted", "dispatched", "running", "succeeded"],
+  "source": "GET /api/v1/jobs/{id}, /attempts and /events on the rebuilt local Compose service",
+  "scope": "Functional routing, persistence and lineage; not a quality or throughput benchmark"
+}

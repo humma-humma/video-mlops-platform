@@ -57,6 +57,7 @@ The API accepts a job before model execution. PostgreSQL owns durable job, attem
 | Claim | Recorded check |
 |---|---|
 | Rebuilt real GPU serving and model reuse | [Two-job GPU acceptance](reports/gpu_service_smoke_current.json) |
+| Model-independent job infrastructure | [CPU text-model job](reports/multi_model_smoke_2026-10-17.json) with persisted result, attempt history and artifact revision; [deployment contract](docs/MULTI_MODEL_SERVING.md) |
 | GPU backlog protection | [Concurrent admission burst](reports/admission_demo.json): two accepted, one 429, acceptance resumes after drain |
 | Active-worker failure and recovery | [Interruption timeline and attempt history](reports/recovery_demo.json), [incident explanation](docs/INCIDENT_REVIEW_2026-10-17.md) |
 | Honest evaluation gate | [Rejected measured candidate](reports/local_demo_gate.json) under a [provisional policy](configs/gates/local-demo.json) |

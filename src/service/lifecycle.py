@@ -80,8 +80,9 @@ def retry_dependencies() -> int:
         # dependency retries from silently exceeding the GPU backlog limit.
         if db.get_bind().dialect.name == "postgresql":
             db.execute(text("SELECT pg_advisory_xact_lock(84192736)"))
-        outstanding = dict(db.execute(select(Job.deployment_id, func.count()).where(
-            Job.status.in_(("PENDING", "QUEUED", "RUNNING"))).group_by(Job.deployment_id)))
+        outstanding = {name: count for name, count in db.execute(
+            select(Job.deployment_id, func.count()).where(
+                Job.status.in_(("PENDING", "QUEUED", "RUNNING"))).group_by(Job.deployment_id))}
         available = {"cpu": settings.max_cpu_outstanding_jobs, "gpu": settings.max_outstanding_jobs}
         for name, count in outstanding.items():
             if name in DEPLOYMENTS:
