@@ -36,6 +36,7 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
         record_event(db, job, "running", attempt.id)
         db.commit()
         try:
+            stage = "artifact_check"
             store = ArtifactStore()
             adapter = get_deployment(job.deployment_id)
             if not store.exists(job.input_path):
@@ -48,9 +49,11 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
                           "timings": {"total": 0.0}}
             else:
                 start = time.perf_counter()
+                stage = "scratch_setup"
                 scratch_root = Path(settings.worker_scratch_root)
                 scratch_root.mkdir(parents=True, exist_ok=True)
                 with TemporaryDirectory(dir=scratch_root) as temporary:
+                    stage = "input_download"
                     local_input = Path(temporary) / Path(job.input_path).name
                     store.download_file(job.input_path, local_input)
                     transcript = ""
@@ -62,6 +65,7 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
                         )
                         transcript = store.get_bytes(transcript_uri).decode("utf-8") if store.exists(transcript_uri) else ""
                     download_time = time.perf_counter() - start
+                    stage = "inference"
                     result = adapter.run(local_input, {"transcript": transcript})
                     result["input_sha256"] = sha256_file(local_input)
                     import hashlib
@@ -69,9 +73,11 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
                         result["transcript_sha256"] = hashlib.sha256(transcript.encode()).hexdigest()
                     result["timings"]["input_download"] = download_time
                     result["timings"]["total"] = time.perf_counter() - start
+            stage = "result_validation"
             result = adapter.validate_result(result)
             result["deployment_id"] = adapter.deployment_id
             result.update(attempt_id=attempt.id, trace_id=job.trace_id)
+            stage = "result_storage"
             result_path = store.put_json(f"results/{job.id}/attempt-{attempt.number}.json", result)
             finished = datetime.now(timezone.utc)
             changed = db.execute(update(Job).where(
@@ -86,6 +92,9 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
             db.commit()
         except Exception as exc:
             code, message = classify_failure(exc)
+            event("worker_failure", job_id=job_id, deployment_id=job.deployment_id,
+                  generation=generation, attempt_id=attempt.id, stage=stage,
+                  error_type=type(exc).__name__, error_code=code, trace_id=job.trace_id)
             finished = datetime.now(timezone.utc)
             changed = db.execute(update(Job).where(
                 Job.id == job_id, Job.status == "RUNNING", Job.generation == generation,

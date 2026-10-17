@@ -17,6 +17,7 @@ x-service-environment: &service-environment
   VIDEO_MAX_OUTSTANDING_JOBS: ${VIDEO_MAX_OUTSTANDING_JOBS:-2}
   VIDEO_TASK_SOFT_TIME_LIMIT: ${VIDEO_TASK_SOFT_TIME_LIMIT:-840}
   VIDEO_TASK_TIME_LIMIT: ${VIDEO_TASK_TIME_LIMIT:-900}
+  VIDEO_WORKER_SCRATCH_ROOT: /tmp/video-jobs
 
 x-service-dependencies: &service-dependencies
   storage-init: {condition: service_completed_successfully}
