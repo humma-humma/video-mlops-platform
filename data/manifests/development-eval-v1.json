@@ -1,0 +1,132 @@
+{
+  "schema_version": "1",
+  "subset_version": "development-eval-v1",
+  "seed": "video-mlops-eval-v1",
+  "purpose": "stratified development comparison; not a production quality acceptance set",
+  "per_category": 1,
+  "records": [
+    {
+      "video_id": "7226368631268019482",
+      "category": "Relationship"
+    },
+    {
+      "video_id": "7273897683918621994",
+      "category": "Sports"
+    },
+    {
+      "video_id": "7299582823940312350",
+      "category": "Drama"
+    },
+    {
+      "video_id": "7299771215755906312",
+      "category": "Music, Singing, & Dancing"
+    },
+    {
+      "video_id": "7309512164870491435",
+      "category": "Politics"
+    },
+    {
+      "video_id": "7311332422077975840",
+      "category": "Comedy"
+    },
+    {
+      "video_id": "7317764806767922475",
+      "category": "Family"
+    },
+    {
+      "video_id": "7323547689201765664",
+      "category": "Autos & Vehicles"
+    },
+    {
+      "video_id": "7324688586807201070",
+      "category": "Education"
+    },
+    {
+      "video_id": "7325985650140974382",
+      "category": "Science & Technology"
+    },
+    {
+      "video_id": "7328941581862473006",
+      "category": "Gaming"
+    },
+    {
+      "video_id": "7331551109649059115",
+      "category": "Pets & Animals"
+    },
+    {
+      "video_id": "7343662075299761440",
+      "category": "Film & Animation"
+    },
+    {
+      "video_id": "7358352976639184146",
+      "category": "Travel & Events"
+    },
+    {
+      "video_id": "7364542326959574314",
+      "category": "Daily Life"
+    },
+    {
+      "video_id": "7367380929913900320",
+      "category": "Outfit, Style, & Howto"
+    },
+    {
+      "video_id": "7368121296154086688",
+      "category": "Food"
+    },
+    {
+      "video_id": "7376360928851299590",
+      "category": "Beauty Care"
+    },
+    {
+      "video_id": "7395616033127648554",
+      "category": "Fitness & Health"
+    },
+    {
+      "video_id": "7396760829498002720",
+      "category": "People & Blogs"
+    },
+    {
+      "video_id": "7397523950391086369",
+      "category": "Entertainment & Shows"
+    },
+    {
+      "video_id": "7397794935199567135",
+      "category": "News"
+    },
+    {
+      "video_id": "7408631372044111135",
+      "category": "Nonprofits & Activism"
+    }
+  ],
+  "sample_hash": "daf48a95d698502f2c482e15ab1284eee350d4cb02ff8ee47796bcb2b60f9d52",
+  "available_category_counts": {
+    "Autos & Vehicles": 11,
+    "Beauty Care": 10,
+    "Comedy": 19,
+    "Daily Life": 25,
+    "Drama": 1,
+    "Education": 2,
+    "Entertainment & Shows": 14,
+    "Family": 4,
+    "Film & Animation": 7,
+    "Fitness & Health": 2,
+    "Food": 10,
+    "Gaming": 5,
+    "Music, Singing, & Dancing": 16,
+    "News": 5,
+    "Nonprofits & Activism": 2,
+    "Outfit, Style, & Howto": 5,
+    "People & Blogs": 21,
+    "Pets & Animals": 7,
+    "Politics": 43,
+    "Relationship": 6,
+    "Science & Technology": 1,
+    "Sports": 8,
+    "Travel & Events": 14
+  },
+  "unrepresented_taxonomy_categories": [
+    "Lipsync",
+    "Society"
+  ],
+  "manifest_hash": "fa6422f1f519e63fe0c3a8c9c25295640e21af9513f1111265c16e9e2b27dfc2"
+}

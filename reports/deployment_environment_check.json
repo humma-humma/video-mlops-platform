@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-10",
+  "checks": {
+    "aws_available": false,
+    "terraform_available": false,
+    "docker_available": true,
+    "gh_available": true,
+    "docker_engine_accessible": false,
+    "docker_engine_reason": "access_denied",
+    "local_api_live": true
+  },
+  "cloud_resources_created": false,
+  "next_required_inputs": [
+    "AWS region",
+    "demo budget",
+    "AWS authentication/profile setup"
+  ],
+  "scope": "Local capability checks only; no cloud identity, quota or deployment verification performed"
+}

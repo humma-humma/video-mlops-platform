@@ -215,6 +215,13 @@ poetry.toml
 # ruff
 .ruff_cache/
 .uv-cache/
+.work-tmp/
+.service-test-work/
+worker-scratch/
+reports/edge-headless-profile/
+
+# Local working status (intentionally not published)
+docs/PROJECT_STATUS.md
 
 # LSP config files
 pyrightconfig.json

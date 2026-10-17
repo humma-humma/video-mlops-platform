@@ -1,5 +1,8 @@
 # MLOps Upgrade Plan
 
+> Historical plan. The [portfolio direction](docs/PORTFOLIO_DIRECTION.md)
+> supersedes its objective and delivery priorities as of 2026-10-10.
+
 ## Objective
 
 Turn this video summarization benchmark into a reproducible MLOps project that demonstrates the full batch ML lifecycle: configurable experiments, tracked metrics and artifacts, data/output versioning, reliable orchestration, automated checks, and clear benchmark reporting.

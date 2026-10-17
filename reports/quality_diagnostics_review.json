@@ -1,0 +1,130 @@
+{
+  "suite": "data/outputs/quality-diagnostics/76845c91141e43109dd9138775c8dbbc",
+  "diagnostics_sha256": "ae4e42252ac8d4b70f1f1bc6b9fc87c1651bfc2194fb280a31d122b6127d310c",
+  "scorer_controls_sha256": "158b60eea456aaaa25419af075498bae8b7c5ab778f1edb4b34d8b7de98e8b51",
+  "verified": "Baseline checksum, report/config/sample/source digest consistency, manifest, journal coverage, category/error evidence and scorer means checked.",
+  "experiments": [
+    {
+      "report": "data/outputs/quality-diagnostics/76845c91141e43109dd9138775c8dbbc/constrained-category/dfbd6761acf249efa1e07dc77e4d7cdd/report.json",
+      "sha256": "8dfc5fb9ed77b322722436b21f593ccff8037f47da2238db494f6a2b399aa2a5",
+      "attempted": 4,
+      "succeeded": 1,
+      "failed": 3,
+      "correct_categories": 1,
+      "raw_category_or_combined_outputs": [
+        {
+          "record_type": "generation",
+          "video_id": "7226368631268019482",
+          "stage": "category",
+          "outputs": [
+            "3. Music, Singing, &"
+          ],
+          "seconds": 1.627240311994683
+        },
+        {
+          "record_type": "generation",
+          "video_id": "7273897683918621994",
+          "stage": "category",
+          "outputs": [
+            "5. Sports"
+          ],
+          "seconds": 1.4770677459891886
+        },
+        {
+          "record_type": "generation",
+          "video_id": "7299771215755906312",
+          "stage": "category",
+          "outputs": [
+            "3. Music, Singing, &"
+          ],
+          "seconds": 1.9431735739926808
+        },
+        {
+          "record_type": "generation",
+          "video_id": "7331551109649059115",
+          "stage": "category",
+          "outputs": [
+            "3. Music, Singing, &"
+          ],
+          "seconds": 1.6551735929970164
+        }
+      ]
+    },
+    {
+      "report": "data/outputs/quality-diagnostics/76845c91141e43109dd9138775c8dbbc/combined-raw/1a66b4cf59ff4c5fb2572c465725bd81/report.json",
+      "sha256": "9edce2d723ca0c335212d2404831342de9952b1717a9d3176bdadd30951ecd69",
+      "attempted": 4,
+      "succeeded": 0,
+      "failed": 4,
+      "correct_categories": 0,
+      "raw_category_or_combined_outputs": [
+        {
+          "record_type": "generation",
+          "video_id": "7226368631268019482",
+          "stage": "combined",
+          "outputs": [
+            "1. Music, Singing, & Dancing"
+          ],
+          "seconds": 2.3174732490006136
+        },
+        {
+          "record_type": "generation",
+          "video_id": "7273897683918621994",
+          "stage": "combined",
+          "outputs": [
+            "Sports"
+          ],
+          "seconds": 1.417550764992484
+        },
+        {
+          "record_type": "generation",
+          "video_id": "7299771215755906312",
+          "stage": "combined",
+          "outputs": [
+            "Dance"
+          ],
+          "seconds": 1.8807730720000109
+        },
+        {
+          "record_type": "generation",
+          "video_id": "7331551109649059115",
+          "stage": "combined",
+          "outputs": [
+            "Pets & Animals"
+          ],
+          "seconds": 1.4526126609998755
+        }
+      ]
+    }
+  ],
+  "scorer_controls": [
+    {
+      "num_layers": 24,
+      "means": {
+        "mismatched": 0.9826422184705734,
+        "model": 0.9859927395979563,
+        "self": 1.0
+      },
+      "self_minus_mismatched": 0.017357781529426575,
+      "model_minus_mismatched": 0.0033505211273828772
+    },
+    {
+      "num_layers": 17,
+      "means": {
+        "mismatched": 0.8555335327982903,
+        "model": 0.8759933114051819,
+        "self": 1.0
+      },
+      "self_minus_mismatched": 0.14446646720170975,
+      "model_minus_mismatched": 0.020459778606891632
+    }
+  ],
+  "findings": [
+    "Layer 24 scores mismatched references near 1; headline F1 is unsuitable as factual-quality evidence.",
+    "Layer 17 gives more separation but still requires human calibration and held-out review.",
+    "The configured category constraint did not reach model.generate: top-level pipeline kwargs are processed as preprocessing options.",
+    "Combined raw generations are plain category labels rather than JSON. No schema repair or promotion is justified."
+  ],
+  "fix": "Forward generation options via generate_kwargs; real pipeline/GPU model verification now observes callback invocation. New full comparison configs explicitly select layer 17; original reports remain unchanged.",
+  "promoted": false
+}

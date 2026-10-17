@@ -1,0 +1,47 @@
+{
+  "purpose": "native GPU adapter smoke; not container or quality acceptance",
+  "runs": [
+    {
+      "schema_version": "1",
+      "video_id": "7203774185322188037",
+      "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white and black electronic device, possibly a computer or a printer, and then moves towards a white wall with a green exit sign. The text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will print the best, like no one else has) appears on the screen, indicating the person's intention to print something. The scene transitions to the person sitting at a desk, typing on a computer, with the text \"Vor der Abschlusspr\u00fcfung\"",
+      "category": "Entertainment & Shows",
+      "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "taxonomy_version": "tiktok-video-v1",
+      "model_instance_id": "fb6d8d0c-0f0a-47aa-b8ed-3f9b6ef811ef",
+      "transcript_source": "provided",
+      "timings": {
+        "model_load": 2.1954471999779344,
+        "input_preparation": 5.6900084018707275e-05,
+        "summary": 16.144852600060403,
+        "category": 5.929562800098211,
+        "inference_total": 22.074519200017676
+      }
+    },
+    {
+      "schema_version": "1",
+      "video_id": "7203774185322188037",
+      "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white and black electronic device, possibly a computer or a printer, and then moves towards a white wall with a green exit sign. The text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will print the best, like no one else has) appears on the screen, indicating the person's intention to print something. The scene transitions to the person sitting at a desk, typing on a computer, with the text \"Vor der Abschlusspr\u00fcfung\"",
+      "category": "Entertainment & Shows",
+      "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "taxonomy_version": "tiktok-video-v1",
+      "model_instance_id": "fb6d8d0c-0f0a-47aa-b8ed-3f9b6ef811ef",
+      "transcript_source": "provided",
+      "timings": {
+        "model_load": 0.0,
+        "input_preparation": 2.9499875381588936e-05,
+        "summary": 14.562160300090909,
+        "category": 5.531019999878481,
+        "inference_total": 20.09325519995764
+      }
+    }
+  ],
+  "environment": {
+    "python": "3.10.13",
+    "torch": "2.8.0+cu126",
+    "transformers": "4.56.1",
+    "gpu": "NVIDIA GeForce RTX 2080"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "passed": false,
+  "reasons": [
+    "candidate: insufficient category evaluation coverage",
+    "Error rate exceeds policy",
+    "P95 latency regressed"
+  ],
+  "candidate_hash": "644fc2a41154564210ab67e47e28ba960511f16387664c966173799acb54683a",
+  "baseline_hash": "550b5ace505f7324354064cd67d2b1b86e913e80f2c71c6ce3efbdb4757be5df",
+  "policy_hash": "a642da651142ac624d56dd44b1fc7235ee846f1ac8ffd94b34685f77a913dc1e",
+  "reviewed_by": "portfolio-demo-author-provisional"
+}

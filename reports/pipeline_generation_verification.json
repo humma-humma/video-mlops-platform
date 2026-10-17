@@ -1,0 +1,13 @@
+{
+  "verification": "Real ImageTextToTextPipeline and pinned 500M GPU model invoked prefix constraint during model.generate",
+  "transformers": "4.56.1",
+  "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "inference_utils_sha256": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+  "labels": [
+    "Gaming"
+  ],
+  "seconds": 6.356783700175583,
+  "callback_calls": 3,
+  "max_new_tokens": 9,
+  "limitations": "Native Torchvision fallback on one small video; no 2.2B accuracy or Docker serving acceptance claimed."
+}

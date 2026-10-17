@@ -1,0 +1,11 @@
+{
+  "baseline_hash": "550b5ace505f7324354064cd67d2b1b86e913e80f2c71c6ce3efbdb4757be5df",
+  "reviewed_by": "portfolio-demo-author-provisional",
+  "minimum_samples": 23,
+  "minimum_category_samples": 20,
+  "max_bertscore_drop": 0.01,
+  "max_accuracy_drop": 0.05,
+  "max_error_rate": 0.15,
+  "max_latency_ratio": 1.25,
+  "max_gpu_memory_ratio": 1.1
+}

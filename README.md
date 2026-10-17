@@ -1,217 +1,52 @@
-# Video MLOps: Production GPU Inference Platform
+# Video-MLOps: GPU inference reliability demo
 
-[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-3776AB.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Tests: 20 passing](https://img.shields.io/badge/tests-20%20passing-brightgreen.svg)](tests)
+An existing video summarization and categorization model provides a concrete GPU workload for an **ML infrastructure portfolio**. The project demonstrates asynchronous serving, durable job history, controlled recovery, resource admission, evaluation gates and local service releases on one RTX 2080. It is a single-host demo, with no additional cloud-hosting spend.
 
-![Video MLOps portfolio banner](assets/portfolio/video_mlops_banner.png)
+![Video-MLOps portfolio banner](assets/portfolio/video_mlops_banner.png)
 
-> [Current implementation status and blockers](docs/PROJECT_STATUS.md)
+## Try it locally
 
-**Objective**
+Docker Desktop with GPU support and the [pinned model snapshot in the local Hugging Face cache](docs/GPU_WORKER_LOCAL.md) are prerequisites. From the project PowerShell:
 
-Build and optimize a video summarization pipeline using an open-source model.
-You will:
-
-- Process a given set of videos.
-- Generate concise and grounded textual summaries using an existing open-source model.
-- Measure and record inference times for each component in the pipeline.
-- Measure and record performance of the generated responses against ground truth responses
-- Propose and implement optimizations to reduce total inference time.
-
-**Dataset**
-
-You will be provided with 270 TikTok videos in .mp4 format and their corresponding transcripts in .txt files (available on [Google Drive](https://drive.google.com/drive/folders/1ZexqdCYpCQPpSjxL38Y8NpvPNCz_lJwH?usp=drive_link)). Each video has a unique file name, and the video durations range from approximately 5 seconds to 5 minutes. Your goal is to generate this information for each video using a Vision Language Model (VLM):
-
-- Summary: A detailed and factual summary of the video content (no hallucinations).
-- Category: One label selected from a predefined set of categories (see [here](https://github.com/AjayKumarGogineni/vlm-inference/blob/899de3b908cb64b8b5ee08cabe29e1d5b3855ee2/inference_utils.py#L11)).
-
-**Validation**
-
-The generated responses should be compared against the ground truth responses to evaluate performance of summary and accuracy of category selection. We will be using BERTScore for evaluating summary.
-
-**Baseline Model**
-
-Use this open-source model for video summarization:
-
-- SmolVLM2-2.2B-Instruct (https://huggingface.co/HuggingFaceTB/SmolVLM2-2.2B-Instruct, https://huggingface.co/blog/smolvlm2)
-
-**Pipeline Requirements**
-
-Your code should include the following components:
-
-Steps with Description
-
-1. Video Loading - Load and read the videos
-2. Audio Transcription - Extract and transcribe audio to text
-3. Prompt Creation - Generate the prompt in a format expected by the model
-4. Text Generation - Generate the textual summary and the video category by passing the prompt to the model
-5. Post-processing - Clean and format the model output. Compute and report the evaluation metrics against ground truth.
-
-<img src="images/Pipeline_workflow.png" alt="Pipeline Workflow" width="600">
-
-**_Input Examples_**
-
-TikTok video frame:
-
-<img src="images/Video_frame.png" alt="Video Frame" width="200">
-
-Audio Transcript:
-
-<img src="images/Audio_transcript.png" alt="Audio Transcript" width="600">
-
-**_Ground Truth_**
-
-Ground Truth Summary:
-`The video is a travel vlog highlighting five unique activities to do on the Greek island of Paros. The presenter, speaking in a casual and enthusiastic tone, suggests: 1. Having a meal in Lefkes and hiking the Byzantine road to Prodromos, which takes about 45 minutes. 2. Visiting Kalogero beach for a natural mud mask, where one can use clay from the rocks. 3. Exploring Laggeri beach, described as secluded and a nudist beach, noting that there's enough space for everyone. 4. Visiting the Butterfly nature reserve, located 5 kilometers from Paros town, which can be reached via an organized excursion. 5. Driving by Agios Fokas, a place located 6 kilometers from the capital of Paros, featuring an unorganized yet picturesque church. The video concludes by asking viewers if they would like a part two and encouraging them to follow for daily Greece travel tips.`
-
-Ground Truth Category:
-`Travel & Events`
-
-**_Predictions_**
-
-Predicted Summary:
-`The video showcases various activities and locations in the Greek island of Paros. It begins with a person standing in front of a scenic view of the sea and white buildings, with the text Paros 5 out of the box activities! displayed at the top. The person gestures and points towards the camera, indicating the start of the video. The scene transitions to a person in a red and white striped shirt standing in front of a picturesque white building with blue accents, with the text Could you do a vid on Paros please? 🙏 at the top.`
-
-Predicted Category:
-`Travel & Events`
-
-**Part A — Baseline Measurement**
-
-Implement the full pipeline using the baseline model.
-Record execution time for:
-
-- Video loading
-- Audio transcription
-- Text generation
-- Total inference time
-
-Save these measurements in a CSV file for analysis.
-
-Record performance metric for:
-
-- Summary quality : BERTScore
-- Category prediction : Accuracy
-
-**Part B — Optimization**
-
-Apply at least two different optimization strategies to the baseline model to improve inference time and evaluation metrics.
-
-- Sample key frames from the video and only pass them to the model.
-- Model quantization (e.g., bitsandbytes, torch.quantization).
-- Use model pruning or distillation.
-- Use mixed precision (torch.float16).
-- Batch processing of frames.
-- Parallel data loading.
-- Combination or any new techniques.
-
-After applying optimizations, re-run timing tests and report improvements compared to the baseline.
-
-**Deliverables**
-
-- Main Project presentation
-- Code (.ipynb or .py)
-- Timing report - CSV file recording inference times before and after optimization
-- Short report (2–3 pages) covering:
-    - Model choice and rationale
-    - Baseline performance
-    - Optimization techniques used
-    - Trade-offs between speed and summary quality
-    - Future improvements
-
-You have been provided with a basic template to begin with. You are welcome to make changes as needed to improve upon it.
-
-**Steps to run the code**
-
-1. Clone the repository to your local machine.
-2. Create and activate the conda environment.
-
-```bash
-conda create -n vlm-mlops python=3.12 -y
-conda activate vlm-mlops
+```powershell
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build --wait
 ```
 
-3. Install `uv`, if you haven't from [here](https://docs.astral.sh/uv/getting-started/installation), then install the dependencies.
+Open **http://127.0.0.1:8000/** and submit your own MP4 or the [project-created six-second sample](assets/portfolio/demo_shapes.mp4), which [passed a real GPU submission](reports/demo_shapes_probe.json). Follow its status, then inspect the summary/category, stage timings, model/config lineage and attempt history. For host GPU measurements alongside readiness, recent jobs and queue state, start the [loopback preview](docs/LOCAL_DEMO.md) and open **http://127.0.0.1:8080/operations**. The service also has a fake-worker mode for CPU-only development; fake results are clearly marked.
 
-```bash
-uv sync
+## What the system demonstrates
+
+```mermaid
+flowchart LR
+    UI[Demo UI] --> API[FastAPI API]
+    API --> DB[(PostgreSQL job state)]
+    API --> Store[(MinIO artifacts)]
+    API --> Queue[Valkey / Celery]
+    Dispatch[Dispatcher] --> DB
+    Dispatch --> Queue
+    Queue --> Worker[One cached GPU worker]
+    Worker --> DB
+    Worker --> Store
+    Ops[Operations UI] --> API
 ```
 
-4. Download the dataset of TikTok videos and audio transcripts from the Google drive link ([Google Drive](https://drive.google.com/drive/folders/1ZexqdCYpCQPpSjxL38Y8NpvPNCz_lJwH?usp=drive_link)) and place them in the `data/inputs/videos/` and `data/inputs/audio_transcripts/` directories respectively.
-5. Update the paths in config.py to point to the correct input and output directories if required. The current pipeline will save the outputs in `data/outputs/` directory by default
-6. Run main.py to execute the video summarization pipeline. The pipeline processes each video sequentially, generates a summary and category for each video, and saves the results to a CSV file. It also records inference times and evaluation metrics.
+The API accepts a job before GPU execution. PostgreSQL owns durable job, attempt and event state; MinIO stores input and result artifacts. The dispatcher repairs unpublished or expired work. The worker uses a pinned 500M SmolVLM2 snapshot and reuses its loaded model. An atomic PostgreSQL admission check limits outstanding work to two jobs by default. See the [job lifecycle](docs/JOB_LIFECYCLE.md), [architecture decision](docs/adr/0001-local-inference-demo.md) and [full reference](docs/PORTFOLIO_REFERENCE.md).
 
-```bash
-uv run main.py \
-    --video-folder data/inputs/videos \
-    --audio-folder data/inputs/audios \
-    --audio-transcript-folder data/inputs/audio_transcripts \
-    --ground-truth-file data/inputs/ground_truth.csv \
-    --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
-    --csv-folder data/outputs/csv \
-    --statistics-folder data/outputs/statistics \
-    --file-name smol_vlm_2.2b_pipeline
-```
+## Inspect the evidence
 
-For a quick smoke run, limit the number of videos:
+| Claim | Recorded check |
+|---|---|
+| Rebuilt real GPU serving and model reuse | [Two-job GPU acceptance](reports/gpu_service_smoke_current.json) |
+| GPU backlog protection | [Concurrent admission burst](reports/admission_demo.json): two accepted, one 429, acceptance resumes after drain |
+| Active-worker failure and recovery | [Interruption timeline and attempt history](reports/recovery_demo.json), [incident explanation](docs/INCIDENT_REVIEW_2026-10-17.md) |
+| Honest evaluation gate | [Rejected measured candidate](reports/local_demo_gate.json) under a [provisional policy](configs/gates/local-demo.json) |
+| GPU and request measurements | [GPU profile](reports/gpu_profile.md), [bounded serving measurements](reports/serving_measurement_smoke.md) |
+| Operational release and rollback | [Executed release report](reports/release_demo_20261017105931.json), [candidate probe](reports/release_candidate_20261017105931.json), [rollback probe](reports/release_rollback_20261017105931.json) |
 
-```bash
-uv run main.py \
-    --video-folder data/inputs/videos \
-    --audio-folder data/inputs/audios \
-    --audio-transcript-folder data/inputs/audio_transcripts \
-    --ground-truth-file data/inputs/ground_truth.csv \
-    --model-name HuggingFaceTB/SmolVLM2-2.2B-Instruct \
-    --csv-folder data/outputs/csv \
-    --statistics-folder data/outputs/statistics \
-    --file-name smoke_test \
-    --num-video-samples 2
-```
+The full local CPU suite passed **159 tests with one optional skip** on 2026-10-17; six Node UI/dashboard behavior checks and manifest verification also passed. See [delivery status](reports/delivery_status.md) for dated evidence and limits. The [reliability/release runbook](docs/LOCAL_RELEASE.md) reproduces the controlled worker interruption and operational rollout/rollback sequence.
 
-To collect attributable per-video timings and continue past individual model
-output failures, add:
+## Scope and limitations
 
-```bash
---inference-strategy per_video_two_pass
-```
+This deployment has one host and one GPU. Short bursts establish admission behavior, not sustained capacity or production p95 latency. The gate rejection uses 2.2B experiment reports and does not approve the distinct 500M serving model. GPU usage on the dashboard is device-wide. Remote CI execution, visual browser review and a recorded walkthrough remain open. AWS and the proposed restricted-access diagnostic workbench are deferred; see the [portfolio direction](docs/PORTFOLIO_REFERENCE.md).
 
-An experimental single-generation path requests a strict JSON summary and
-category together:
-
-```bash
---inference-strategy per_video_combined
-```
-
-The original throughput-oriented behavior remains the default
-(`batch_two_pass`). Do not promote the combined strategy until its latency and
-quality have been compared against the same versioned evaluation subset.
-
-7. Sample output files with baseline performance can be found in the `data/outputs/` directory.
-
-Before running a benchmark, generate the versioned dataset manifest:
-
-```bash
-uv run python -m scripts.build_dataset_manifest
-```
-
-The manifest records the available inputs and their SHA-256 checksums. The
-category compatibility policy and current dataset counts are documented in
-[`docs/DATASET_CONTRACT.md`](docs/DATASET_CONTRACT.md).
-
-The production-service and MLOps implementation roadmap is documented in
-[`PLATFORM_IMPLEMENTATION_PLAN.md`](PLATFORM_IMPLEMENTATION_PLAN.md).
-
-A small real-GPU comparison can be run independently of BERTScore with:
-
-```bash
-uv run python -m scripts.gpu_smoke \
-    --video data/inputs/videos/7302484543691328810.mp4 \
-    --transcript data/inputs/audio_transcripts/7302484543691328810.txt \
-    --max-frames 4 \
-    --output reports/gpu_smoke_500m.json
-```
-
-**Possible issues**
-
-1. Ensure the paths in config.py are correctly set to your local directories.
-2. Ensure to use Python 3.12, matching `.python-version` and `pyproject.toml`.
+The video model and dataset came from an [earlier assignment and research workflow](docs/ORIGINAL_ASSIGNMENT.md). That document preserves its original objective, data instructions, examples and optimization commands; those runs are separate from the serving demo.

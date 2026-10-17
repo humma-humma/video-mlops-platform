@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-17T09:01:09.939047+00:00",
+  "live": {
+    "status": "ok"
+  },
+  "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+  "preserved": [
+    {
+      "job_id": "c6480cee-8265-4fee-a447-065e7a9f6010",
+      "result_hash": "6963952e5724ef8cccea6df54ca1af90de5a393a8ffb044f11e67d40f5abe10e"
+    },
+    {
+      "job_id": "bca1bfc7-955c-4e8d-9969-922df81a093b",
+      "result_hash": "a305437d036442dafee62db282472b1077911ba58006b05f52e14ef66c24c484"
+    }
+  ],
+  "new_job_id": "312deeca-f2a0-4684-97f3-fcba17ab60f1",
+  "new_result_hash": "97b6b57e00c259d47ad9b0166d9e471139d6f2df8f9f46f77a8485916946a76f",
+  "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "lineage": {
+    "source_files": {
+      "src/config.py": "8606bda860910c301afdffa8473a056440e3e381a65c9905ae70f1bbb747c0c7",
+      "src/pipeline.py": "ac9d74604b2177c566a6832a71b3d5c96e11bf08b3275513ba9a407462e81b8b",
+      "src/inference_utils.py": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+      "src/decoding.py": "0523c989d64f22c7acda902849ca420f81fd86e1e74436a29c8e43c2f5efef89",
+      "src/model_utils.py": "32769d1dde94751322534f7b71265ce25f775d778941fe0451ebdbd3e5afbc4f",
+      "src/category_utils.py": "cf4b7fb12a8219a59596944d8d2a4db83cdb1cda0b3f0c41fb11a0f315bb562d",
+      "src/taxonomy.py": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+      "src/service/inference.py": "37038eb796341dce0d7b7f5764e0a7184da21f908cf1b9392e04d8298164d159",
+      "src/lineage.py": "2697f36785a9b2b82642fb82764dc97495cba844cb9244d22c6ba989a83be09d",
+      "src/experiments.py": "1edb161d4d4290ffa4b48d6fc1351a3deab8df738da5621460bbd28a760bdccc",
+      "src/evaluation_utils.py": "75298fdd381a9f2c0052a58fc225435a1cea683e8c06032ad52dc82b944edd00"
+    },
+    "code_hash": "a5754dd86820a435556ed0c0e4baaa8104132f63245f72653dcb258850fdb4ad",
+    "prompt_version": "video-prompts-v1",
+    "prompt_hash": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+    "taxonomy_hash": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+    "inference_config": {
+      "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "max_frames": 4,
+      "model_dtype": "auto",
+      "use_kv_cache": true,
+      "inference_strategy": "per_video_two_pass",
+      "decoder": "torchcodec"
+    },
+    "inference_config_hash": "7208bad081532771f3f4c6a906b00769f612223f9f9f36b893f1c7c0371e1552"
+  },
+  "timings": {
+    "model_load": 10.597441224032082,
+    "input_preparation": 7.660302799195051e-05,
+    "summary": 9.766701040090993,
+    "category": 1.1621193119790405,
+    "inference_total": 10.928992558969185,
+    "input_download": 0.010434636962600052,
+    "total": 25.354032341972925
+  },
+  "passed": true
+}

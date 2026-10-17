@@ -17,6 +17,7 @@ class InferenceConfig:
 
     # ===== MODEL INFO =====
     model_name: str = field(metadata={"help": "Name of the model to be used"})
+    model_revision: str | None = field(default=None, metadata={"help": "Exact Hugging Face model and processor revision."})
     use_kv_cache: bool = field(
         default=False,
         metadata={"help": "Whether to use key-value cache for faster inference."},

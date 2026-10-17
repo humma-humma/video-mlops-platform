@@ -1,0 +1,97 @@
+{
+  "suite": "data/outputs/quality-suite/91a00867c3314887b9b0f81b9da73a00",
+  "comparison_sha256": "bb19257b92df30a3484cc9a38bb0379b11714511b99bf619cf415d98393a3ac2",
+  "verification": "Source/runner/config/sample/manifest hashes, selected input checksums, full journal coverage, category counts, latency percentiles and paired runtime/scorer identity verified. BERTScore means are recorded from reports, not independently rerun.",
+  "experiments": [
+    {
+      "report": "data/outputs/quality-suite/91a00867c3314887b9b0f81b9da73a00/constrained-baseline/9d965cbcc7284aa3bf5adc933229569c/report.json",
+      "sha256": "cd08a8a95048983f57ba6bbb2995789bf3470ff9c71cd2d796ff96c207720a25",
+      "frames": 4,
+      "correct": 8,
+      "attempted": 23,
+      "failed": 0,
+      "metrics": {
+        "error_rate": 0.0,
+        "peak_gpu_memory_bytes": 6807667200,
+        "inference_seconds": 199.57086623100622,
+        "model_load_seconds": 122.87549636101176,
+        "input_preparation_seconds": 0.060224675995414145,
+        "category_accuracy": 0.34782608695652173,
+        "prediction_coverage": 1.0,
+        "category_accuracy_all_attempted": 0.34782608695652173,
+        "latency_p50_seconds": 8.388846321991878,
+        "latency_p95_seconds": 10.35004251099599,
+        "bertscore_f1": 0.8799886107444763
+      }
+    },
+    {
+      "report": "data/outputs/quality-suite/91a00867c3314887b9b0f81b9da73a00/constrained-fewer-frames/cd9c754a23f5483da26518308b6e1110/report.json",
+      "sha256": "c538256f839f2ee80d83a7c739102e18234584204e17f098a14368f268a7001e",
+      "frames": 2,
+      "correct": 5,
+      "attempted": 23,
+      "failed": 0,
+      "metrics": {
+        "error_rate": 0.0,
+        "peak_gpu_memory_bytes": 6500282368,
+        "inference_seconds": 174.3136343590013,
+        "model_load_seconds": 143.51134424100746,
+        "input_preparation_seconds": 0.08190686500165612,
+        "category_accuracy": 0.21739130434782608,
+        "prediction_coverage": 1.0,
+        "category_accuracy_all_attempted": 0.21739130434782608,
+        "latency_p50_seconds": 7.334097996004857,
+        "latency_p95_seconds": 9.25427654600935,
+        "bertscore_f1": 0.8835994005203247
+      }
+    }
+  ],
+  "paired_categories": {
+    "four_correct_two_wrong": [
+      "7325985650140974382",
+      "7331551109649059115",
+      "7368121296154086688",
+      "7397794935199567135"
+    ],
+    "four_wrong_two_correct": [
+      "7226368631268019482"
+    ],
+    "both_wrong": [
+      "7299582823940312350",
+      "7299771215755906312",
+      "7311332422077975840",
+      "7317764806767922475",
+      "7323547689201765664",
+      "7328941581862473006",
+      "7358352976639184146",
+      "7364542326959574314",
+      "7367380929913900320",
+      "7376360928851299590",
+      "7395616033127648554",
+      "7396760829498002720",
+      "7397523950391086369",
+      "7408631372044111135"
+    ],
+    "both_correct": [
+      "7273897683918621994",
+      "7309512164870491435",
+      "7324688586807201070",
+      "7343662075299761440"
+    ]
+  },
+  "two_vs_four": {
+    "accuracy_difference_percentage_points": -13.043478260869565,
+    "p95_reduction_percent": 10.587067288105212,
+    "peak_gpu_reduction_percent": 4.515274072152053,
+    "inference_elapsed_reduction_percent": 12.655771029609753,
+    "bertscore_difference": 0.0036107897758483887
+  },
+  "decision": "Keep four frames as the development reference. Do not promote the two-frame optimization or claim production quality acceptance.",
+  "limitations": [
+    "23 stratified development videos; no representative held-out acceptance.",
+    "Layer-17 summary similarity is not factual correctness.",
+    "Single sequential run; no uncertainty estimate or repeatability claim for latency.",
+    "Container image digest and serving-image acceptance remain pending."
+  ],
+  "promoted": false
+}

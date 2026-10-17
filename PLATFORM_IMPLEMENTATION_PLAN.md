@@ -1,5 +1,9 @@
 # Video ML Platform Implementation Plan
 
+> The [portfolio direction](docs/PORTFOLIO_DIRECTION.md) governs priorities as
+> of 2026-10-10, including a small demo UI. This document retains the detailed
+> implementation background and cost controls.
+
 ## 1. Objective
 
 Extend the existing SmolVLM2 video summarization benchmark into a coherent, portfolio-ready platform containing:

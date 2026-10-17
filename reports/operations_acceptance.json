@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-10-10T13:37:11.925931+00:00",
+  "scope": "Live HTTP and mock-DOM verification; visual browser review unavailable",
+  "job_set_unchanged": true,
+  "job_count": 16,
+  "existing_job_reviewed": "0ebadbdc-2221-41f5-a5c4-6af61c408da8",
+  "checks": {
+    "/operations": {
+      "status": 200,
+      "bytes": 1900
+    },
+    "/demo-assets/operations.js": {
+      "status": 200,
+      "bytes": 3379
+    },
+    "/demo-assets/operations.css": {
+      "status": 200,
+      "bytes": 1035
+    },
+    "/health/ready": {
+      "status": 200,
+      "bytes": 59,
+      "data": {
+        "status": "ok",
+        "database": "ok",
+        "queue": "ok",
+        "storage": "ok"
+      }
+    },
+    "/metrics": {
+      "status": 200,
+      "bytes": 3475,
+      "text": "# TYPE video_http_requests_total counter\nvideo_http_requests_total{method=\"GET\",route=\"/api/v1/jobs\",status=\"200\"} 5\nvideo_http_requests_total{method=\"GET\",route=\"/api/v1/jobs/{job_id}\",status=\"200\"} 69\nvideo_http_requests_total{method=\"GET\",route=\"/api/v1/jobs/{job_id}/attempts\",status=\"200\"} 5\nvideo_http_requests_total{method=\"GET\",route=\"/api/v1/jobs/{job_id}/events\",status=\"200\"} 1\nvideo_http_requests_total{method=\"GET\",route=\"/api/v1/jobs/{job_id}/result\",status=\"200\"} 1\nvideo_http_requests_total{method=\"GET\",route=\"/health\",status=\"200\"} 1\nvideo_http_requests_total{method=\"GET\",route=\"/health/live\",status=\"200\"} 4892\nvideo_http_requests_total{method=\"GET\",route=\"/health/ready\",status=\"200\"} 12\nvideo_http_requests_total{method=\"GET\",route=\"/jobs/{job_id}\",status=\"200\"} 20\nvideo_http_requests_total{method=\"GET\",route=\"/metrics\",status=\"200\"} 2\nvideo_http_requests_total{method=\"POST\",route=\"/api/v1/jobs\",status=\"202\"} 5\nvideo_http_requests_total{method=\"POST\",route=\"/jobs\",status=\"202\"} 2\n# TYPE video_http_request_duration_seconds summary\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/api/v1/jobs\"} 0.07161211801576428\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/api/v1/jobs\"} 5\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/api/v1/jobs/{job_id}\"} 0.5496445820281224\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/api/v1/jobs/{job_id}\"} 69\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/api/v1/jobs/{job_id}/attempts\"} 0.06466526798612904\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/api/v1/jobs/{job_id}/attempts\"} 5\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/api/v1/jobs/{job_id}/events\"} 0.009754095997777767\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/api/v1/jobs/{job_id}/events\"} 1\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/api/v1/jobs/{job_id}/result\"} 0.015397366005345248\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/api/v1/jobs/{job_id}/result\"} 1\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/health\"} 1.28240091400221\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/health\"} 1\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/health/live\"} 2.9743324616392783\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/health/live\"} 4892\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/health/ready\"} 13.374400077980681\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/health/ready\"} 12\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/jobs/{job_id}\"} 0.10335612000199035\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/jobs/{job_id}\"} 20\nvideo_http_request_duration_seconds_sum{method=\"GET\",route=\"/metrics\"} 0.04747233400121331\nvideo_http_request_duration_seconds_count{method=\"GET\",route=\"/metrics\"} 2\nvideo_http_request_duration_seconds_sum{method=\"POST\",route=\"/api/v1/jobs\"} 4.8119675619964255\nvideo_http_request_duration_seconds_count{method=\"POST\",route=\"/api/v1/jobs\"} 5\nvideo_http_request_duration_seconds_sum{method=\"POST\",route=\"/jobs\"} 0.7730776730022626\nvideo_http_request_duration_seconds_count{method=\"POST\",route=\"/jobs\"} 2\n# TYPE video_jobs gauge\nvideo_jobs{status=\"FAILED\"} 3\nvideo_jobs{status=\"SUCCEEDED\"} 13\n# TYPE video_job_attempts gauge\nvideo_job_attempts{status=\"FAILED\"} 1\nvideo_job_attempts{status=\"SUCCEEDED\"} 8\nvideo_oldest_queued_job_seconds 0\n"
+    },
+    "/local/gpu": {
+      "status": 200,
+      "bytes": 272,
+      "data": {
+        "timestamp": "2026-10-10T13:37:11.722536+00:00",
+        "scope": "device-wide; includes other applications",
+        "devices": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce RTX 2080",
+            "memory_total_mib": 8192.0,
+            "memory_used_mib": 5049.0,
+            "utilization_percent": 20.0,
+            "temperature_c": 42.0
+          }
+        ],
+        "available": true
+      }
+    },
+    "/api/v1/jobs/0ebadbdc-2221-41f5-a5c4-6af61c408da8": {
+      "status": 200,
+      "bytes": 3186
+    },
+    "/api/v1/jobs/0ebadbdc-2221-41f5-a5c4-6af61c408da8/result": {
+      "status": 200,
+      "bytes": 3006
+    },
+    "/api/v1/jobs/0ebadbdc-2221-41f5-a5c4-6af61c408da8/attempts": {
+      "status": 200,
+      "bytes": 215
+    },
+    "/api/v1/jobs/0ebadbdc-2221-41f5-a5c4-6af61c408da8/events": {
+      "status": 200,
+      "bytes": 520
+    }
+  },
+  "source_sha256": {
+    "scripts/demo_server.py": "bf34cb7182955e4acba416f31f493ecd86d338cd948b7cf54b04887fcabaf2b9",
+    "src/service/gpu_metrics.py": "a6595466ca89941dfb6d4f663ddf34ae34e17c1f04d02776183acc1b6185688c",
+    "src/service/static/operations.html": "d793a4fefb4942b54570bdd7a8e387e18e35560d83d4a4d8dce7d091bd6da70b",
+    "src/service/static/operations.js": "14e20a363e0f47a8c1713deb3bfbe0db93372eefe0c095d7ba1af780df97151c",
+    "src/service/static/operations.css": "71665f5ef4f96e5f08d67476ddcf6b8edd758500d9fe5954aaed9ee5effe48b6"
+  }
+}

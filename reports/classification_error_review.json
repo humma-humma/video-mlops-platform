@@ -1,0 +1,495 @@
+{
+  "schema_version": "1",
+  "review_date": "2026-10-10",
+  "reviewer": "assistant; provisional, not independent human adjudication",
+  "source_report": {
+    "path": "data/outputs/quality-suite/91a00867c3314887b9b0f81b9da73a00/constrained-baseline/9d965cbcc7284aa3bf5adc933229569c/report.json",
+    "sha256": "cd08a8a95048983f57ba6bbb2995789bf3470ff9c71cd2d796ff96c207720a25"
+  },
+  "manifest_sha256": "fa6422f1f519e63fe0c3a8c9c25295640e21af9513f1111265c16e9e2b27dfc2",
+  "ground_truth_sha256": "cf52d259e4162b6b5152d5fb99472ef7712629741393c8f048805fcd9146c212",
+  "method": "Reviewed all 15 four-frame baseline category mismatches against full supplied transcripts, reference summaries and four independently sampled visual frames at 5%,35%,65%,95% of duration. Not full-video playback or exact inference-frame reconstruction.",
+  "limits": [
+    "Review is conditional on existing transcripts; audio was not independently retranscribed.",
+    "Only mismatch cases received factual review; this is not an overall summary-error rate.",
+    "No labels, predictions, scores or original reports were changed. Ambiguous cases remain strict benchmark errors.",
+    "Sparse frames cannot establish every event, object identity or source provenance."
+  ],
+  "counts": {
+    "attempted": 23,
+    "strict_correct": 8,
+    "strict_mismatches": 15,
+    "verdicts": {
+      "taxonomy_ambiguity": 8,
+      "clear_model_topic_error": 7
+    },
+    "entertainment_predictions_among_mismatches": 10,
+    "entertainment_predictions_overall": 10
+  },
+  "next_experiment_hypothesis": "Keep four frames and constrained canonical decoding. Test one category-prompt change on development only: define label boundaries and classify central topic/purpose using transcript and visible text, with the existing generated summary as supporting evidence. Reserve broad Entertainment for cases without a better supported specific label. Treat this as an untested hypothesis.",
+  "taxonomy_proposal_status": "Draft tie-break rules require annotation review; no taxonomy version or original labels changed.",
+  "cases": [
+    {
+      "video_id": "7226368631268019482",
+      "reference_category": "Relationship",
+      "predicted_category": "Music, Singing, & Dancing",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "theme_vs_format",
+      "provisional_interpretation": "Relationship or Music, Singing, & Dancing; requires a theme-versus-format rule",
+      "evidence": "Onscreen title recommends songs for an Instagram crush story; later frames show relationship lyrics. Music recommendation and relationship theme both have evidence.",
+      "summary_and_reference_review": "The generated summary captures the song-recommendation title but ends inside a quotation. The transcript only introduces the recommendation.",
+      "data_flags": [],
+      "predicted_summary": "The video features a person with long blonde hair, wearing a black leather jacket, standing in a room with a pink towel hanging on the wall. The person is holding a phone, and the text \"Songs for your Insta Story Crush Edition\" is displayed at the top of the screen. The person appears to be singing or speaking, with the camera capturing their upper body and the background. The video then transitions to a screen with the text \"Abbrechen\" (Cancel) and \"Eintragen\" (Add) at the top, indicating that the person is likely interacting with a music or video editing app. The final frames show the person with the text \"WE",
+      "reference_summary": "The video is an Instagram story with a song playing in the background, featuring lyrics about a complicated relationship. The lyrics express feelings of hurt, confusion about the relationship's status, and the difficulty of moving on. The on-screen text reads: 'EVERY TIME WE TALK, IT JUST HURTS SO BAD 'CAUSE I DON'T EVEN KNOW WHAT WE ARE. I DON'T EVEN KNOW WHERE TO START BUT I CAN PLAY THE PART. WE SAY WE'RE FRIENDS, BUT I'M CATCHING YOU ACROSS THE ROOM.' The video seems to be a personal expression of feelings related to a crush or unrequited love. No public figures, political content, or news-related information are present.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7226368631268019482.txt",
+        "sha256": "e1869fab884ee21138457960dd329e7f5ee20cebc8c7c2294191b91e252ade07"
+      },
+      "visual_evidence": {
+        "video_id": "7226368631268019482",
+        "duration_seconds": 18.233333,
+        "sample_times_seconds": [
+          0.9116666499999999,
+          6.381666549999999,
+          11.85166645,
+          17.321666349999997
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7226368631268019482.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "d904cde27259b00b7a1f5a11b0fb12e69be84ec50649c4ada9b9b3cb605f6000"
+      }
+    },
+    {
+      "video_id": "7299582823940312350",
+      "reference_category": "Drama",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "genre_vs_format",
+      "provisional_interpretation": "Drama or Entertainment & Shows; genre boundary unresolved",
+      "evidence": "Dramatic montage with a seated actor, a dark handheld object, police imagery and dark transitions. These frames do not uniquely distinguish Drama from Entertainment & Shows.",
+      "summary_and_reference_review": "Reference calls the handheld object a remote; prediction calls it a gun. Its silhouette looks gun-shaped in the review frame, but identity is unresolved. Do not score this as a proven model hallucination or silently correct the reference.",
+      "data_flags": [
+        "reference_object_identity_unresolved"
+      ],
+      "predicted_summary": "The video begins with a person sitting on a green leather couch, holding a gun. The person is wearing a dark shirt and pants, and is seated in a dimly lit room with wooden walls and a window in the background. The person appears to be in a contemplative or serious mood, as they are looking down at the gun. The scene then transitions to a close-up of a person's face, which is illuminated by a blue light, creating a mysterious and intense atmosphere. The person's face is partially obscured by shadows, adding to the sense of secrecy or hidden information. The video then cuts to a completely black screen, which could indicate a moment of suspense or a transition to a new",
+      "reference_summary": "The video features a young man in various settings and outfits. Initially, he is seen in a dimly lit room, sitting on a leather couch, holding a remote, and looking pensive. He then appears in a black shirt, with text \"MADE BY HEQJINZ\" appearing on the screen. Subsequently, he is shown wearing a dark hoodie, with his face partially obscured, creating a mysterious or somber mood. There are quick cuts to him in a shower, looking distressed and with water on his face. Another scene shows him in a white t-shirt, adjusting something near his ear, possibly earbuds. He is later seen again on the couch in a grey t-shirt, looking thoughtful. A shot shows him in a police uniform, looking directly at the camera with a serious expression. The video includes snippets of him in the dark hoodie again, followed by another shot of him in the shower. The overall tone is dramatic and intense, with varying moods conveyed through the visuals.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7299582823940312350.txt",
+        "sha256": "e67ddfcef2832f45b74392a6a586f8f2675875950d88d83928356694060cbae3"
+      },
+      "visual_evidence": {
+        "video_id": "7299582823940312350",
+        "duration_seconds": 15.133333,
+        "sample_times_seconds": [
+          0.7566666500000001,
+          5.296666549999999,
+          9.836666450000001,
+          14.376666349999999
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7299582823940312350.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "8afeeae9782749b71414d2580540c38e6d4ad2a847ef4e5a6f72d4fc0787c870"
+      }
+    },
+    {
+      "video_id": "7299771215755906312",
+      "reference_category": "Music, Singing, & Dancing",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "specific_topic_ignored",
+      "provisional_interpretation": "Music, Singing, & Dancing",
+      "evidence": "Two women perform coordinated choreography in a studio. The model summary itself identifies a choreographed dance routine; the category pass still returns the broad entertainment label.",
+      "summary_and_reference_review": "The core dance description is supported. Four review frames cannot verify every claimed jump or the exact ending.",
+      "data_flags": [],
+      "predicted_summary": "The video shows two women in a dance studio, performing a choreographed routine. They are dressed in black outfits and are moving in sync with each other. The studio has a wooden floor and a high ceiling with lights. The women are performing a dance routine that includes spins, jumps, and other coordinated movements. The video ends with the women standing side by side, having completed their routine.",
+      "reference_summary": "The video features two young women dancing in a studio. They are dressed in fashionable, coordinated outfits consisting of black crop tops, black jackets, and gray wide-leg pants. The dance routine appears to be energetic and synchronized. The song playing in the background is upbeat and contributes to a lively, performance-oriented atmosphere. The women engage in various dance moves, including hand gestures, body rolls, and footwork, with smiles and playful expressions. The setting is a dance studio with a wooden floor and a grey wall backdrop, illuminated by bright strip lights on the ceiling. The overall tone is cheerful and confident. The video does not contain any political or news-related content.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7299771215755906312.txt",
+        "sha256": "cc0f41517d9a38d68bccc3b420ed5a546ed973f17a40b4819033f35725406d36"
+      },
+      "visual_evidence": {
+        "video_id": "7299771215755906312",
+        "duration_seconds": 24.1,
+        "sample_times_seconds": [
+          1.205,
+          8.435,
+          15.665000000000001,
+          22.895
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7299771215755906312.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "56db00e1795193c7a3e46e36260540f328054e01bbdc6db4dcdb2da817bb7808"
+      }
+    },
+    {
+      "video_id": "7311332422077975840",
+      "reference_category": "Comedy",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "genre_vs_format",
+      "provisional_interpretation": "Comedy preferred if comic sketches take priority over Entertainment & Shows",
+      "evidence": "The clip is a scripted police/attempted-robbery sketch with a reaction inset. Comedy and Entertainment & Shows overlap without a tie-break rule.",
+      "summary_and_reference_review": "Transcript identifies the police captain as the boy's dad and ends with the woman being arrested for attempted robbery. Reference instead describes a grandson, an apology and a resolved misunderstanding. Generated summary misses the plot and ends mid-sentence.",
+      "data_flags": [
+        "reference_plot_conflict"
+      ],
+      "predicted_summary": "The video depicts a series of events involving a woman and a man, with the woman being the main focus. The woman is seen in various settings, including an outdoor area with a fence, a park, and a room with a white wall. She is dressed in different outfits, including a patterned coat and a purple jacket. The man, who is bald, is also seen in different settings, including a room with a white wall and a park. The video includes a recurring image of a man in a white shirt and glasses, who appears to be speaking or reacting to the events unfolding. The video also includes a recurring image of a man in a purple jacket and a pink tie, who is also",
+      "reference_summary": "The video depicts a humorous misunderstanding between an older woman and a police officer. The woman recounts an incident where she was waiting for a \"present\" from her grandson, implying a gift. However, the officer interprets this as her attempting to steal a present, leading to a comical accusation of attempted robbery. The situation is resolved when the grandson appears and clarifies that the \"present\" was actually a Christmas gift. The officer, embarrassed by his assumption, apologizes for the misunderstanding. The interaction highlights the contrast between the woman's innocent intention and the officer's overly serious interpretation, creating a lighthearted and comedic scene.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7311332422077975840.txt",
+        "sha256": "efe42cd776fff4077effdb4341aea4b057af6c9fe91c4f89afe9015e4501b9b2"
+      },
+      "visual_evidence": {
+        "video_id": "7311332422077975840",
+        "duration_seconds": 94.18,
+        "sample_times_seconds": [
+          4.7090000000000005,
+          32.963,
+          61.217000000000006,
+          89.471
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7311332422077975840.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "6b38572a97f0b1cbc0bcd7efa4f03fb40eca12ae426400c02528f97ed980e1d8"
+      }
+    },
+    {
+      "video_id": "7317764806767922475",
+      "reference_category": "Family",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "topic_vs_activity",
+      "provisional_interpretation": "Family preferred if parent-child context takes priority; Fitness & Health and Daily Life also plausible",
+      "evidence": "A mother and child participate in outdoor ice baths in a snowy forest; family context and a cold-water activity compete. Entertainment is nonspecific but the intended taxonomy priority is undefined.",
+      "summary_and_reference_review": "Review frames show separate bath containers; the summary describes holding the child and helping them into a large container, which these frames do not establish. Transcript includes pregnancy/belly and winter-bathing context.",
+      "data_flags": [],
+      "predicted_summary": "The video shows a woman and a child in a snowy forest. The woman is holding the child and they are standing next to a large metal container filled with water. The child is playing in the water, and the woman is trying to help the child get into the container. The text in the video says \"Oh my gosh! Ready, hop in! I can't exactly hop in. Oh no. It's okay, I see water. It's coming through. I'm so sorry. It's like a slushie. It's almost big enough for her to get in. The belly is restrictive these days. It's a winter wonderland. Alright, here comes mama",
+      "reference_summary": "In a snowy forest setting, a woman and a young child are preparing for an ice bath. The woman is pregnant and is clearing snow from a large galvanized tub, while the child is already in a smaller plastic tub filled with water. The woman expresses disbelief and anticipation, then struggles to clear ice from the larger tub using a dumbbell. She eventually manages to break through the ice and gets into the tub, exclaiming about the cold. She notes that the water is warmer than the snow and compares the ice to Chick-fil-A ice. The video captures a playful and adventurous moment of embracing the cold, highlighting the mother's playful interaction with her child and the challenging, yet fun, winter activity.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7317764806767922475.txt",
+        "sha256": "04760a1e17d7c22da9d0cdc304e2d613fd69a8048f192631dc760ab6c936d377"
+      },
+      "visual_evidence": {
+        "video_id": "7317764806767922475",
+        "duration_seconds": 85.935011,
+        "sample_times_seconds": [
+          4.2967505500000005,
+          30.077253849999998,
+          55.857757150000005,
+          81.63826045
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7317764806767922475.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "51fe47a9706be9fceaed5e3e13871bda4543943da409120e91a9841b6d142354"
+      }
+    },
+    {
+      "video_id": "7323547689201765664",
+      "reference_category": "Autos & Vehicles",
+      "predicted_category": "Comedy",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "specific_topic_ignored",
+      "provisional_interpretation": "Autos & Vehicles",
+      "evidence": "Title says five cars from one country, Italian edition; transcript discusses a car wishlist and the generated summary also identifies Italian cars. Comedy lacks substantive support.",
+      "summary_and_reference_review": "Summary treats GTC4 Lusso as the second choice, although the speaker subsequently chooses Roma; it ends before completing the list. Reference is also incomplete, omitting LaFerrari and containing vehicle-name transcription problems.",
+      "data_flags": [
+        "reference_list_incomplete"
+      ],
+      "predicted_summary": "The video features a person in a garage, showcasing five cars from Italy. The first car is a Ferrari Pro Sangue, described as the best SUV the person has ever driven, with a V12 engine and no pitch, dive, or roll. The second car is a Ferrari GTC4 Lusso, which the person considers the second daily, as it is not too hot in appearance. The third car is a Lamborghini Centenario, which the person would drive most of the time, considering it a supercar. The fourth car is a Ferrari LaFerrari, which the person would have as a hypercar, with a hybrid element and a K",
+      "reference_summary": "The video features a man, who identifies as an Italian car fan, discussing his personal list of five desired Italian cars. He acknowledges that some of the cars on his list are aspirational and not currently owned. He presents the first car as the Ferrari Purosangue, describing it as the best SUV he's ever driven, noting its flat stance and V12 engine. He humorously admits he doesn't technically own it yet. For his second daily driver, he chooses the Ferrari Roma, explaining it's a practical choice, even showing a picture of the car. He then discusses his third choice, the Lamborghini Centenario, calling it a 'hypercar' and relating it to the Aventador. He expresses difficulty in choosing the final two, mentioning the desire to include a classic and a car that is timeless. He contemplates the Ferrari F12 TDF, a Gagani, and the Ferrari 250 GTO, noting its auction record and historical significance. The video ends with him stating he'll need to do another list due to the abundance of desirable Italian cars, hinting at future content.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7323547689201765664.txt",
+        "sha256": "f699a291ae2a149ddce15171fc2269c4e98919262f7fcda3a52d15222572c12b"
+      },
+      "visual_evidence": {
+        "video_id": "7323547689201765664",
+        "duration_seconds": 138.333333,
+        "sample_times_seconds": [
+          6.916666650000001,
+          48.41666655,
+          89.91666645000001,
+          131.41666635
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7323547689201765664.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "c2d10db2af52dad54cf1bc4127359683dbf2469c7c14b3c30394ae4f0545a71a"
+      }
+    },
+    {
+      "video_id": "7328941581862473006",
+      "reference_category": "Gaming",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "source_provenance_unresolved",
+      "provisional_interpretation": "Gaming only after verifying source; Entertainment & Shows or Film & Animation remains plausible",
+      "evidence": "Fighter-jet montage and TRIGGER_EDITZ/SPEED IS LIFE end card. Reference calls this a simulated combat game, but sampled frames do not establish game provenance or show an unambiguous game interface.",
+      "summary_and_reference_review": "Generated summary overemphasizes HIGH text and altitude. It does not resolve whether this is game footage, a film edit or another source. Reference Gaming label requires provenance review.",
+      "data_flags": [
+        "reference_provenance_unverified"
+      ],
+      "predicted_summary": "The video begins with a close-up of a fighter jet on a runway, with the word \"HIGH\" in bright yellow letters superimposed over the image. The jet is stationary, and the background is a cloudy sky. The scene then transitions to a view of the jet in flight, with the word \"HIGH\" still visible. The jet is flying at a high altitude, and the background is a clear blue sky. The video then cuts to a view of the jet flying over the ocean, with the word \"HIGH\" still visible. The jet is flying at a high altitude, and the background is a dark blue sky with clouds. The video concludes with a black screen displaying",
+      "reference_summary": "The video features a high-performance fighter jet, an F-35, on an aircraft carrier. The jet is shown in various maneuvers, including takeoff, flight, and what appears to be combat. There are visual elements of targeting and explosions, suggesting a simulated combat scenario. Text overlays in the video include aircraft identification (03, IN, 015) and a song title and artist ('SPEED IS LIFE BY LYKIA'). The video also includes the creator's watermark ('TRIGGER_EDITZ'). The overall tone is action-packed and intense, likely aimed at an audience interested in aviation and gaming or simulation content. There are no political or news-related elements present; the content appears to be from a video game or simulation.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7328941581862473006.txt",
+        "sha256": "17456fa6325c39ccb4e9731b7262987ca73a87c2e63250d698dc313a728c8d33"
+      },
+      "visual_evidence": {
+        "video_id": "7328941581862473006",
+        "duration_seconds": 25.2,
+        "sample_times_seconds": [
+          1.26,
+          8.819999999999999,
+          16.38,
+          23.939999999999998
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7328941581862473006.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "2f93e98a40b9e1955b57da06e5fb9d4ee6b938ff13b0b7ac48f6b70622b58e33"
+      }
+    },
+    {
+      "video_id": "7358352976639184146",
+      "reference_category": "Travel & Events",
+      "predicted_category": "Science & Technology",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "unsupported_category",
+      "provisional_interpretation": "Travel & Events is plausible; exact boundary with Autos & Vehicles or News needs policy",
+      "evidence": "Windshield view of sudden severe rain; overlay explicitly describes a Dubai highway rainstorm and loss of visibility. Nothing in the reviewed evidence supports Science & Technology.",
+      "summary_and_reference_review": "Model adds a driver's black shirt, a white car and a final sky view not supported by the sampled windshield footage. Supplied transcript is incoherent and unrelated to the visible driving scene; mark it suspect rather than treating it as trusted evidence.",
+      "data_flags": [
+        "transcript_content_mismatch"
+      ],
+      "predicted_summary": "The video shows a person driving a car on a highway during a rainstorm. The person is wearing a black shirt and is driving a white car. The highway is wet, and the raindrops are visible on the windshield. The person is driving in the rain, and the raindrops are splashing on the windshield. The video ends with a view of the sky, which is cloudy and overcast.",
+      "reference_summary": "The video shows a person driving a car on a highway in Dubai during a sudden rainstorm. The text on the screen states, \"Never have I been more scared in my life: watch how visibility drops to zero in an instant on the highway during a sudden rainstorm in Dubai.\" The footage captures the intense rain and reduced visibility, with other cars' brake lights appearing as red blurs in the distance. The scene highlights the dangerous driving conditions caused by the storm, emphasizing the fear and vulnerability experienced by the driver.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7358352976639184146.txt",
+        "sha256": "ef053ff5b7986532157cfd3942421a2aebdeb2c2eec8230043a9dcdb2b3d8ad5"
+      },
+      "visual_evidence": {
+        "video_id": "7358352976639184146",
+        "duration_seconds": 137.369002,
+        "sample_times_seconds": [
+          6.8684501000000004,
+          48.07915069999999,
+          89.2898513,
+          130.50055189999998
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7358352976639184146.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "65c7060271cf93e2284dce14957bb4716f01a9076c1dd407301e00a7108e8e39"
+      }
+    },
+    {
+      "video_id": "7364542326959574314",
+      "reference_category": "Daily Life",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "theme_vs_format",
+      "provisional_interpretation": "Daily Life or Relationship; Beauty Care is secondary to the reaction",
+      "evidence": "Overlay describes finishing nails, sending him a picture and hoping he likes them; the person then reacts on a bed. Daily-life diary and relationship theme overlap.",
+      "summary_and_reference_review": "Generated summary captures excitement but omits the nail/photo/relationship context carried by the overlay. Background-song transcript does not explain the central scene.",
+      "data_flags": [],
+      "predicted_summary": "The video shows a person sitting on a bed, wearing a black shirt, and holding a phone. The person is looking at the phone and appears to be in a state of excitement or surprise. The background is a plain wall with a picture hanging on it. The person then starts to move around the bed, possibly dancing or jumping, and continues to move energetically. The video ends with the person lying on the bed, still in a state of excitement or surprise.",
+      "reference_summary": "The video shows a close-up of a young woman's face as she talks about her nails. The text on the screen reads, \"i just finished doing my nails, i'll send him a pic, i hope he likes them.\" The woman appears to be in a casual setting, possibly her bedroom, and is looking down at her hands. She then brings her hands up to cover her face and seems to be feeling shy or embarrassed. The overall tone of the video is lighthearted and focuses on a personal, relatable experience.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7364542326959574314.txt",
+        "sha256": "f4594d37de76084e8edfce971f64d55ef5f1873eae83747e573b33f9d3961d5f"
+      },
+      "visual_evidence": {
+        "video_id": "7364542326959574314",
+        "duration_seconds": 9.9,
+        "sample_times_seconds": [
+          0.49500000000000005,
+          3.465,
+          6.4350000000000005,
+          9.405
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7364542326959574314.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "17fe1f0c1f2747d0d04c7dd9faab8b8a1d108d7ecac15ef366bda39e1685f0f8"
+      }
+    },
+    {
+      "video_id": "7367380929913900320",
+      "reference_category": "Outfit, Style, & Howto",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "ocr_meaning_error",
+      "provisional_interpretation": "Outfit, Style, & Howto",
+      "evidence": "Overlay discusses wearing shorts at size 12 and says Literally wear whatever you want. This is clothing/body-confidence advice; generic Entertainment misses the explicit topic.",
+      "summary_and_reference_review": "Model changes the encouragement into wear sweaters instead, reversing the message. This is a supported OCR/meaning error, not merely a category-boundary disagreement.",
+      "data_flags": [],
+      "predicted_summary": "The video shows a woman wearing a black shirt and headphones, standing on a road. She is talking to the camera and sharing her experience of wearing shorts on a walk. The text overlay on the video reads, \"PSA I wore shorts on my walk and the town elders at that size 12 queen wore shorts summer heat x. (Literally wear your sweater you don't)\" This suggests that the woman is sharing her personal experience of wearing shorts during a hot summer day, and she is encouraging others to wear their sweaters instead.",
+      "reference_summary": "The video features a young woman wearing headphones and walking outdoors, possibly for exercise. Text overlays in the video state, \"PSA I wore shorts on my walk and oddly enough no one cared. No one alerted the town elders that this size 12 queen wore shorts in summer heat x\" and \"(Literally wear whatever you want)\". The woman appears to be speaking casually and humorously about her experience, seemingly addressing societal expectations or judgments related to clothing choices, particularly for women and regarding body size. The overall tone is lighthearted and empowering, encouraging self-expression and freedom in choosing outfits. The setting is a paved walkway with greenery and a cloudy sky in the background. There is no background music that is clearly identifiable or impactful on the message.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7367380929913900320.txt",
+        "sha256": "cd255ceca64b6313bac1828a88b5b4f8f2070f14210bc6dd6dc268a51243b5b5"
+      },
+      "visual_evidence": {
+        "video_id": "7367380929913900320",
+        "duration_seconds": 5.408005,
+        "sample_times_seconds": [
+          0.27040025,
+          1.8928017499999998,
+          3.5152032500000003,
+          5.1376047499999995
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7367380929913900320.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "6178444e73c4395be8d410dcb5c1cb364cc3855ff46348159a187829e80c9ae3"
+      }
+    },
+    {
+      "video_id": "7376360928851299590",
+      "reference_category": "Beauty Care",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "specific_topic_ignored",
+      "provisional_interpretation": "Beauty Care",
+      "evidence": "Ukrainian transcript and captions discuss retinol, wrinkles and skincare expectations. Model summary already identifies a skin product but returns generic Entertainment.",
+      "summary_and_reference_review": "Summary flattens a critical discussion of expectations into benefits and adds an ending wardrobe change not established by sampled frames. This review describes the speaker's claims and does not validate skincare efficacy. Language handling is a hypothesis, not a proven root cause.",
+      "data_flags": [],
+      "predicted_summary": "The video features a woman in a white shirt, sitting in front of a bookshelf, discussing the benefits of using a specific product. She mentions that the product is effective in reducing wrinkles and improving skin texture. The video then transitions to a woman with curly hair, who is also wearing a white shirt, and continues the discussion about the product's effectiveness. The video concludes with the woman in the white shirt, who is now wearing a black blazer, summarizing the benefits of the product.",
+      "reference_summary": "The video discusses retinol as a trending anti-aging component in skincare. The speaker explains that while retinol is clinically proven and considered one of the best ingredients for anti-aging, people's expectations might be unrealistic. The speaker touches on the idea that retinol may not reverse aging but rather contribute to a younger appearance by promoting skin cell turnover, making the skin look more radiant and elastic. The video is in Ukrainian. The tone is informative and slightly humorous.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7376360928851299590.txt",
+        "sha256": "d048bce9f89940ef6b46e6e4869cd510cbb061c7238d860b6b982eb96c1c945b"
+      },
+      "visual_evidence": {
+        "video_id": "7376360928851299590",
+        "duration_seconds": 140.153991,
+        "sample_times_seconds": [
+          7.00769955,
+          49.053896849999994,
+          91.10009415,
+          133.14629144999998
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7376360928851299590.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "736a7699c754d17a469ae969a137a71d6a2efd9e4f1ad71f137f52fceb02b774"
+      }
+    },
+    {
+      "video_id": "7395616033127648554",
+      "reference_category": "Fitness & Health",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "onscreen_topic_missed",
+      "provisional_interpretation": "Fitness & Health",
+      "evidence": "Repeated overlay markets berberine using swelling, body-fat and cortisol claims. Health-product marketing is the central text topic; it is not simply entertainment.",
+      "summary_and_reference_review": "Model describes clothing, bag and tattoo while omitting the advertising claim. Black dress versus scrubs is uncertain from these views. Health claims are advertising content, not verified medical facts.",
+      "data_flags": [],
+      "predicted_summary": "The video shows a woman in a black dress standing in a room. She is wearing a black dress and has a tattoo on her arm. The room has a bed with a white blanket and a mirror on the wall. The woman is holding a black bag and talking to the camera.",
+      "reference_summary": "The video shows a woman wearing black scrubs and black pants, standing in what appears to be a bedroom. She is holding her phone and taking a mirror selfie. The text on the screen reads \"POV: you start taking a berberine capsule and you realize your swollen face & stubborn belly fat was from high cortisol.\" The woman is seen turning and adjusting her clothing, seemingly highlighting her midsection. The overall tone is casual and personal, suggesting a user-generated content piece related to health and wellness.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7395616033127648554.txt",
+        "sha256": "436bf61e01bb6cb6b83a43b548e5d66a41a83319d7458bb0a9294ba98e054eac"
+      },
+      "visual_evidence": {
+        "video_id": "7395616033127648554",
+        "duration_seconds": 12.5,
+        "sample_times_seconds": [
+          0.625,
+          4.375,
+          8.125,
+          11.875
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7395616033127648554.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "b26032be49c22bf587e2187168990a9b89e63bbdeaca5daf8ce5c36ed771302c"
+      }
+    },
+    {
+      "video_id": "7396760829498002720",
+      "reference_category": "People & Blogs",
+      "predicted_category": "Entertainment & Shows",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "diary_vs_entertainment",
+      "provisional_interpretation": "People & Blogs preferred under a personal-monologue rule",
+      "evidence": "German personal monologue in front of a bookshelf explains keeping physical books as trophies after reading them on Kindle. People & Blogs is plausible, but broad Entertainment overlaps without definitions.",
+      "summary_and_reference_review": "Model inverts the intent into reasons not to buy or keep books. Transcript instead says physical editions are bought after reading and retained as trophies. This is a clear summary negation/intent error despite category ambiguity.",
+      "data_flags": [],
+      "predicted_summary": "The video features a woman with long, wavy blonde hair, wearing a white top, standing in front of a bookshelf filled with various books. She is speaking and gesturing with her hands, seemingly explaining or discussing something related to books and reading. The text overlays on the video provide context to her speech, suggesting that she is discussing the reasons behind her decision not to buy new books or keep them in her room. The video includes a series of text overlays that provide different reasons for her actions, such as not buying new books because she already has a large collection, not keeping them in her room because she can read them on her Kindle, and not buying more because she can",
+      "reference_summary": "The video features a young woman with long blonde hair, standing in front of bookshelves filled with books. She speaks in German and addresses a question she was recently asked: why she doesn't simply lend out or sell books she has already read. She explains that she has already read them and therefore doesn't need them anymore. She then recounts another question she was asked: why she doesn't just borrow books from the library instead, as those can be returned after reading. The woman then passionately argues that she buys books even after reading them on her Kindle, not to expand her collection, but to display them as trophies. She feels it makes no sense to sell them because she buys them after reading them, specifically to have them on her shelf. She concludes by saying that the books look beautiful on her shelf and questions why she should give that up. The tone is enthusiastic and slightly playful, with a touch of humor as she explains her perspective on collecting books.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7396760829498002720.txt",
+        "sha256": "a3c33d02b5248943be31dde8c4628ef97f7490c81e66aa033f7a2c5c9f655dad"
+      },
+      "visual_evidence": {
+        "video_id": "7396760829498002720",
+        "duration_seconds": 70.233333,
+        "sample_times_seconds": [
+          3.5116666500000004,
+          24.581666549999998,
+          45.65166645,
+          66.72166634999999
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7396760829498002720.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "9a7169466a2ec3fd3dc4177b998c3737d57a1986e0de1f4cead15f92eb4df33f"
+      }
+    },
+    {
+      "video_id": "7397523950391086369",
+      "reference_category": "Entertainment & Shows",
+      "predicted_category": "Film & Animation",
+      "verdict": "taxonomy_ambiguity",
+      "primary_issue": "animation_vs_entertainment",
+      "provisional_interpretation": "Film & Animation is defensible; original Entertainment & Shows needs adjudication",
+      "evidence": "Animated fruit characters dance against a black background with music. Prediction matches the literal animation format; the reference uses generic Entertainment.",
+      "summary_and_reference_review": "Model repeats the same green-apple/purple-character sequence many times. Reference-category disagreement alone should not be used as proof of a semantic model failure.",
+      "data_flags": [
+        "reference_taxonomy_boundary"
+      ],
+      "predicted_summary": "The video features a series of animated characters, including a blue character with a red heart on its head, a green apple with a crown, and a purple character with a crown. The characters are set against a black background, and the video begins with the green apple and the purple character appearing together. The green apple is then shown alone, with the purple character appearing behind it. The green apple is then shown alone again, with the purple character appearing behind it. The green apple is then shown alone, with the purple character appearing behind it. The green apple is then shown alone, with the purple character appearing behind it. The green apple is then shown alone, with the purple character appearing behind it",
+      "reference_summary": "This video features animated fruits with cartoonish faces, set against a black background with falling confetti. The fruits, including blueberries, an apple with a crown, peas, a pineapple with a party hat, radishes wearing glasses, and an avocado in a dinosaur costume, appear to be celebrating or engaged in a whimsical dance. The overall tone is lighthearted and festive, with no discernible political or news-related content. The audio consists of upbeat, cheerful music that enhances the celebratory atmosphere. There are no notable public figures, politicians, or celebrities present. The video aims to entertain with its charming character designs and playful animation.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7397523950391086369.txt",
+        "sha256": "2499382e171dcb02041ae138bc0f14ec6cec50af1a530838ce6d3a8de84c8bb4"
+      },
+      "visual_evidence": {
+        "video_id": "7397523950391086369",
+        "duration_seconds": 61.533333,
+        "sample_times_seconds": [
+          3.07666665,
+          21.53666655,
+          39.99666645,
+          58.45666635
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7397523950391086369.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "9ffe89b7ff6af833563ec53575889931129b82af5c72a1726029c71f9f29e101"
+      }
+    },
+    {
+      "video_id": "7408631372044111135",
+      "reference_category": "Nonprofits & Activism",
+      "predicted_category": "Pets & Animals",
+      "verdict": "clear_model_topic_error",
+      "primary_issue": "purpose_missed_for_visual_subject",
+      "provisional_interpretation": "Nonprofits & Activism under an explicit fundraising-appeal rule",
+      "evidence": "Kittens are the visual subject, but transcript and overlays ask for help replacing rescue medications after a power outage and display donation information. The central purpose is a rescue fundraiser.",
+      "summary_and_reference_review": "Generated summary repeats petting/hand details and misses the donation plea and medication-loss context. Pets & Animals describes the subject but misses the communicated purpose.",
+      "data_flags": [],
+      "predicted_summary": "The video shows a person petting a kitten on a bed. The kitten is black and white. The person is wearing a tattoo on their hand. The video also shows a group of kittens on a bed, with one kitten being petted by the person. The kittens are all black and white. The video also shows a person holding a kitten in their hand. The person is wearing a tattoo on their hand. The video also shows a person holding a kitten in their hand. The person is wearing a tattoo on their hand. The video also shows a person holding a kitten in their hand. The person is wearing a tattoo on their hand. The video also shows a person holding a kitten in their",
+      "reference_summary": "The video features a distressed plea for help regarding a power outage that lasted for 20 hours, during which a generator also failed. This resulted in the loss of critical medications for approximately 20 kittens who were undergoing treatment with antibiotics and special eye serum. The organization, identified as a rescue focused on medical cases, is facing a critical shortage of these essential supplies, including vaccines and pain medication. They are urgently seeking donations to replace the lost medications and vaccines, estimated to cost around $400, and to cover the cost of pain medication and special eye serum for the kittens. The video explicitly requests financial assistance, donations, and sharing of the video to raise awareness and support.",
+      "transcript": {
+        "path": "data/inputs/audio_transcripts/7408631372044111135.txt",
+        "sha256": "5eb343191d9f51b9610ad57588e1fad98d8574488c10a7441a6e0ed468219d5a"
+      },
+      "visual_evidence": {
+        "video_id": "7408631372044111135",
+        "duration_seconds": 37.066667,
+        "sample_times_seconds": [
+          1.8533333500000002,
+          12.97333345,
+          24.093333550000004,
+          35.21333365
+        ],
+        "contact_sheet": "data/outputs/classification-review/frames/7408631372044111135.png",
+        "sampling": "Independent review at 5%,35%,65%,95%; not a reconstruction of exact inference frames",
+        "sha256": "491b8360afc1c6fca773a03dc533b7bc12f3a1ebd4edc5ee74b83a9122ce3b3d"
+      }
+    }
+  ]
+}

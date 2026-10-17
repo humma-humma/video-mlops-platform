@@ -1,0 +1,141 @@
+{
+  "schema_version": "1",
+  "purpose": "controlled local active-worker interruption",
+  "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+  "job_id": "bd4908b7-be1f-4d39-b86a-59d54ebda05d",
+  "original_soft_hard_seconds": [
+    840,
+    900
+  ],
+  "demo_soft_hard_seconds": [
+    180,
+    240
+  ],
+  "timeline": [
+    {
+      "at": "2026-10-17T08:48:43.919856+00:00",
+      "event": "demo_deadlines_active",
+      "soft_seconds": 180,
+      "hard_seconds": 240
+    },
+    {
+      "at": "2026-10-17T08:48:44.173087+00:00",
+      "event": "submitted",
+      "job_id": "bd4908b7-be1f-4d39-b86a-59d54ebda05d"
+    },
+    {
+      "at": "2026-10-17T08:48:45.927263+00:00",
+      "event": "running"
+    },
+    {
+      "at": "2026-10-17T08:48:46.389518+00:00",
+      "event": "worker_killed",
+      "signal": "SIGKILL"
+    },
+    {
+      "at": "2026-10-17T08:48:47.116182+00:00",
+      "event": "worker_restarted"
+    },
+    {
+      "at": "2026-10-17T08:48:47.122065+00:00",
+      "event": "job_status",
+      "status": "RUNNING"
+    },
+    {
+      "at": "2026-10-17T08:53:56.453095+00:00",
+      "event": "job_status",
+      "status": "FAILED"
+    },
+    {
+      "at": "2026-10-17T08:53:56.514351+00:00",
+      "event": "explicit_retry_requested"
+    },
+    {
+      "at": "2026-10-17T08:54:24.731416+00:00",
+      "event": "result_persisted",
+      "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+    },
+    {
+      "at": "2026-10-17T08:54:36.127419+00:00",
+      "event": "original_deadlines_restored",
+      "soft_seconds": 840,
+      "hard_seconds": 900
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "fcf47547-1bbb-4426-8614-78ca22aeffd9",
+      "number": 1,
+      "status": "FAILED",
+      "error_code": "timeout",
+      "error": "Worker deadline exceeded",
+      "started_at": "2026-10-17T08:48:45.844273+00:00",
+      "finished_at": "2026-10-17T08:53:54.802378+00:00"
+    },
+    {
+      "attempt_id": "5eece54b-1420-4c4a-bdd3-b5365fe2d1cc",
+      "number": 2,
+      "status": "SUCCEEDED",
+      "error_code": null,
+      "error": null,
+      "started_at": "2026-10-17T08:53:56.514222+00:00",
+      "finished_at": "2026-10-17T08:54:23.209825+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event": "submitted",
+      "generation": 0,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:48:44.143950+00:00"
+    },
+    {
+      "event": "dispatched",
+      "generation": 0,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:48:44.166182+00:00"
+    },
+    {
+      "event": "running",
+      "generation": 0,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:48:45.845805+00:00"
+    },
+    {
+      "event": "deadline_exceeded",
+      "generation": 0,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:53:54.806032+00:00"
+    },
+    {
+      "event": "retry_requested",
+      "generation": 1,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:53:56.475442+00:00"
+    },
+    {
+      "event": "dispatched",
+      "generation": 1,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:53:56.504005+00:00"
+    },
+    {
+      "event": "running",
+      "generation": 1,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:53:56.548572+00:00"
+    },
+    {
+      "event": "succeeded",
+      "generation": 1,
+      "trace_id": "51ff326134cb43c3bb27b7b0cecfa6ef",
+      "timestamp": "2026-10-17T08:54:23.212459+00:00"
+    }
+  ],
+  "final_status": "SUCCEEDED",
+  "result_model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "limits": [
+    "Hard interruption can remain RUNNING until deadline plus reconciliation allowance.",
+    "The explicit retry is part of this observed recovery; execution is not exactly once."
+  ]
+}

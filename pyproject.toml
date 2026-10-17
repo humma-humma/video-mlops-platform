@@ -57,3 +57,6 @@ dev = [
     "notebook>=7.5.2",
     "pytest>=8.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

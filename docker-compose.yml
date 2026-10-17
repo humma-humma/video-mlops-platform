@@ -1,3 +1,28 @@
+x-artifact-environment: &artifact-environment
+  VIDEO_ARTIFACT_BACKEND: s3
+  VIDEO_S3_ENDPOINT_URL: http://minio:9000
+  VIDEO_S3_BUCKET: video-artifacts
+  VIDEO_S3_REGION: us-east-1
+  VIDEO_S3_ACCESS_KEY_ID: minio
+  VIDEO_S3_SECRET_ACCESS_KEY: miniosecret
+
+x-service-environment: &service-environment
+  <<: *artifact-environment
+  VIDEO_DATABASE_URL: postgresql+psycopg://video:video@postgres:5432/video
+  VIDEO_BROKER_URL: redis://valkey:6379/0
+  VIDEO_ARTIFACT_ROOT: /artifacts
+  VIDEO_USE_FAKE_INFERENCE: "true"
+  VIDEO_API_KEY: ${VIDEO_API_KEY:-}
+  VIDEO_RELEASE_ID: ${VIDEO_RELEASE_ID:-local-unversioned}
+  VIDEO_MAX_OUTSTANDING_JOBS: ${VIDEO_MAX_OUTSTANDING_JOBS:-2}
+  VIDEO_TASK_SOFT_TIME_LIMIT: ${VIDEO_TASK_SOFT_TIME_LIMIT:-840}
+  VIDEO_TASK_TIME_LIMIT: ${VIDEO_TASK_TIME_LIMIT:-900}
+
+x-service-dependencies: &service-dependencies
+  storage-init: {condition: service_completed_successfully}
+  migrate: {condition: service_completed_successfully}
+  valkey: {condition: service_healthy}
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -5,42 +30,71 @@ services:
       POSTGRES_USER: video
       POSTGRES_PASSWORD: video
       POSTGRES_DB: video
-    ports: ["5432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    ports: ["127.0.0.1:5432:5432"]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U video -d video"]
   valkey:
     image: valkey/valkey:8-alpine
-    ports: ["6379:6379"]
+    ports: ["127.0.0.1:6379:6379"]
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
   minio:
     image: minio/minio:latest
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: miniosecret
-    ports: ["9000:9000", "9001:9001"]
+    ports: ["127.0.0.1:9000:9000", "127.0.0.1:9001:9001"]
+    volumes: ["minio_data:/data"]
+  storage-init:
+    build: .
+    command: ["python", "-m", "src.service.storage"]
+    environment: *artifact-environment
+    depends_on:
+      minio: {condition: service_started}
   api:
     build: .
-    environment:
-      VIDEO_DATABASE_URL: postgresql+psycopg://video:video@postgres:5432/video
-      VIDEO_BROKER_URL: redis://valkey:6379/0
-      VIDEO_ARTIFACT_ROOT: /artifacts
-      VIDEO_USE_FAKE_INFERENCE: "true"
+    environment: *service-environment
     volumes: ["artifacts:/artifacts"]
-    ports: ["8000:8000"]
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on: *service-dependencies
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+  migrate:
+    build: .
+    command: ["python", "-m", "src.service.db"]
+    environment: *service-environment
     depends_on:
       postgres: {condition: service_healthy}
-      valkey: {condition: service_started}
+  dispatcher:
+    build: .
+    command: ["python", "-m", "src.service.dispatcher"]
+    environment: *service-environment
+    depends_on: *service-dependencies
+    restart: unless-stopped
   worker:
     build: .
     command: ["celery", "-A", "src.service.tasks", "worker", "--loglevel=INFO", "--concurrency=1"]
-    environment:
-      VIDEO_DATABASE_URL: postgresql+psycopg://video:video@postgres:5432/video
-      VIDEO_BROKER_URL: redis://valkey:6379/0
-      VIDEO_ARTIFACT_ROOT: /artifacts
-      VIDEO_USE_FAKE_INFERENCE: "true"
+    environment: *service-environment
     volumes: ["artifacts:/artifacts"]
-    depends_on:
-      postgres: {condition: service_healthy}
-      valkey: {condition: service_started}
+    depends_on: *service-dependencies
+    restart: unless-stopped
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.16.1
+    profiles: ["tracking"]
+    command: ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000", "--backend-store-uri", "sqlite:////mlflow/mlflow.db", "--serve-artifacts", "--artifacts-destination", "/mlflow/artifacts", "--allowed-hosts", "localhost:*,127.0.0.1:*,mlflow:*"]
+    ports: ["127.0.0.1:5000:5000"]
+    volumes: ["mlflow_data:/mlflow"]
 volumes:
   artifacts:
+  postgres_data:
+  minio_data:
+  mlflow_data:

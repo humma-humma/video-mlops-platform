@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-10",
+  "url": "http://127.0.0.1:8080",
+  "checks": [
+    "page/assets/CSP",
+    "authenticated-ready contract via existing API",
+    "real multipart submission",
+    "successful GPU result",
+    "events and attempts",
+    "result retrieval",
+    "lineage and timings",
+    "live metrics"
+  ],
+  "job": {
+    "job_id": "0ebadbdc-2221-41f5-a5c4-6af61c408da8",
+    "status": "SUCCEEDED",
+    "result": {
+      "schema_version": "1",
+      "video_id": "serving-load",
+      "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white computer keyboard and a white mouse, with the text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will do the best I can, like everyone else) appearing on the screen. The person then moves towards a white wall with a green exit sign, and the text \"Vor der Abschlusspr\u00fcfung\" (Before the test) appears on the screen. The person continues to use the keyboard and mouse, with the text \"Ich im",
+      "category": "Entertainment & Shows",
+      "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "timings": {
+        "model_load": 0.0,
+        "input_preparation": 0.00031500899058301,
+        "summary": 12.635201832992607,
+        "category": 2.7595847960037645,
+        "inference_total": 15.395192640993628,
+        "input_download": 0.014198325996403582,
+        "total": 15.413297784994938
+      },
+      "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "lineage": {
+        "source_files": {
+          "src/config.py": "8606bda860910c301afdffa8473a056440e3e381a65c9905ae70f1bbb747c0c7",
+          "src/pipeline.py": "ac9d74604b2177c566a6832a71b3d5c96e11bf08b3275513ba9a407462e81b8b",
+          "src/inference_utils.py": "a2c39bdc69b8bc1fb281be29bfe77e5db0d7865d21f8891d32eeb8f42a8cbc0e",
+          "src/model_utils.py": "1641279195444a4c377067f2401ec7fc377534b2130e911d36de689ec9855513",
+          "src/category_utils.py": "cf4b7fb12a8219a59596944d8d2a4db83cdb1cda0b3f0c41fb11a0f315bb562d",
+          "src/taxonomy.py": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+          "src/service/inference.py": "e704fc7d70c24beea87f6fdc2587a506e1bfb51cd17ad52435ebe3398c3208ae",
+          "src/lineage.py": "2a1f68fd2273651cc6ccf6ce05794b916f3d04badee1e1d86da2a7b0db975776",
+          "src/experiments.py": "430d92f53e4715ada8ac6dcd67356175d5703fa88ceac2fb533b6f818375d5f3",
+          "src/evaluation_utils.py": "75298fdd381a9f2c0052a58fc225435a1cea683e8c06032ad52dc82b944edd00"
+        },
+        "code_hash": "b61a9f46578d4d8e1334724810bc8614970252db9893f44a550850d81aa040ad",
+        "prompt_version": "video-prompts-v1",
+        "prompt_hash": "a2c39bdc69b8bc1fb281be29bfe77e5db0d7865d21f8891d32eeb8f42a8cbc0e",
+        "taxonomy_hash": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+        "inference_config": {
+          "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "max_frames": 4,
+          "model_dtype": "auto",
+          "use_kv_cache": true,
+          "inference_strategy": "per_video_two_pass",
+          "decoder": "torchvision"
+        },
+        "inference_config_hash": "7272a698197d7afca92ae7904ecba8df40b305b950763df9fc2169739880153b"
+      },
+      "taxonomy_version": "tiktok-video-v1",
+      "model_instance_id": "fbf6838a-18d8-4794-ae60-011cf2dce3ef",
+      "transcript_source": "provided",
+      "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+      "transcript_sha256": "0776ef2d100716b1f0613fdb30b3315cd66c8b017aa3f665419da07cbe9212d6",
+      "attempt_id": "f80927a0-666f-4ae0-8bd9-144f00f07678",
+      "trace_id": "42c46d9305ac47afbeaee9b83d015978"
+    },
+    "error": null,
+    "created_at": "2026-10-10T13:22:01.133414Z",
+    "finished_at": "2026-10-10T13:22:16.612493Z"
+  },
+  "events": [
+    {
+      "event": "submitted",
+      "generation": 0,
+      "trace_id": "42c46d9305ac47afbeaee9b83d015978",
+      "timestamp": "2026-10-10T13:22:01.133414+00:00"
+    },
+    {
+      "event": "dispatched",
+      "generation": 0,
+      "trace_id": "42c46d9305ac47afbeaee9b83d015978",
+      "timestamp": "2026-10-10T13:22:01.147976+00:00"
+    },
+    {
+      "event": "running",
+      "generation": 0,
+      "trace_id": "42c46d9305ac47afbeaee9b83d015978",
+      "timestamp": "2026-10-10T13:22:01.160589+00:00"
+    },
+    {
+      "event": "succeeded",
+      "generation": 0,
+      "trace_id": "42c46d9305ac47afbeaee9b83d015978",
+      "timestamp": "2026-10-10T13:22:16.614352+00:00"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "f80927a0-666f-4ae0-8bd9-144f00f07678",
+      "number": 1,
+      "status": "SUCCEEDED",
+      "error_code": null,
+      "error": null,
+      "started_at": "2026-10-10T13:22:01.155518+00:00",
+      "finished_at": "2026-10-10T13:22:16.612493+00:00"
+    }
+  ],
+  "browser_visual_qa": "unavailable: no connected browser surface",
+  "cloud_resources_created": false,
+  "limits": [
+    "Loopback-only preview forwards to existing service image, not a rebuilt API image.",
+    "No in-flight failure injection or cloud acceptance performed."
+  ],
+  "verification": {
+    "python_tests": {
+      "passed": 148,
+      "skipped": 1,
+      "scope": "full lightweight CPU suite; workspace tmp_path fixture"
+    },
+    "javascript_behavior_tests": {
+      "passed": 4,
+      "runner": "node tests/demo_ui.test.cjs; mock DOM, not browser visual QA"
+    },
+    "javascript_syntax": "passed",
+    "diff_check": "passed",
+    "remote_ci_executed": false
+  },
+  "source_hashes": {
+    "scripts/demo_server.py": "df6220c009cbb19dedd79f06a94c4fa34b842875ee99721a926913f7e49ffaa8",
+    "src/service/demo_ui.py": "64d5d5652999f35f8bc37a7f96fdf80cbc8e22912754843081037bad71b33ee4",
+    "src/service/static/index.html": "44847955c85b8413de1594bb4e0481f0b1ca6a8e3815e8145f8fd68760b61376",
+    "src/service/static/demo.css": "87bab29a277069b68d30440bbf61c7154edaf2d5ca414577dd7f2537eeacd8f4",
+    "src/service/static/demo.js": "e96002f74de709cac0593f5061fdca3c1a25bb97ea3beacbd8bf3af5bb9b7b5a",
+    "src/service/api.py": "8eb4f4b16fd44a51187a1eec8c2427c6cad604cf78222bda202e8589f9b96e2b"
+  },
+  "cost_route": "Existing local GPU; no additional cloud spend; AWS deferred"
+}

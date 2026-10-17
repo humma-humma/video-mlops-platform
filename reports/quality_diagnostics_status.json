@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-10T08:23:34.343880+00:00",
+  "completed": [
+    "Raw generations flushed before validation",
+    "Optional canonical-category token constraints",
+    "Coverage/all-attempted accuracy and explicit denominators",
+    "Scorer self/mismatched/model controls for layers 24 and 17",
+    "Four-video cached-checkpoint diagnostic orchestration",
+    "Serving image definition updated to require bounded TorchCodec decoding",
+    "User Docker diagnostic run independently reviewed",
+    "Scorer layer-24 saturation demonstrated; future full comparison configs explicitly select layer 17",
+    "Fixed pipeline generation-option forwarding and observed real GPU callback invocation",
+    "Matching baseline/scorer controls reused for diagnostic reruns",
+    "Fixed 2.2B Docker diagnostics independently verified: 4/4 valid constrained outputs and 2/4 correct categories",
+    "Full paired constrained two-pass comparison prepared at four and two frames, with layer-17 scoring and no combined JSON",
+    "Full constrained development comparison independently verified: both 23/23 valid, four-frame 8/23 correct versus two-frame 5/23 correct"
+  ],
+  "validation": {
+    "cpu_tests_passed": 126,
+    "real_transformers_generate_with_cached_tokenizer": "passed (random small CPU model; contract test only)",
+    "native_gpu_smoke": {
+      "report": "data/outputs/diagnostic-native-smoke/6a2bb18f6a324f90980d9c2b6fb6a1ba/report.json",
+      "report_sha256": "a7f38cfed8836131517af9341fd02c02dd71d051693691a66246e8681c33404d",
+      "model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "metrics": {
+        "error_rate": 0.0,
+        "peak_gpu_memory_bytes": 1616520192,
+        "inference_seconds": 21.801972800167277,
+        "model_load_seconds": 2.1708358000032604,
+        "input_preparation_seconds": 0.00021279999054968357,
+        "category_accuracy": 0.0,
+        "prediction_coverage": 1.0,
+        "category_accuracy_all_attempted": 0.0,
+        "latency_p50_seconds": 21.32561459997669,
+        "latency_p95_seconds": 21.32561459997669
+      },
+      "predicted_category": "Entertainment & Shows",
+      "category_correct": false,
+      "decoder": "native processor fallback (Torchvision); not Docker decoder acceptance"
+    },
+    "native_decoding_tests_passed": 4,
+    "real_gpu_pipeline_verification": "reports/pipeline_generation_verification.json"
+  },
+  "pending": [
+    "Review semantic category errors and summary factuality; curate held-out acceptance examples. The constrained 23-video comparison is complete; no unchanged rerun required.",
+    "Rebuild GPU worker and verify bounded decoding plus service model reuse",
+    "Model accuracy improvement and held-out evaluation",
+    "Live MLflow/registry, dependency locks, CI and cloud delivery remain open"
+  ],
+  "promotion": "None; no quality improvement or production acceptance claimed",
+  "quality_comparison_review": "reports/constrained_quality_review.json"
+}

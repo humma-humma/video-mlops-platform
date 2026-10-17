@@ -1,0 +1,63 @@
+{
+  "schema_version": "1",
+  "purpose": "local GPU admission demonstration",
+  "started_at": "2026-10-17T08:33:30.209232+00:00",
+  "finished_at": "2026-10-17T08:34:05.472063+00:00",
+  "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+  "capacity": 2,
+  "submissions": [
+    {
+      "index": 0,
+      "http_status": 202,
+      "response": {
+        "job_id": "56fe9a77-62af-4717-acbf-b4949a659e83",
+        "status": "QUEUED"
+      }
+    },
+    {
+      "index": 1,
+      "http_status": 429,
+      "response": {
+        "detail": "GPU job capacity reached; retry later"
+      }
+    },
+    {
+      "index": 2,
+      "http_status": 202,
+      "response": {
+        "job_id": "12980d97-a78b-4496-8dfe-0e6cc79c80ed",
+        "status": "QUEUED"
+      }
+    }
+  ],
+  "terminal_outcomes": [
+    {
+      "job_id": "56fe9a77-62af-4717-acbf-b4949a659e83",
+      "status": "SUCCEEDED",
+      "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct"
+    },
+    {
+      "job_id": "12980d97-a78b-4496-8dfe-0e6cc79c80ed",
+      "status": "SUCCEEDED",
+      "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct"
+    }
+  ],
+  "after_drain": {
+    "index": "after_drain",
+    "http_status": 202,
+    "response": {
+      "job_id": "cf56cdf0-32e3-4022-a57e-5ad7d10bcf43",
+      "status": "QUEUED"
+    }
+  },
+  "after_drain_outcome": {
+    "job_id": "cf56cdf0-32e3-4022-a57e-5ad7d10bcf43",
+    "status": "SUCCEEDED",
+    "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct"
+  },
+  "passed": true,
+  "limits": [
+    "One small local burst does not establish sustained capacity or tail latency.",
+    "GPU utilization and competing host workloads are not sampled by this script."
+  ]
+}

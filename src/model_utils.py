@@ -1,4 +1,5 @@
 import time
+import os
 
 import torch
 from transformers import BaseVideoProcessor, ImageTextToTextPipeline, pipeline
@@ -9,6 +10,8 @@ from src.config import InferenceConfig
 def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
     """Load processor and model with timing info."""
     start_time = time.perf_counter()
+    if os.environ.get("VIDEO_REQUIRE_TORCHCODEC") == "1":
+        from torchcodec.decoders import VideoDecoder  # fail before allocating VLM weights
     if cfg.model_dtype == "float16":
         dtype = torch.float16
     elif cfg.model_dtype == "bfloat16":
@@ -18,6 +21,7 @@ def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
     pipe = pipeline(
         "image-text-to-text",
         model=cfg.model_name,
+        revision=cfg.model_revision,
         device_map="auto",
         dtype=dtype,
         use_cache=cfg.use_kv_cache,
@@ -33,11 +37,12 @@ def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
         if processor is not None:
             video_processor = getattr(processor, "video_processor", None)
             if isinstance(video_processor, BaseVideoProcessor):
-                print(f"🚀 Setting max frames to {cfg.max_frames}...")
+                print(f"Setting max frames to {cfg.max_frames}...")
                 video_processor.num_frames = cfg.max_frames  # type: ignore[reportAttributeAccessIssue]
+                video_processor.do_sample_frames = True
 
     if cfg.torch_compile:
-        print("🚀 Compiling model...")
+        print("Compiling model...")
         # Copied the options from unsloth training repo
         unsloth_torch_compile_options = {
             "epilogue_fusion": True,
@@ -52,5 +57,5 @@ def load_model(cfg: InferenceConfig) -> tuple[ImageTextToTextPipeline, float]:
         )
 
     load_time = time.perf_counter() - start_time
-    print(f"✅ Model loaded in {load_time:.2f}s")
+    print(f"Model loaded in {load_time:.2f}s")
     return pipe, load_time

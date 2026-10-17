@@ -59,6 +59,7 @@ def run_inference(
     messages: list[list[dict]],
     max_new_tokens: int = 140,
     mode: Literal["category", "summary", "combined"] = "category",
+    constrain_category: bool = False,
 ) -> tuple[list[str], float]:
     """Run inference and measure time."""
     start = time.perf_counter()
@@ -67,7 +68,16 @@ def run_inference(
     elif mode == "combined":
         max_new_tokens = 180
 
-    output = pipe(text=messages, max_new_tokens=max_new_tokens, do_sample=False)  # type: ignore[reportCallIssue]
+    generation = {}
+    if mode == "category" and constrain_category:
+        if len(messages) != 1:
+            raise ValueError("Constrained category generation requires one video per call")
+        from src.decoding import category_constraint
+        callback, max_new_tokens = category_constraint(
+            pipe.processor.tokenizer, pipe.model.generation_config.eos_token_id)
+        generation = {"prefix_allowed_tokens_fn": callback, "num_beams": 1}
+    output = pipe(text=messages, generate_kwargs={"max_new_tokens": max_new_tokens,
+        "do_sample": False, **generation})  # type: ignore[reportCallIssue]
     text = [
         out[0]["generated_text"][-1]["content"].strip()
         for out in tqdm(output, desc="Running Inference", total=len(messages))

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Video-MLOps Operations</title><link rel="stylesheet" href="/demo-assets/operations.css">
+<script src="/demo-assets/operations.js" defer></script></head><body><main>
+<header><a href="/">Video-MLOps demo</a><h1>Inference operations</h1>
+<p>Read-only monitoring of existing jobs. This page never submits a video.</p></header>
+<label>API key <input id="key" type="password" autocomplete="off" placeholder="Only if authentication is enabled"></label>
+<button id="refresh">Refresh</button><button id="pause">Pause</button><p id="state" role="status">Waiting for first snapshot</p>
+<section><h2>Service health</h2><pre id="health">No data</pre></section>
+<section><h2>Jobs and queue</h2><div id="counts" class="cards"></div>
+<p>Counts are persisted current states, not a recent failure rate. Queue age is the oldest queued job.</p></section>
+<section><h2>GPU · device-wide</h2><p>Includes desktop and other workloads. Memory used is not model allocation. Host telemetry requires the local preview server.</p>
+<div id="gpu"></div><svg id="chart" viewBox="0 0 600 120" role="img" aria-label="GPU utilization over the latest 60 successful refreshes"></svg>
+<p>Utilization, 0–100%; one sample every 5 seconds. Missing samples are gaps.</p></section>
+<section><h2>Recent job history</h2><div class="scroll"><table><thead><tr><th>Job</th><th>Status</th><th>Created</th></tr></thead><tbody id="jobs"></tbody></table></div>
+<p>Open a job in the demo to inspect attempts, stage timings, events and model/configuration lineage.</p></section>
+<section><h2>API telemetry</h2><p>Process-local counters reset on API restart. Duration sum/count supports means, not p95. Refresh requests contribute to these counters.</p><pre id="metrics">No data</pre></section>
+</main></body></html>

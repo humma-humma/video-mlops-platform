@@ -1,0 +1,3432 @@
+{
+  "timestamp": "2026-10-10T13:34:50.714483+00:00",
+  "config": {
+    "video_folder": "data\\inputs\\videos",
+    "audio_folder": "data\\inputs\\audios",
+    "audio_transcript_folder": "data\\inputs\\audio_transcripts",
+    "ground_truth_file": "data\\inputs\\ground_truth.csv",
+    "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "use_kv_cache": true,
+    "torch_compile": false,
+    "attention_implementation": null,
+    "batch_size": 1,
+    "num_workers": 0,
+    "max_frames": 4,
+    "whisper_device_id": 0,
+    "inference_strategy": "batch_two_pass",
+    "model_dtype": "auto",
+    "csv_folder": "data\\outputs\\gpu-profile",
+    "statistics_folder": "data\\outputs\\gpu-profile",
+    "file_name": "profile",
+    "num_video_samples": -1
+  },
+  "environment": {
+    "python": "3.10.13",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.8.0+cu126",
+    "transformers": "4.56.1"
+  },
+  "input_sha256": {
+    "data\\inputs\\videos\\7203774185322188037.mp4": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+    "data\\inputs\\audio_transcripts\\7203774185322188037.txt": "0776ef2d100716b1f0613fdb30b3315cd66c8b017aa3f665419da07cbe9212d6"
+  },
+  "scope": "native local cached sample; no API submission; not rebuilt Docker acceptance or a capacity test",
+  "limitations": [
+    "Device-wide GPU samples include other applications",
+    "Profiler adds overhead",
+    "Single sample, single warmup, one measured two-pass run",
+    "torchvision fallback may decode the entire clip",
+    "CUDA device events include annotations; operator table CUDA percentages are not device utilization or additive stage shares"
+  ],
+  "job_ids_before": [
+    "060d1889-8d2f-4177-abec-43b6af803bfd",
+    "0ebadbdc-2221-41f5-a5c4-6af61c408da8",
+    "0fc910ee-ce8e-40f7-8f5c-7a7199e7b275",
+    "1129b3f2-ad6f-4a82-a029-5e14515eeca3",
+    "23670cc7-1752-4424-8f4e-bdc584d1157a",
+    "45405d07-3bfd-4023-8e21-7da942443691",
+    "4c7f351c-7be0-4665-8e1c-9fefc2ccd693",
+    "7be30fe4-dbff-4da6-9d78-ab4a07e4945e",
+    "7f222415-17a7-4e26-ae24-e165825a5f9d",
+    "8efd7644-be84-4b73-aa3c-638b79384615",
+    "aed5837d-3299-4bc3-9991-1be244608e53",
+    "b109fec8-cc9f-4118-be09-4e02b0d96355",
+    "c68aaa57-91d3-4657-8185-f27f0167feea",
+    "c71438d6-b425-40c4-a29a-a7a12d478243",
+    "e4b3b598-5e4f-469d-893b-e39448eb92a6",
+    "f59df0f8-6e84-4ab5-b508-5a4f2f3f03ed"
+  ],
+  "stages_seconds": {
+    "summary": 20.912992799887434,
+    "category": 6.214279999956489
+  },
+  "model_load_seconds": 2.5007569999434054,
+  "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "warmup_seconds": 21.68698630016297,
+  "peak_process_allocated_bytes": 1616520192,
+  "peak_process_reserved_bytes": 1700790272,
+  "job_ids_after": [
+    "060d1889-8d2f-4177-abec-43b6af803bfd",
+    "0ebadbdc-2221-41f5-a5c4-6af61c408da8",
+    "0fc910ee-ce8e-40f7-8f5c-7a7199e7b275",
+    "1129b3f2-ad6f-4a82-a029-5e14515eeca3",
+    "23670cc7-1752-4424-8f4e-bdc584d1157a",
+    "45405d07-3bfd-4023-8e21-7da942443691",
+    "4c7f351c-7be0-4665-8e1c-9fefc2ccd693",
+    "7be30fe4-dbff-4da6-9d78-ab4a07e4945e",
+    "7f222415-17a7-4e26-ae24-e165825a5f9d",
+    "8efd7644-be84-4b73-aa3c-638b79384615",
+    "aed5837d-3299-4bc3-9991-1be244608e53",
+    "b109fec8-cc9f-4118-be09-4e02b0d96355",
+    "c68aaa57-91d3-4657-8185-f27f0167feea",
+    "c71438d6-b425-40c4-a29a-a7a12d478243",
+    "e4b3b598-5e4f-469d-893b-e39448eb92a6",
+    "f59df0f8-6e84-4ab5-b508-5a4f2f3f03ed"
+  ],
+  "job_set_unchanged": true,
+  "status": "completed",
+  "gpu_samples": [
+    {
+      "timestamp": "2026-10-10T13:34:50.651586+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 3314.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:51.729380+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4385.0,
+          "utilization_percent": 6.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:52.815617+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4495.0,
+          "utilization_percent": 12.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:53.890560+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4495.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:54.961380+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4525.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:56.034332+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4957.0,
+          "utilization_percent": 3.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:57.107835+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4957.0,
+          "utilization_percent": 5.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:58.168382+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4957.0,
+          "utilization_percent": 13.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:34:59.247139+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5561.0,
+          "utilization_percent": 1.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:00.318490+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:01.394855+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 11.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:02.454669+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 13.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:03.544824+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 18.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:04.605035+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:05.679340+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 29.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:06.755721+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:07.815297+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 38.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:08.877221+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:09.951538+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 19.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:11.018797+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4850.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:12.080352+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4981.0,
+          "utilization_percent": 2.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:13.141469+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4981.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:14.227165+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5001.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:15.316663+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5097.0,
+          "utilization_percent": 39.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:16.378199+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5097.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:17.439917+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5097.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:18.508942+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5127.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:19.572926+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5185.0,
+          "utilization_percent": 1.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:20.658565+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5191.0,
+          "utilization_percent": 60.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:21.730634+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5191.0,
+          "utilization_percent": 48.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:22.793235+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5191.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:23.865952+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5191.0,
+          "utilization_percent": 42.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:24.925687+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5265.0,
+          "utilization_percent": 46.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:25.991081+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4676.0,
+          "utilization_percent": 40.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:27.054694+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4676.0,
+          "utilization_percent": 100.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:28.129253+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4699.0,
+          "utilization_percent": 59.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:29.217762+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4699.0,
+          "utilization_percent": 41.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:30.282811+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4763.0,
+          "utilization_percent": 41.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:31.375209+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4763.0,
+          "utilization_percent": 41.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:32.450336+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 39.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:33.528411+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:34.591162+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 40.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:35.663750+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 40.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:36.728967+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:37.792969+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 5.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:38.863778+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 12.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:39.925450+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4891.0,
+          "utilization_percent": 16.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:40.999267+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4901.0,
+          "utilization_percent": 30.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:35:42.061307+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [],
+      "available": false,
+      "reason": "Host NVIDIA telemetry unavailable"
+    },
+    {
+      "timestamp": "2026-10-10T13:36:22.577250+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4917.0,
+          "utilization_percent": 18.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:23.855511+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4917.0,
+          "utilization_percent": 38.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:28.039237+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4919.0,
+          "utilization_percent": 19.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:29.811668+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4933.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:32.655214+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4933.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:33.814932+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4937.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:35.031865+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4937.0,
+          "utilization_percent": 15.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:36.246570+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4937.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:37.447786+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4951.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:38.632771+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4951.0,
+          "utilization_percent": 8.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:39.846748+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4951.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:41.121726+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4955.0,
+          "utilization_percent": 16.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:42.295320+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4961.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:43.547393+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4961.0,
+          "utilization_percent": 11.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:44.765468+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4961.0,
+          "utilization_percent": 32.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:45.976393+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4977.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:47.240405+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4985.0,
+          "utilization_percent": 11.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:48.455309+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4985.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:49.699693+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4977.0,
+          "utilization_percent": 17.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:51.098838+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4983.0,
+          "utilization_percent": 30.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:52.297615+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4983.0,
+          "utilization_percent": 18.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:53.500169+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4983.0,
+          "utilization_percent": 5.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:54.699579+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4983.0,
+          "utilization_percent": 6.0,
+          "temperature_c": 40.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:55.886444+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4983.0,
+          "utilization_percent": 5.0,
+          "temperature_c": 40.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:57.067677+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 4983.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:58.239214+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5009.0,
+          "utilization_percent": 17.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:36:59.462050+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5015.0,
+          "utilization_percent": 26.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:01.113466+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5015.0,
+          "utilization_percent": 12.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:02.377646+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5015.0,
+          "utilization_percent": 16.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:03.536355+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5013.0,
+          "utilization_percent": 27.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:04.770511+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5013.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:05.974612+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5013.0,
+          "utilization_percent": 20.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:07.158043+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5047.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:08.692300+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5049.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:09.900073+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5049.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:11.090218+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5049.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:12.262618+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5071.0,
+          "utilization_percent": 20.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:13.526754+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5075.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:14.742594+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5075.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:15.992752+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5099.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:17.180683+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5105.0,
+          "utilization_percent": 17.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:19.126774+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5105.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:20.391542+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5105.0,
+          "utilization_percent": 39.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:21.621692+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:22.836295+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:24.051780+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:25.320403+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 30.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:26.529540+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:27.746361+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:29.432293+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:30.639928+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:31.898643+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5195.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:33.110259+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5311.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 43.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:34.373069+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5313.0,
+          "utilization_percent": 20.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:35.684101+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5313.0,
+          "utilization_percent": 38.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:36.914444+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5313.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 43.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:38.132589+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5431.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:39.357975+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5441.0,
+          "utilization_percent": 18.0,
+          "temperature_c": 43.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:40.625225+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5441.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 43.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:41.792979+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5441.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 43.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:43.039377+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5303.0,
+          "utilization_percent": 28.0,
+          "temperature_c": 43.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:45.312798+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5303.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 42.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:46.524685+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5303.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 41.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:47.743920+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 39.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:48.937520+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:50.158723+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 30.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:51.401098+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 21.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:52.586071+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 22.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:53.822397+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:55.032685+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:56.244971+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5317.0,
+          "utilization_percent": 21.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:57.407491+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5317.0,
+          "utilization_percent": 20.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:58.590662+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5317.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:37:59.774284+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5289.0,
+          "utilization_percent": 32.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:02.654637+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5289.0,
+          "utilization_percent": 27.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:03.853107+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5289.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:05.006562+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5285.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:06.236482+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5285.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 44.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:08.038152+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5285.0,
+          "utilization_percent": 29.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:09.282937+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 28.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:10.515828+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:11.747696+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:12.996121+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:14.290035+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:15.478382+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:16.728642+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:17.944010+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:20.462761+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:21.673814+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5537.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:22.889025+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5541.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:24.036512+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5541.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:25.199508+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5541.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:26.389812+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5411.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:27.586791+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 26.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:28.804063+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:30.020758+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:31.178410+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 2.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:32.409739+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:33.627580+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:34.796381+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5409.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 45.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:35.986379+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5411.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 46.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:37.206323+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:38.403270+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:39.606912+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 26.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:40.785223+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5411.0,
+          "utilization_percent": 29.0,
+          "temperature_c": 47.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:41.953281+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:43.191825+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:44.411402+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5411.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:45.644709+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5411.0,
+          "utilization_percent": 26.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:46.861670+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5413.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:48.062255+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5321.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:49.288665+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 20.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:50.533137+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:51.750584+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 38.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:52.938995+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5431.0,
+          "utilization_percent": 16.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:54.138274+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5433.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:55.330665+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5433.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:56.467694+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5429.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:57.685440+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5431.0,
+          "utilization_percent": 21.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:38:58.902208+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5433.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:00.090802+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5433.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:01.386838+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5303.0,
+          "utilization_percent": 21.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:02.585845+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:03.779284+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5305.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:05.033982+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5321.0,
+          "utilization_percent": 38.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:06.249988+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:07.436600+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:08.680490+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:09.845934+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5323.0,
+          "utilization_percent": 22.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:11.029373+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:12.195488+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 22.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:13.344340+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:14.552958+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5323.0,
+          "utilization_percent": 26.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:15.736604+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:16.950510+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5325.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:18.109486+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:19.368695+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 1.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:20.613123+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:21.862986+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 0.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:23.064235+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5385.0,
+          "utilization_percent": 14.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:24.189965+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5385.0,
+          "utilization_percent": 39.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:25.423674+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 44.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:26.641548+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:27.874112+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:29.106850+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 13.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:30.327234+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:31.481643+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 33.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:32.697780+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 21.0,
+          "temperature_c": 48.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:33.915347+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5319.0,
+          "utilization_percent": 29.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:35.115877+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5385.0,
+          "utilization_percent": 21.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:36.349492+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 34.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:37.582705+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 31.0,
+          "temperature_c": 50.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:38.794476+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 19.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:39.982498+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 25.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:41.167761+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:42.385088+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:43.598787+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 49.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:44.799501+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 22.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:46.071434+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 51.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:47.291226+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:48.471377+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5513.0,
+          "utilization_percent": 24.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:49.719095+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5515.0,
+          "utilization_percent": 30.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:50.891922+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5515.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:52.169976+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 20.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:53.376397+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:54.576359+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:55.805151+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 37.0,
+          "temperature_c": 54.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:57.002833+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5515.0,
+          "utilization_percent": 28.0,
+          "temperature_c": 54.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:58.203031+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5515.0,
+          "utilization_percent": 36.0,
+          "temperature_c": 53.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:39:59.509317+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5515.0,
+          "utilization_percent": 35.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:40:00.696134+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5383.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 52.0
+        }
+      ],
+      "available": true
+    },
+    {
+      "timestamp": "2026-10-10T13:40:01.867355+00:00",
+      "scope": "device-wide; includes other applications",
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 2080",
+          "memory_total_mib": 8192.0,
+          "memory_used_mib": 5387.0,
+          "utilization_percent": 23.0,
+          "temperature_c": 54.0
+        }
+      ],
+      "available": true
+    }
+  ],
+  "baseline_gpu": {
+    "timestamp": "2026-10-10T13:34:50.651586+00:00",
+    "scope": "device-wide; includes other applications",
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 2080",
+        "memory_total_mib": 8192.0,
+        "memory_used_mib": 3314.0,
+        "utilization_percent": 0.0,
+        "temperature_c": 45.0
+      }
+    ],
+    "available": true
+  },
+  "cuda_device_event_count": 261461,
+  "profiler_configuration": {
+    "activities": [
+      "CPU",
+      "CUDA"
+    ],
+    "profile_memory": true,
+    "note": "This first recorded run enabled memory event tracing; the runner now disables it to reduce trace size. Allocator peaks remain measured in both modes."
+  },
+  "artifacts": {
+    "data\\outputs\\gpu-profile\\trace.json.gz": {
+      "bytes": 62986019,
+      "sha256": "6506359a832ab6ec265e1965ad0dd0ff045816bcae44445f27abe3bd3442e129"
+    },
+    "data\\outputs\\gpu-profile\\operators.txt": {
+      "bytes": 7457,
+      "sha256": "e3accd0e5990ba99a56f1bade0209a3d21d757ec26fc0b2aa290e3ceace92521"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+services:
+  benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile.benchmark
+    volumes:
+      - ./data/inputs:/app/data/inputs:ro
+      - ./data/manifests:/app/data/manifests:ro
+      - ./data/outputs:/app/data/outputs
+      - ./artifacts/benchmark-model-cache:/model-cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

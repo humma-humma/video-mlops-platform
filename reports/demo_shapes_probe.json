@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-17T09:02:29.121045+00:00",
+  "live": {
+    "status": "ok"
+  },
+  "input_sha256": "4d2b3e0737838d908d52c6b7203f7dba8ebd4e99880090c1125e93b28e1b6fea",
+  "preserved": [],
+  "new_job_id": "abc40dcd-67b7-46c5-ab3a-fac5c8902e23",
+  "new_result_hash": "b3152905b37f5d36352c69ad2862a68a8156a03e0cb9723f132593ac7b42ddec",
+  "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "lineage": {
+    "source_files": {
+      "src/config.py": "8606bda860910c301afdffa8473a056440e3e381a65c9905ae70f1bbb747c0c7",
+      "src/pipeline.py": "ac9d74604b2177c566a6832a71b3d5c96e11bf08b3275513ba9a407462e81b8b",
+      "src/inference_utils.py": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+      "src/decoding.py": "0523c989d64f22c7acda902849ca420f81fd86e1e74436a29c8e43c2f5efef89",
+      "src/model_utils.py": "32769d1dde94751322534f7b71265ce25f775d778941fe0451ebdbd3e5afbc4f",
+      "src/category_utils.py": "cf4b7fb12a8219a59596944d8d2a4db83cdb1cda0b3f0c41fb11a0f315bb562d",
+      "src/taxonomy.py": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+      "src/service/inference.py": "37038eb796341dce0d7b7f5764e0a7184da21f908cf1b9392e04d8298164d159",
+      "src/lineage.py": "2697f36785a9b2b82642fb82764dc97495cba844cb9244d22c6ba989a83be09d",
+      "src/experiments.py": "1edb161d4d4290ffa4b48d6fc1351a3deab8df738da5621460bbd28a760bdccc",
+      "src/evaluation_utils.py": "75298fdd381a9f2c0052a58fc225435a1cea683e8c06032ad52dc82b944edd00"
+    },
+    "code_hash": "a5754dd86820a435556ed0c0e4baaa8104132f63245f72653dcb258850fdb4ad",
+    "prompt_version": "video-prompts-v1",
+    "prompt_hash": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+    "taxonomy_hash": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+    "inference_config": {
+      "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "max_frames": 4,
+      "model_dtype": "auto",
+      "use_kv_cache": true,
+      "inference_strategy": "per_video_two_pass",
+      "decoder": "torchcodec"
+    },
+    "inference_config_hash": "7208bad081532771f3f4c6a906b00769f612223f9f9f36b893f1c7c0371e1552"
+  },
+  "timings": {
+    "model_load": 0.0,
+    "input_preparation": 3.9601000025868416e-05,
+    "summary": 7.230772178038023,
+    "category": 0.8882639720104635,
+    "inference_total": 8.119126252015121,
+    "input_download": 0.007765850983560085,
+    "total": 8.127067809924483
+  },
+  "passed": true
+}

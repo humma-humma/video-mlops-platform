@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Video-MLOps · Inference demo</title>
+  <link rel="stylesheet" href="/demo-assets/demo.css">
+  <script src="/demo-assets/demo.js" defer></script>
+</head>
+<body>
+<main>
+  <header><div><p class="eyebrow">ML INFRASTRUCTURE PORTFOLIO</p><h1>Video-MLOps</h1><p>Submit a video. Follow its GPU job. Inspect the evidence.</p></div><span class="badge">Local demo</span></header>
+  <section class="statusbar" aria-label="Service health"><strong id="health">Checking service…</strong><span id="dependencies"></span><button id="refresh" type="button">Refresh</button></section>
+  <p class="notice">This demo uses your running worker. Generated summaries and categories can be incorrect. Real and simulated results are identified below.</p>
+  <div class="layout">
+    <section class="card"><h2>Submit a video</h2>
+      <form id="submit-form">
+        <label for="api-key">API key <span class="muted">if required</span></label><input id="api-key" type="password" autocomplete="off" placeholder="Kept in memory for this page only">
+        <label for="video">Video file <span class="muted">up to 64 MiB</span></label><input id="video" type="file" accept=".mp4,.mov,.avi,.mkv" required>
+        <label for="transcript">Transcript <span class="muted">optional</span></label><textarea id="transcript" rows="5" placeholder="Paste the spoken transcript for additional context."></textarea>
+        <p class="muted small">Without a transcript, this service uses visuals only.</p>
+        <button id="submit" type="submit" class="primary">Submit inference job</button>
+      </form>
+      <p id="message" role="status" aria-live="polite"></p>
+      <h2>Recent jobs</h2><p class="muted small">Latest 12 jobs from this local service. Select one to inspect it.</p><div id="jobs" class="jobs"></div>
+      <label for="job-id">Open a job by ID</label><div class="row"><input id="job-id" placeholder="Job UUID"><button id="open-job" type="button">Open</button></div>
+    </section>
+    <section class="card" aria-label="Selected job"><div class="row spread"><h2>Job detail</h2><span id="job-status" class="badge">No job selected</span></div>
+      <p id="selected-id" class="mono muted">Select or submit a job to begin.</p><p id="job-error" role="alert"></p>
+      <div class="row"><button id="cancel" type="button" disabled>Cancel queued job</button><button id="retry" type="button" disabled>Retry failed job</button></div>
+      <p class="small muted">Cancellation applies to queued work. Retry eligibility is enforced by the service.</p>
+      <div id="result" hidden><div class="row spread"><h3>Result</h3><span id="result-mode" class="badge"></span></div><p id="category" class="category"></p><p id="summary" class="summary"></p><button id="download" type="button">Download result JSON</button></div>
+      <h3>Stage timings</h3><p class="muted small">Reported by the deployed worker; queue time is separate.</p><table><thead><tr><th scope="col">Stage</th><th scope="col">Seconds</th></tr></thead><tbody id="timings"></tbody></table>
+      <h3>Job history</h3><ol id="events" class="history"></ol>
+      <details><summary>Attempts</summary><pre id="attempts">No attempts loaded.</pre></details>
+      <details><summary>Model and configuration lineage</summary><pre id="lineage">Available after a successful result.</pre></details>
+    </section>
+  </div>
+  <section class="card"><div class="row spread"><h2>Operational metrics</h2><button id="load-metrics" type="button">Load metrics</button></div><p class="muted small"><a href="/operations">Open operations dashboard</a> for health, queue, jobs and host GPU activity. Distributed request traces remain pending.</p><pre id="metrics">Load metrics to inspect the running service.</pre></section>
+  <footer>Single-host demonstration · No cloud hosting required · Persisted job state and results come from the running API</footer>
+</main>
+</body>
+</html>

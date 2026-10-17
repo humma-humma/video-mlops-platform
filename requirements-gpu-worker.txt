@@ -1,0 +1,9 @@
+-r requirements-service.txt
+transformers==4.56.1
+accelerate==1.10.1
+pandas==2.3.2
+numpy==2.2.6
+tqdm==4.67.1
+num2words==0.5.14
+av>=14,<16
+torchcodec==0.7.0

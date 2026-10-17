@@ -1,0 +1,14 @@
+﻿{
+    "checks":  [
+                   "cpu_tests_and_migrations",
+                   "manifest_integrity",
+                   "fake_service",
+                   "s3_storage",
+                   "restart_persistence",
+                   "durable_failure",
+                   "real_gpu_service",
+                   "warm_model_reuse"
+               ],
+    "gpu_checked":  true,
+    "verified_at":  "2026-10-09T17:03:46.9315372Z"
+}

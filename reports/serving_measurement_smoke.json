@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-10",
+  "purpose": "HTTP load runner acceptance against existing local GPU service; not sustained capacity acceptance",
+  "tests": "15 targeted tests passed (8 serving runner, 7 existing reservation/subset tests), using workspace tmp_path fixture because default Windows temp is inaccessible",
+  "verification": "Input/report/client-snapshot hashes, aggregate arithmetic, four accepted/finished journal pairs, nonfake pinned model and shared model instance verified",
+  "runs": [
+    {
+      "report": "data/outputs/serving-load/7090ec31ff6b4144af736b37583606cf/report.json",
+      "sha256": "ed2ada6ab0cd23b6f79dfe62e1b3ed08149f271d98d9ce3e722c6d7d65c45735",
+      "client_source_sha256": "ea6d62ee9bb48921ac849f781139906403b6300b4060b8ec3e922d22b81217a5",
+      "metrics": {
+        "attempted": 2,
+        "succeeded": 2,
+        "failed": 0,
+        "cancelled": 0,
+        "timeouts": 0,
+        "client_errors": 0,
+        "elapsed_seconds": 75.10900000017136,
+        "successful_jobs_per_minute": 1.5976780412430762,
+        "successful_submission_seconds": {
+          "count": 2,
+          "p50": 3.89850000012666,
+          "p95": 4.004250000067986
+        },
+        "successful_completion_observed_seconds": {
+          "count": 2,
+          "p50": 65.35150000010617,
+          "p95": 72.26305000018328
+        },
+        "successful_initial_queue_seconds": {
+          "count": 2,
+          "p50": 26.798621,
+          "p95": 50.7758351
+        }
+      },
+      "jobs": [
+        {
+          "job_id": "4c7f351c-7be0-4665-8e1c-9fefc2ccd693",
+          "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "model_instance_id": "fbf6838a-18d8-4794-ae60-011cf2dce3ef",
+          "submission_seconds": 3.7810000001918525,
+          "completion_observed_seconds": 57.67200000002049,
+          "initial_queue_seconds": 0.157272,
+          "timings": {
+            "model_load": 27.34633265399316,
+            "input_preparation": 0.00012140499893575907,
+            "summary": 13.632409073004965,
+            "category": 3.7040544179908466,
+            "inference_total": 17.336801803001435,
+            "input_download": 0.05044727800122928,
+            "total": 52.06808524399821
+          }
+        },
+        {
+          "job_id": "c71438d6-b425-40c4-a29a-a7a12d478243",
+          "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "model_instance_id": "fbf6838a-18d8-4794-ae60-011cf2dce3ef",
+          "submission_seconds": 4.016000000061467,
+          "completion_observed_seconds": 73.03100000019185,
+          "initial_queue_seconds": 53.43997,
+          "timings": {
+            "model_load": 0.0,
+            "input_preparation": 3.080099122598767e-05,
+            "summary": 10.446447730006184,
+            "category": 2.525917038990883,
+            "inference_total": 12.97245567299251,
+            "input_download": 0.012941558001330122,
+            "total": 12.989292573998682
+          }
+        }
+      ],
+      "deployed_inference_config": {
+        "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+        "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+        "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+        "max_frames": 4,
+        "model_dtype": "auto",
+        "use_kv_cache": true,
+        "inference_strategy": "per_video_two_pass",
+        "decoder": "torchvision"
+      },
+      "workspace_files_differing_from_deployed_lineage": [
+        "src/inference_utils.py",
+        "src/model_utils.py",
+        "src/service/inference.py",
+        "src/lineage.py",
+        "src/experiments.py"
+      ]
+    },
+    {
+      "report": "data/outputs/serving-load/120d4f1f7fc2441088d1f04d451764a9/report.json",
+      "sha256": "76deb5c3fedd88db379b36b2f0d67df9feb15ec84cd18be1c3eaf7a4be40ac73",
+      "client_source_sha256": "ae8ac82b999e20abc7b00f5b716cb5e207c7cc681c01c2962116afa3d2f5fa34",
+      "metrics": {
+        "attempted": 2,
+        "succeeded": 2,
+        "failed": 0,
+        "cancelled": 0,
+        "timeouts": 0,
+        "client_errors": 0,
+        "elapsed_seconds": 34.125,
+        "successful_jobs_per_minute": 3.5164835164835164,
+        "successful_submission_seconds": {
+          "count": 2,
+          "p50": 2.4689999998081475,
+          "p95": 2.4689999998081475
+        },
+        "successful_completion_observed_seconds": {
+          "count": 2,
+          "p50": 24.390999999945052,
+          "p95": 31.281400000012944
+        },
+        "successful_initial_queue_seconds": {
+          "count": 2,
+          "p50": 6.650831500000001,
+          "p95": 12.61257055
+        }
+      },
+      "jobs": [
+        {
+          "job_id": "c68aaa57-91d3-4657-8185-f27f0167feea",
+          "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "model_instance_id": "fbf6838a-18d8-4794-ae60-011cf2dce3ef",
+          "submission_seconds": 2.4689999998081475,
+          "completion_observed_seconds": 16.734999999869615,
+          "initial_queue_seconds": 0.026677,
+          "timings": {
+            "model_load": 0.0,
+            "input_preparation": 0.00010780300362966955,
+            "summary": 10.735054691002006,
+            "category": 2.6173920260043815,
+            "inference_total": 13.352594620999298,
+            "input_download": 0.012008107994915918,
+            "total": 13.368741678990773
+          }
+        },
+        {
+          "job_id": "aed5837d-3299-4bc3-9991-1be244608e53",
+          "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+          "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+          "model_instance_id": "fbf6838a-18d8-4794-ae60-011cf2dce3ef",
+          "submission_seconds": 2.4689999998081475,
+          "completion_observed_seconds": 32.04700000002049,
+          "initial_queue_seconds": 13.274986,
+          "timings": {
+            "model_load": 0.0,
+            "input_preparation": 3.430100332479924e-05,
+            "summary": 11.363784621004015,
+            "category": 2.7580801300064195,
+            "inference_total": 14.121949154010508,
+            "input_download": 0.018184461005148478,
+            "total": 14.144025146000786
+          }
+        }
+      ],
+      "deployed_inference_config": {
+        "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+        "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+        "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+        "max_frames": 4,
+        "model_dtype": "auto",
+        "use_kv_cache": true,
+        "inference_strategy": "per_video_two_pass",
+        "decoder": "torchvision"
+      },
+      "workspace_files_differing_from_deployed_lineage": [
+        "src/inference_utils.py",
+        "src/model_utils.py",
+        "src/service/inference.py",
+        "src/lineage.py",
+        "src/experiments.py"
+      ]
+    }
+  ],
+  "limits": [
+    "Two jobs per run, one repeated input and one existing GPU worker; no sustained-capacity or P95 claim.",
+    "First run observed cold model loading, not a controlled process restart; second run observed warm reuse.",
+    "Deployed worker reports torchvision decoder and does not verify newer workspace loader/generation source.",
+    "Cloud deployment, GPU profiling, cost measurement and release rollback remain unverified.",
+    "Initial runner accepted events carried provisional CLIENT_ERROR field; final outcomes were SUCCEEDED. Corrected accepted-event labeling was verified by unit tests and the second live run."
+  ]
+}

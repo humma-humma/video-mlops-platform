@@ -1,0 +1,43 @@
+﻿{
+    "schema_version":  "1",
+    "source_dirty":  true,
+    "purpose":  "local operational service release and compatible rollback",
+    "passed":  true,
+    "candidate_probe":  "reports/release_candidate_20261017105931.json",
+    "source_commit":  "f01cc7c830cbfb2f4a8da67348fa87428b40ccc9",
+    "rollback_probe":  "reports/release_rollback_20261017105931.json",
+    "baseline":  {
+                     "dispatcher":  {
+                                        "image_id":  "sha256:19fa058ee1d77c54b7d2032773309ed2b3fafb9a807e3e8b9e761e60387a12a1",
+                                        "tag":  "video-mlops-demo/dispatcher:baseline-20261017105931"
+                                    },
+                     "api":  {
+                                 "image_id":  "sha256:d08fbfa174a49800137dce6ec31d8d3269e374852a206c0fe867b0380d5b3408",
+                                 "tag":  "video-mlops-demo/api:baseline-20261017105931"
+                             },
+                     "worker":  {
+                                    "image_id":  "sha256:f7c34525e64474b352b730707209e6fe0e01c3836308cfce6c2fbc1d61bfee01",
+                                    "tag":  "video-mlops-demo/worker:baseline-20261017105931"
+                                }
+                 },
+    "limits":  [
+                   "This is an operational service exercise, not model-quality promotion.",
+                   "Local image IDs identify content; tags are mutable and no remote registry deployment occurred."
+               ],
+    "exercised_at":  "2026-10-17T09:01:10.2700634Z",
+    "candidate":  {
+                      "dispatcher":  {
+                                         "image_id":  "sha256:155b961fc817b8f3bc1abe852605e02cb9c05828191ec2a9355330cd585a6fb5",
+                                         "tag":  "video-mlops-demo/dispatcher:candidate-20261017105931"
+                                     },
+                      "api":  {
+                                  "image_id":  "sha256:867db18a8dd07c87932f2e64a6d360a8e218a0793c6b85e90d3a324846e0cbe9",
+                                  "tag":  "video-mlops-demo/api:candidate-20261017105931"
+                              },
+                      "worker":  {
+                                     "image_id":  "sha256:2c1d5f9baec5a9200ae81c319630fa86e2d8fb51461bd7a3a73f010d6c7f223e",
+                                     "tag":  "video-mlops-demo/worker:candidate-20261017105931"
+                                 }
+                  },
+    "baseline_job_id":  "c6480cee-8265-4fee-a447-065e7a9f6010"
+}

@@ -1,0 +1,25 @@
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    environment:
+      VIDEO_USE_FAKE_INFERENCE: "false"
+      VIDEO_MODEL_NAME: HuggingFaceTB/SmolVLM2-500M-Video-Instruct
+      VIDEO_MODEL_REVISION: 7b375e1b73b11138ff12fe22c8f2822d8fe03467
+      VIDEO_MAX_FRAMES: "4"
+      VIDEO_WORKER_SCRATCH_ROOT: /tmp/video-jobs
+      HF_HOME: /model-cache
+      HF_HUB_OFFLINE: "1"
+    volumes:
+      - type: bind
+        source: ${VIDEO_HF_CACHE:-${USERPROFILE}/.cache/huggingface}
+        target: /model-cache
+        read_only: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

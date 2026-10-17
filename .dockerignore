@@ -1,0 +1,15 @@
+.git
+.venv
+.uv-cache
+.work-tmp
+.service-test-work
+__pycache__
+**/__pycache__
+.pytest_cache
+data
+artifacts
+reports
+notebooks
+images
+assets
+.env

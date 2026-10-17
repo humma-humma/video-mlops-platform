@@ -1,0 +1,81 @@
+{
+  "suite": "data/outputs/quality-suite/2da0a29dd0ed47bcabf0017136eb55d8",
+  "comparison_sha256": "7b9213e80c3829b89696f8a5b1c5db4f295d5b9b848e2102c24c7e08aaa18259",
+  "verification": "All three reports, selected IDs, source/runner hashes, manifest hash, runtime, scorer, prediction journals, coverage and reported category/error metrics verified.",
+  "experiments": [
+    {
+      "name": "development-2.2b-baseline",
+      "report": "data/outputs/quality-suite/2da0a29dd0ed47bcabf0017136eb55d8/baseline/e648eb6b8ac242edbb2352cace77043e/report.json",
+      "report_sha256": "334063902076d50c07cf424a0b6eb4fd232d5bd42952ae60aabb817dda5d3c1c",
+      "attempted": 23,
+      "succeeded": 20,
+      "failed": 3,
+      "correct_category_count": 4,
+      "category_accuracy_all_attempted": 0.17391304347826086,
+      "category_accuracy_successful_only": 0.2,
+      "metrics": {
+        "error_rate": 0.13043478260869565,
+        "peak_gpu_memory_bytes": 6807667200,
+        "inference_seconds": 894.8832794550035,
+        "model_load_seconds": 253.27073284299695,
+        "input_preparation_seconds": 0.07525249299942516,
+        "category_accuracy": 0.2,
+        "latency_p50_seconds": 10.236308619998454,
+        "latency_p95_seconds": 22.157737581997935,
+        "bertscore_f1": 0.9866595268249512
+      }
+    },
+    {
+      "name": "development-2.2b-fewer-frames",
+      "report": "data/outputs/quality-suite/2da0a29dd0ed47bcabf0017136eb55d8/fewer-frames/9a3d87a475be4cbda6db618650b940f5/report.json",
+      "report_sha256": "9ff95a01e2ae57a1e842aa0cc152f520d5d599e98301c6267d79dddfd4bd3954",
+      "attempted": 23,
+      "succeeded": 19,
+      "failed": 4,
+      "correct_category_count": 4,
+      "category_accuracy_all_attempted": 0.17391304347826086,
+      "category_accuracy_successful_only": 0.21052631578947367,
+      "metrics": {
+        "error_rate": 0.17391304347826086,
+        "peak_gpu_memory_bytes": 6500282368,
+        "inference_seconds": 300.49096453499806,
+        "model_load_seconds": 210.93935623700236,
+        "input_preparation_seconds": 0.08630006099701859,
+        "category_accuracy": 0.21052631578947367,
+        "latency_p50_seconds": 11.118762682002853,
+        "latency_p95_seconds": 40.08841506599856,
+        "bertscore_f1": 0.9871379733085632
+      }
+    },
+    {
+      "name": "development-2.2b-combined",
+      "report": "data/outputs/quality-suite/2da0a29dd0ed47bcabf0017136eb55d8/combined/5bc86c7007004a88a1a3db1bd9f16552/report.json",
+      "report_sha256": "d22a38db9dd1189730740b11767928f75f6e46b59d51a62b09a511774dbd5604",
+      "attempted": 23,
+      "succeeded": 6,
+      "failed": 17,
+      "correct_category_count": 2,
+      "category_accuracy_all_attempted": 0.08695652173913043,
+      "category_accuracy_successful_only": 0.3333333333333333,
+      "metrics": {
+        "error_rate": 0.7391304347826086,
+        "peak_gpu_memory_bytes": 6801059840,
+        "inference_seconds": 109.97820749099628,
+        "model_load_seconds": 209.72153038599936,
+        "input_preparation_seconds": 0.09555704100057483,
+        "category_accuracy": 0.3333333333333333,
+        "latency_p50_seconds": 4.72657245350274,
+        "latency_p95_seconds": 5.34802177399979,
+        "bertscore_f1": 0.9802520871162415
+      }
+    }
+  ],
+  "decision": "Do not promote either optimization; no reviewed production gate policy exists.",
+  "limitations": [
+    "23-video stratified development subset; no representative production acceptance claim.",
+    "BERTScore and latency percentiles cover successful outputs only; success sets differ, so headline scores are not paired comparisons.",
+    "All-layer unrescaled BERTScore is not calibrated for factual quality; high scores do not establish correctness.",
+    "Wall-clock inference includes decoding and failure work; sequential runs can differ in host cache state.",
+    "No immutable benchmark container image digest is recorded in the experiment reports."
+  ]
+}

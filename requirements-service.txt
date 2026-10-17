@@ -1,4 +1,6 @@
 celery[redis]>=5.4
+boto3>=1.35
+alembic>=1.14,<2
 fastapi>=0.115
 psycopg[binary]>=3.2
 pydantic-settings>=2.6

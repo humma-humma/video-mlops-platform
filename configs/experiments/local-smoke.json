@@ -1,0 +1,9 @@
+{
+  "name": "local-500m-smoke",
+  "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+  "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "video_ids": ["7203774185322188037"],
+  "max_frames": 4,
+  "strategy": "per_video_two_pass",
+  "evaluate_summary": false
+}

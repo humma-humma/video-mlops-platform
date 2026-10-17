@@ -1,0 +1,49 @@
+{
+  "suite": "data/outputs/quality-diagnostics/440d0c1c873d42f0bd481c99625fe557",
+  "diagnostics_sha256": "90ad9aa1f52b9f814ccb939419b06cfe0d9f89bceadcf3b442d4f69dc8a0a55e",
+  "verification": "Report/source/runner/config/sample/manifest hashes, full journal coverage, category counts and byte-identical scorer control reuse verified.",
+  "experiments": [
+    {
+      "name": "diagnostic-constrained-category",
+      "report": "data/outputs/quality-diagnostics/440d0c1c873d42f0bd481c99625fe557/constrained-category/f9410fa298ea438ba689fb5bfebdd55d/report.json",
+      "sha256": "7a6e02bed30e1269701c8023e75d6d75554c8f96f54e283d047fec8900508eed",
+      "succeeded": 4,
+      "failed": 0,
+      "correct": 2,
+      "sample_count": 4,
+      "metrics": {
+        "error_rate": 0.0,
+        "peak_gpu_memory_bytes": 4936869888,
+        "inference_seconds": 30.046418748010183,
+        "model_load_seconds": 197.97186836699257,
+        "input_preparation_seconds": 0.010533104999922216,
+        "category_accuracy": 0.5,
+        "prediction_coverage": 1.0,
+        "category_accuracy_all_attempted": 0.5,
+        "latency_p50_seconds": 7.812619600495964,
+        "latency_p95_seconds": 9.063737515010871
+      }
+    },
+    {
+      "name": "diagnostic-combined-raw",
+      "report": "data/outputs/quality-diagnostics/440d0c1c873d42f0bd481c99625fe557/combined-raw/a2fe15b0c5954ea5ab498679c272f00c/report.json",
+      "sha256": "d9f500fec36597ac2d729f42c1dbafad337d5b8f28bb2c2b4c7e01940383378e",
+      "succeeded": 0,
+      "failed": 4,
+      "correct": 0,
+      "sample_count": 4,
+      "metrics": {
+        "error_rate": 1.0,
+        "peak_gpu_memory_bytes": 4936869888,
+        "inference_seconds": 7.012322896000114,
+        "model_load_seconds": 125.69917379799881,
+        "input_preparation_seconds": 0.010668961011106148,
+        "prediction_coverage": 0.0,
+        "category_accuracy_all_attempted": 0.0
+      }
+    }
+  ],
+  "decision": "Category-output reliability fixed on this four-video diagnostic set; accuracy remains unresolved. Combined JSON remains rejected. No promotion.",
+  "next": "Evaluate constrained two-pass generation at four and two frames on all 23 fixed development videos using layer-17 scoring; representative held-out review still required.",
+  "promoted": false
+}

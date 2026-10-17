@@ -1,0 +1,9 @@
+# Only used by the controlled local rollback exercise. Tags are assigned to
+# already-built image IDs by scripts/release_demo.ps1; no source is rebuilt here.
+services:
+  api:
+    image: ${VIDEO_RELEASE_API_IMAGE:?Set VIDEO_RELEASE_API_IMAGE}
+  dispatcher:
+    image: ${VIDEO_RELEASE_DISPATCHER_IMAGE:?Set VIDEO_RELEASE_DISPATCHER_IMAGE}
+  worker:
+    image: ${VIDEO_RELEASE_WORKER_IMAGE:?Set VIDEO_RELEASE_WORKER_IMAGE}

@@ -1,0 +1,127 @@
+{
+  "runs": [
+    {
+      "job_id": "c6480cee-8265-4fee-a447-065e7a9f6010",
+      "status": "SUCCEEDED",
+      "result": {
+        "schema_version": "1",
+        "video_id": "gpu-smoke",
+        "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white and black computer mouse, which is placed on the floor. The text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will do the best I can, like everyone else) appears at the bottom of the screen, indicating a motivational quote. The person then moves towards the door, which is marked with a green arrow, and opens it. The text \"Vor der Abschlusspr\u00fcfung\" (Before the test) appears at the bottom of the",
+        "category": "Entertainment & Shows",
+        "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+        "timings": {
+          "model_load": 31.983361889026128,
+          "input_preparation": 8.400401566177607e-05,
+          "summary": 10.079223920009099,
+          "category": 1.0660838390467688,
+          "inference_total": 11.145546070998535,
+          "input_download": 0.015919408993795514,
+          "total": 52.197861076914705
+        },
+        "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+        "lineage": {
+          "source_files": {
+            "src/config.py": "8606bda860910c301afdffa8473a056440e3e381a65c9905ae70f1bbb747c0c7",
+            "src/pipeline.py": "ac9d74604b2177c566a6832a71b3d5c96e11bf08b3275513ba9a407462e81b8b",
+            "src/inference_utils.py": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+            "src/decoding.py": "0523c989d64f22c7acda902849ca420f81fd86e1e74436a29c8e43c2f5efef89",
+            "src/model_utils.py": "32769d1dde94751322534f7b71265ce25f775d778941fe0451ebdbd3e5afbc4f",
+            "src/category_utils.py": "cf4b7fb12a8219a59596944d8d2a4db83cdb1cda0b3f0c41fb11a0f315bb562d",
+            "src/taxonomy.py": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+            "src/service/inference.py": "37038eb796341dce0d7b7f5764e0a7184da21f908cf1b9392e04d8298164d159",
+            "src/lineage.py": "2697f36785a9b2b82642fb82764dc97495cba844cb9244d22c6ba989a83be09d",
+            "src/experiments.py": "1edb161d4d4290ffa4b48d6fc1351a3deab8df738da5621460bbd28a760bdccc",
+            "src/evaluation_utils.py": "75298fdd381a9f2c0052a58fc225435a1cea683e8c06032ad52dc82b944edd00"
+          },
+          "code_hash": "a5754dd86820a435556ed0c0e4baaa8104132f63245f72653dcb258850fdb4ad",
+          "prompt_version": "video-prompts-v1",
+          "prompt_hash": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+          "taxonomy_hash": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+          "inference_config": {
+            "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+            "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+            "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+            "max_frames": 4,
+            "model_dtype": "auto",
+            "use_kv_cache": true,
+            "inference_strategy": "per_video_two_pass",
+            "decoder": "torchcodec"
+          },
+          "inference_config_hash": "7208bad081532771f3f4c6a906b00769f612223f9f9f36b893f1c7c0371e1552"
+        },
+        "taxonomy_version": "tiktok-video-v1",
+        "model_instance_id": "8e6edab5-bfbc-4083-b65a-56f0859eb086",
+        "transcript_source": "provided",
+        "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+        "transcript_sha256": "0776ef2d100716b1f0613fdb30b3315cd66c8b017aa3f665419da07cbe9212d6",
+        "attempt_id": "bb96523e-b07b-4ddf-9b26-e98e579b12eb",
+        "trace_id": "d85254e5d6bc4af18d075001a38b753e"
+      },
+      "error": null,
+      "created_at": "2026-10-17T08:32:15.786510Z",
+      "finished_at": "2026-10-17T08:33:08.544393Z"
+    },
+    {
+      "job_id": "8bf25cba-35b5-46e9-8ddc-ec6815f7e0d6",
+      "status": "SUCCEEDED",
+      "result": {
+        "schema_version": "1",
+        "video_id": "gpu-smoke",
+        "summary": "The video features a person in a dark sweater and gray pants, standing in a room with a wooden floor and a white door. The person is seen using a white and black computer mouse, which is placed on the floor. The text \"Ich will der Allerbeste sein, wie keiner vor mir war.\" (I will do the best I can, like everyone else) appears at the bottom of the screen, indicating a motivational quote. The person then moves towards the door, which is marked with a green arrow, and opens it. The text \"Vor der Abschlusspr\u00fcfung\" (Before the test) appears at the bottom of the",
+        "category": "Entertainment & Shows",
+        "model_version": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+        "timings": {
+          "model_load": 0.0,
+          "input_preparation": 3.330199979245663e-05,
+          "summary": 8.777935034013353,
+          "category": 1.0857402270194143,
+          "inference_total": 9.863770165015012,
+          "input_download": 0.015272101038135588,
+          "total": 9.882701288093813
+        },
+        "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+        "lineage": {
+          "source_files": {
+            "src/config.py": "8606bda860910c301afdffa8473a056440e3e381a65c9905ae70f1bbb747c0c7",
+            "src/pipeline.py": "ac9d74604b2177c566a6832a71b3d5c96e11bf08b3275513ba9a407462e81b8b",
+            "src/inference_utils.py": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+            "src/decoding.py": "0523c989d64f22c7acda902849ca420f81fd86e1e74436a29c8e43c2f5efef89",
+            "src/model_utils.py": "32769d1dde94751322534f7b71265ce25f775d778941fe0451ebdbd3e5afbc4f",
+            "src/category_utils.py": "cf4b7fb12a8219a59596944d8d2a4db83cdb1cda0b3f0c41fb11a0f315bb562d",
+            "src/taxonomy.py": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+            "src/service/inference.py": "37038eb796341dce0d7b7f5764e0a7184da21f908cf1b9392e04d8298164d159",
+            "src/lineage.py": "2697f36785a9b2b82642fb82764dc97495cba844cb9244d22c6ba989a83be09d",
+            "src/experiments.py": "1edb161d4d4290ffa4b48d6fc1351a3deab8df738da5621460bbd28a760bdccc",
+            "src/evaluation_utils.py": "75298fdd381a9f2c0052a58fc225435a1cea683e8c06032ad52dc82b944edd00"
+          },
+          "code_hash": "a5754dd86820a435556ed0c0e4baaa8104132f63245f72653dcb258850fdb4ad",
+          "prompt_version": "video-prompts-v1",
+          "prompt_hash": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+          "taxonomy_hash": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540",
+          "inference_config": {
+            "model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+            "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+            "processor_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+            "max_frames": 4,
+            "model_dtype": "auto",
+            "use_kv_cache": true,
+            "inference_strategy": "per_video_two_pass",
+            "decoder": "torchcodec"
+          },
+          "inference_config_hash": "7208bad081532771f3f4c6a906b00769f612223f9f9f36b893f1c7c0371e1552"
+        },
+        "taxonomy_version": "tiktok-video-v1",
+        "model_instance_id": "8e6edab5-bfbc-4083-b65a-56f0859eb086",
+        "transcript_source": "provided",
+        "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+        "transcript_sha256": "0776ef2d100716b1f0613fdb30b3315cd66c8b017aa3f665419da07cbe9212d6",
+        "attempt_id": "1f2e858e-33a0-40f4-82e6-052b0c5d06c5",
+        "trace_id": "5aeb91ff5d5b4624b952c0a5afc7be4e"
+      },
+      "error": null,
+      "created_at": "2026-10-17T08:33:11.865053Z",
+      "finished_at": "2026-10-17T08:33:21.794153Z"
+    }
+  ],
+  "model_reused": true
+}
