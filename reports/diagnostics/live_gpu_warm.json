@@ -1,0 +1,80 @@
+{
+  "bundle_sha256": "16cb135aa86b4128ce759bc9661bb1dc654870d0285b9a66fd7de655cce423ff",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": null,
+        "finished_at": "2026-10-17T08:33:21.794153+00:00",
+        "number": 1,
+        "started_at": "2026-10-17T08:33:11.878245+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-17T22:36:32.831896+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "video-summary-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:33:11.865053+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:33:11.876596+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:33:11.879667+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:33:21.795425+00:00"
+      }
+    ],
+    "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+    "lineage_hashes": {
+      "code_hash": "a5754dd86820a435556ed0c0e4baaa8104132f63245f72653dcb258850fdb4ad",
+      "inference_config_hash": "7208bad081532771f3f4c6a906b00769f612223f9f9f36b893f1c7c0371e1552",
+      "prompt_hash": "7d621db6a37ae6cdf61f0601fbc85fb42f48c302ba8c762ad95e429442ec9b90",
+      "taxonomy_hash": "22a152e6e681b3dcd4a44e89aaef043817a74d8faad203353fd92c3e8b2be540"
+    },
+    "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "status": "SUCCEEDED",
+    "timings_seconds": {
+      "category": 1.0857402270194143,
+      "inference_total": 9.863770165015012,
+      "input_download": 0.015272101038135588,
+      "input_preparation": 3.330199979245663e-05,
+      "model_load": 0.0,
+      "summary": 8.777935034013353,
+      "total": 9.882701288093813
+    }
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "a55c35bdb552e7d4d01a723b18e9ef4cd1e97403e7fc09b716cc4f38f286a367",
+    "events": "40f0394769ee139af27e390d175974f094aeebfe06473b399a5bf48442e6916b",
+    "job": "45aff649aecc24c05de5904f02478825c2e82f6ec0922f86290eeb68d632e564",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "2178d6ecbc1fca5eb794c7567d7e6c4c10cca0ad0e7f1cc5d25d013973d0516b"
+  }
+}

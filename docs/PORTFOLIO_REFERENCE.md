@@ -431,7 +431,11 @@ every interview. The reviewer should be able to trace each claim to its artifact
 
 ## 10. Future product idea: restricted-access inference diagnostics
 
-**Status: deferred concept, not implemented or required for the current demo.**
+**Status: bounded offline pilot started 2026-10-18; the broader product remains deferred.**
+The [pilot runbook](DIAGNOSTIC_WORKBENCH.md) documents a read-only evidence exporter,
+two recorded incident sources, report-derived variants and a deterministic
+evaluation. It does not establish diagnosis quality on independent incidents or
+grant an agent access to any environment.
 Feasibility, ROI and ETA analysis (2026-10-12):
 [DIAGNOSTIC_WORKBENCH_FEASIBILITY.md](DIAGNOSTIC_WORKBENCH_FEASIBILITY.md).
 

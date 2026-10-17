@@ -1,0 +1,104 @@
+{
+  "abstentions": 5,
+  "by_split": {
+    "development": {
+      "correct": 2,
+      "total": 2
+    },
+    "held_out": {
+      "correct": 6,
+      "total": 6
+    }
+  },
+  "case_manifest_sha256": "9cc1a34ee4e0ffba864227e9417cf8bee51f69420c3b910573fab38e3fe55378",
+  "cases": [
+    {
+      "bundle_sha256": "3d6faef92a6a222ad969e36aeb6fe822ab05491109dc4899c59e62dedb89fb2e",
+      "case_id": "recorded_worker_interruption",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "worker_interruption",
+      "origin": "recorded",
+      "predicted": "worker_interruption",
+      "split": "development"
+    },
+    {
+      "bundle_sha256": "06fd0bd28414dff80736a64b25ad913905b8ba810b368173090ed826d25f9714",
+      "case_id": "recorded_gpu_admission",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "gpu_admission_limit",
+      "origin": "recorded",
+      "predicted": "gpu_admission_limit",
+      "split": "development"
+    },
+    {
+      "bundle_sha256": "d457ed1cecb0d4c30f10ed9af951ab7bcdb4317854aa10156f421ff15d81b72f",
+      "case_id": "timeout_without_kill",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "synthetic_missing_evidence",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "fb4a27895a41cbee4a66a640469f6107b8f62d6d90fc06aea7c4aef29cbd2c9a",
+      "case_id": "kill_without_timeout",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "synthetic_missing_evidence",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "c2a179c431de1be883f6254c819f9dd957fe72f649479eb255f28bcdbbb9c2e8",
+      "case_id": "kill_after_timeout",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "synthetic_temporal_confounder",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "76e2dac15e10c9cb4a1958ebc0187988d19b0a196fbd3acd878d8574a8a97a20",
+      "case_id": "rejection_below_capacity",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "synthetic_confounded_rejection",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "573be9baf210c39955e0b08bbc9e1f8f5399ad32a05f6eff11e1af22f754bed7",
+      "case_id": "rejection_without_capacity",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "synthetic_missing_evidence",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "312782c7b143a8566fb154ac7c331c970f5b13c922d38832fc0f476d6b42aea2",
+      "case_id": "admission_without_drain_probe",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "gpu_admission_limit",
+      "origin": "synthetic_missing_evidence",
+      "predicted": "gpu_admission_limit",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 3,
+  "correct": 8,
+  "false_confident": 0,
+  "rules_sha256": "c2449c41196bcc592abd8f5b8046e1da6d36295428563a2e393dbdb57012aa40",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Small pilot with report-derived variants; not independent generalization evidence",
+  "total": 8
+}

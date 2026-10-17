@@ -1,0 +1,84 @@
+{
+  "comparable": true,
+  "deployment_id": "video-summary-v1",
+  "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+  "interpretation_limit": "Timing differences alone do not identify a cause; GPU and host conditions may differ.",
+  "lineage_hashes_equal": true,
+  "model_revision_equal": true,
+  "stage_differences": {
+    "category": {
+      "baseline_seconds": 1.0660838390467688,
+      "candidate_seconds": 1.0857402270194143,
+      "citations": [
+        "baseline.observations.timings_seconds.category",
+        "candidate.observations.timings_seconds.category"
+      ],
+      "delta_seconds": 0.01965638797264546,
+      "ratio": 1.0184379382302813
+    },
+    "inference_total": {
+      "baseline_seconds": 11.145546070998535,
+      "candidate_seconds": 9.863770165015012,
+      "citations": [
+        "baseline.observations.timings_seconds.inference_total",
+        "candidate.observations.timings_seconds.inference_total"
+      ],
+      "delta_seconds": -1.2817759059835225,
+      "ratio": 0.8849965808926321
+    },
+    "input_download": {
+      "baseline_seconds": 0.015919408993795514,
+      "candidate_seconds": 0.015272101038135588,
+      "citations": [
+        "baseline.observations.timings_seconds.input_download",
+        "candidate.observations.timings_seconds.input_download"
+      ],
+      "delta_seconds": -0.0006473079556599259,
+      "ratio": 0.9593384430343984
+    },
+    "input_preparation": {
+      "baseline_seconds": 8.400401566177607e-05,
+      "candidate_seconds": 3.330199979245663e-05,
+      "citations": [
+        "baseline.observations.timings_seconds.input_preparation",
+        "candidate.observations.timings_seconds.input_preparation"
+      ],
+      "delta_seconds": -5.070201586931944e-05,
+      "ratio": 0.3964334267844992
+    },
+    "model_load": {
+      "baseline_seconds": 31.983361889026128,
+      "candidate_seconds": 0.0,
+      "citations": [
+        "baseline.observations.timings_seconds.model_load",
+        "candidate.observations.timings_seconds.model_load"
+      ],
+      "delta_seconds": -31.983361889026128,
+      "ratio": 0.0
+    },
+    "summary": {
+      "baseline_seconds": 10.079223920009099,
+      "candidate_seconds": 8.777935034013353,
+      "citations": [
+        "baseline.observations.timings_seconds.summary",
+        "candidate.observations.timings_seconds.summary"
+      ],
+      "delta_seconds": -1.3012888859957457,
+      "ratio": 0.8708939402157293
+    },
+    "total": {
+      "baseline_seconds": 52.197861076914705,
+      "candidate_seconds": 9.882701288093813,
+      "citations": [
+        "baseline.observations.timings_seconds.total",
+        "candidate.observations.timings_seconds.total"
+      ],
+      "delta_seconds": -42.31515978882089,
+      "ratio": 0.1893315374270113
+    }
+  },
+  "statuses": [
+    "SUCCEEDED",
+    "SUCCEEDED"
+  ]
+}

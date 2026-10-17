@@ -1,0 +1,112 @@
+{
+  "bundle_sha256": "c2a179c431de1be883f6254c819f9dd957fe72f649479eb255f28bcdbbb9c2e8",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": "timeout",
+        "finished_at": "2026-10-17T08:53:54.802378+00:00",
+        "number": 1,
+        "started_at": "2026-10-17T08:48:45.844273+00:00",
+        "status": "FAILED"
+      },
+      {
+        "error_code": null,
+        "finished_at": "2026-10-17T08:54:23.209825+00:00",
+        "number": 2,
+        "started_at": "2026-10-17T08:53:56.514222+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:48:44.143950+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:48:44.166182+00:00"
+      },
+      {
+        "event": "submitted",
+        "generation": null,
+        "timestamp": "2026-10-17T08:48:44.173087+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:48:45.845805+00:00"
+      },
+      {
+        "event": "running",
+        "generation": null,
+        "timestamp": "2026-10-17T08:48:45.927263+00:00"
+      },
+      {
+        "event": "worker_killed",
+        "generation": null,
+        "timestamp": "2026-10-17T08:54:00+00:00"
+      },
+      {
+        "event": "worker_restarted",
+        "generation": null,
+        "timestamp": "2026-10-17T08:48:47.116182+00:00"
+      },
+      {
+        "event": "job_status",
+        "generation": null,
+        "timestamp": "2026-10-17T08:48:47.122065+00:00"
+      },
+      {
+        "event": "deadline_exceeded",
+        "generation": 0,
+        "timestamp": "2026-10-17T08:53:54.806032+00:00"
+      },
+      {
+        "event": "job_status",
+        "generation": null,
+        "timestamp": "2026-10-17T08:53:56.453095+00:00"
+      },
+      {
+        "event": "retry_requested",
+        "generation": 1,
+        "timestamp": "2026-10-17T08:53:56.475442+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 1,
+        "timestamp": "2026-10-17T08:53:56.504005+00:00"
+      },
+      {
+        "event": "explicit_retry_requested",
+        "generation": null,
+        "timestamp": "2026-10-17T08:53:56.514351+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 1,
+        "timestamp": "2026-10-17T08:53:56.548572+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 1,
+        "timestamp": "2026-10-17T08:54:23.212459+00:00"
+      }
+    ],
+    "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+    "model_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "status": "SUCCEEDED",
+    "timings_seconds": {}
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "synthetic_variant",
+  "source_sha256": {
+    "parent_bundle": "3d6faef92a6a222ad969e36aeb6fe822ab05491109dc4899c59e62dedb89fb2e"
+  }
+}

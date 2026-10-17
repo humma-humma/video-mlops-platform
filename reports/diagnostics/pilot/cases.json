@@ -1,0 +1,62 @@
+{
+  "cases": [
+    {
+      "bundle": "recorded_worker_interruption.json",
+      "expected": "worker_interruption",
+      "id": "recorded_worker_interruption",
+      "origin": "recorded",
+      "split": "development"
+    },
+    {
+      "bundle": "recorded_gpu_admission.json",
+      "expected": "gpu_admission_limit",
+      "id": "recorded_gpu_admission",
+      "origin": "recorded",
+      "split": "development"
+    },
+    {
+      "bundle": "timeout_without_kill.json",
+      "expected": "insufficient_evidence",
+      "id": "timeout_without_kill",
+      "origin": "synthetic_missing_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle": "kill_without_timeout.json",
+      "expected": "insufficient_evidence",
+      "id": "kill_without_timeout",
+      "origin": "synthetic_missing_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle": "kill_after_timeout.json",
+      "expected": "insufficient_evidence",
+      "id": "kill_after_timeout",
+      "origin": "synthetic_temporal_confounder",
+      "split": "held_out"
+    },
+    {
+      "bundle": "rejection_below_capacity.json",
+      "expected": "insufficient_evidence",
+      "id": "rejection_below_capacity",
+      "origin": "synthetic_confounded_rejection",
+      "split": "held_out"
+    },
+    {
+      "bundle": "rejection_without_capacity.json",
+      "expected": "insufficient_evidence",
+      "id": "rejection_without_capacity",
+      "origin": "synthetic_missing_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle": "admission_without_drain_probe.json",
+      "expected": "gpu_admission_limit",
+      "id": "admission_without_drain_probe",
+      "origin": "synthetic_missing_evidence",
+      "split": "held_out"
+    }
+  ],
+  "limits": "Variants derive from two recorded local incidents; held-out means withheld from the simple rules, not an independent incident population.",
+  "schema_version": "diagnostic-cases-v1"
+}

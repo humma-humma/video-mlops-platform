@@ -1,0 +1,71 @@
+{
+  "bundle_sha256": "bb43dffde9863eddd5f207d1b7361d028c0de701f304e8262700fc6f082f149a",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": null,
+        "finished_at": "2026-10-17T21:29:02.535968+00:00",
+        "number": 1,
+        "started_at": "2026-10-17T21:29:02.045573+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-17T22:36:32.813129+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "text-topic-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-17T21:29:02.005401+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-17T21:29:02.033159+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-17T21:29:02.103314+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 0,
+        "timestamp": "2026-10-17T21:29:02.538479+00:00"
+      }
+    ],
+    "input_sha256": "9ac1175af88d4a5496e8da2ad1a1cf1b286e02497fbf812bbc2773d0cc0fec5a",
+    "lineage_hashes": {},
+    "model_revision": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+    "status": "SUCCEEDED",
+    "timings_seconds": {
+      "inference_total": 0.0005012219771742821,
+      "input_download": 0.010006348951719701,
+      "total": 0.011622722027823329
+    }
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "6341ccac0b52f31b389afd8b1672771cb34a29ce97cd38835d34278a1125b9b2",
+    "events": "a6f639a75846ba25ecfc11067a69f7de6c9d04121311b533b5eac252b1e8003f",
+    "job": "f6b95fd14da0ec6a4144461cd18f5f9b47c1d1fbf9af0505200c4b7e5fc0fbe0",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "2a5b8501eb1a45624d6699a443fc9ef459ed332dc2cb536d5977abe0fe370f41"
+  }
+}

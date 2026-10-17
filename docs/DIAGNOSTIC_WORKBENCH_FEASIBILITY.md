@@ -4,6 +4,12 @@
 - **Status:** analysis of the deferred concept in [PORTFOLIO_REFERENCE.md §10](PORTFOLIO_REFERENCE.md#10-future-product-idea-restricted-access-inference-diagnostics); does not change the current plan
 - **Live copy:** [Claude doc](https://claude.ai/code/artifact/cccc26ca-2931-4fef-a22e-65299d8c1131)
 
+**2026-10-18 implementation update:** a first [offline pilot](DIAGNOSTIC_WORKBENCH.md)
+now exports bounded evidence from recorded reports and existing service jobs,
+and evaluates simple deterministic rules. The timeline and market estimates below
+were made before that implementation; the eight report-derived pilot cases are
+not independent diagnosis-quality evidence.
+
 ## Verdict
 
 Build it as a narrow portfolio piece, not as a product, and only after demo phases A–E are complete. Generic AI incident diagnosis is crowded and well funded. The open angle is GPU-inference-specific diagnosis backed by an honest evaluation harness: injected ground truth, held-out variants, and measured citation accuracy and abstention.
