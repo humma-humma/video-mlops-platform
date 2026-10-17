@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     redispatch_after_seconds: int = Field(default=120, ge=10)
     request_rate_limit_per_minute: int = Field(default=600, ge=0)
     max_outstanding_jobs: int = Field(default=2, ge=1)
+    max_cpu_outstanding_jobs: int = Field(default=8, ge=1)
     validate_media: bool = True
     max_video_duration_seconds: float = Field(default=600, gt=0)
     ffprobe_timeout_seconds: int = Field(default=15, ge=1)

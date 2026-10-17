@@ -19,7 +19,7 @@ async function refresh() {
   el("counts").replaceChildren();
   if (results[1].status === "fulfilled") {
     for (const line of results[1].value.split("\n")) {
-      if (/^video_jobs\{|^video_oldest_queued_job_seconds\s/.test(line)) {
+      if (/^model_jobs\{|^video_oldest_queued_job_seconds\s/.test(line)) {
         const card = document.createElement("span"); card.textContent = line; el("counts").append(card);
       }
     }
@@ -29,7 +29,7 @@ async function refresh() {
     const jobs = results[2].value.jobs || results[2].value;
     if (Array.isArray(jobs)) for (const job of jobs) {
       const row = document.createElement("tr");
-      for (const value of [job.job_id || job.id, job.status, job.created_at]) {
+      for (const value of [job.job_id || job.id, job.deployment_id || "video-summary-v1", job.status, job.created_at]) {
         const cell = document.createElement("td"); cell.textContent = value ?? "—"; row.append(cell);
       }
       el("jobs").append(row);

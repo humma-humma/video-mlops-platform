@@ -82,7 +82,14 @@ services:
     restart: unless-stopped
   worker:
     build: .
-    command: ["celery", "-A", "src.service.tasks", "worker", "--loglevel=INFO", "--concurrency=1"]
+    command: ["celery", "-A", "src.service.tasks", "worker", "--loglevel=INFO", "--concurrency=1", "--queues=video-inference"]
+    environment: *service-environment
+    volumes: ["artifacts:/artifacts"]
+    depends_on: *service-dependencies
+    restart: unless-stopped
+  cpu-worker:
+    build: .
+    command: ["celery", "-A", "src.service.tasks", "worker", "--loglevel=INFO", "--concurrency=1", "--queues=cpu-inference"]
     environment: *service-environment
     volumes: ["artifacts:/artifacts"]
     depends_on: *service-dependencies

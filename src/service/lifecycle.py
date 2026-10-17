@@ -7,6 +7,7 @@ from .db import SessionLocal
 from .models import Job, JobAttempt, JobEvent
 from .storage import ArtifactStorageError
 from . import telemetry
+from .deployments import DEPLOYMENTS, get_deployment
 
 def record_event(db, job, name, attempt_id=None):
     db.add(JobEvent(job_id=job.id, generation=job.generation, event=name, trace_id=job.trace_id))
@@ -20,7 +21,11 @@ def dispatch_job(job_id: str, generation: int) -> bool:
         if job is None or job.status != "QUEUED" or job.generation != generation:
             return False
     try:
-        process_job.delay(job_id, generation)
+        deployment = get_deployment(job.deployment_id)
+        if deployment.input_kind == "video":
+            process_job.delay(job_id, generation)
+        else:
+            process_job.apply_async(args=(job_id, generation), queue=deployment.queue)
     except Exception:
         # The job itself is the durable outbox. The dispatcher will retry it.
         with SessionLocal() as db:
@@ -75,10 +80,12 @@ def retry_dependencies() -> int:
         # dependency retries from silently exceeding the GPU backlog limit.
         if db.get_bind().dialect.name == "postgresql":
             db.execute(text("SELECT pg_advisory_xact_lock(84192736)"))
-        available = settings.max_outstanding_jobs - db.scalar(
-            select(func.count()).select_from(Job).where(Job.status.in_(("PENDING", "QUEUED", "RUNNING"))))
-        if available <= 0:
-            return 0
+        outstanding = dict(db.execute(select(Job.deployment_id, func.count()).where(
+            Job.status.in_(("PENDING", "QUEUED", "RUNNING"))).group_by(Job.deployment_id)))
+        available = {"cpu": settings.max_cpu_outstanding_jobs, "gpu": settings.max_outstanding_jobs}
+        for name, count in outstanding.items():
+            if name in DEPLOYMENTS:
+                available[DEPLOYMENTS[name].resource] -= count
         jobs = db.scalars(select(Job).join(JobAttempt, JobAttempt.job_id == Job.id).where(
             Job.status == "FAILED", Job.attempts < settings.max_job_attempts,
             JobAttempt.generation == Job.generation, JobAttempt.error_code == "dependency",
@@ -86,14 +93,16 @@ def retry_dependencies() -> int:
         )).all()
         count = 0
         for job in jobs:
-            if count >= available:
-                break
+            resource = get_deployment(job.deployment_id).resource
+            if available.get(resource, 0) <= 0:
+                continue
             changed = db.execute(update(Job).where(
                 Job.id == job.id, Job.status == "FAILED", Job.generation == job.generation,
             ).values(status="QUEUED", generation=Job.generation + 1, dispatched_at=None,
                      started_at=None, finished_at=None, error_message=None, result_path=None))
             if changed.rowcount:
                 record_event(db, job, "dependency_retry_requested")
+                available[resource] -= 1
                 count += 1
         db.commit()
     return count
@@ -101,7 +110,8 @@ def retry_dependencies() -> int:
 def classify_failure(error):
     name = type(error).__name__
     if isinstance(error, FileNotFoundError):
-        return "missing_input", "Input video artifact is missing"
+        return "missing_input", ("Input video artifact is missing" if "video" in str(error)
+                                 else "Input artifact is missing")
     if isinstance(error, ArtifactStorageError):
         return "dependency", "Artifact store request failed"
     if "TimeLimit" in name or isinstance(error, TimeoutError):

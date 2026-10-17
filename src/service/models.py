@@ -13,6 +13,7 @@ class Job(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
     status: Mapped[str] = mapped_column(String(20), default="PENDING", index=True)
     input_path: Mapped[str] = mapped_column(Text)
+    deployment_id: Mapped[str] = mapped_column(String(64), default="video-summary-v1", server_default="video-summary-v1")
     result_path: Mapped[str | None] = mapped_column(Text, nullable=True)
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
     attempts: Mapped[int] = mapped_column(Integer, default=0)

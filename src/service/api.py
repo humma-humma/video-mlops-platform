@@ -11,6 +11,7 @@ import time
 
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, Request, UploadFile
 from fastapi.responses import JSONResponse, Response
+from pydantic import BaseModel, Field
 from sqlalchemy import func, select, text, update
 from sqlalchemy.exc import IntegrityError
 
@@ -24,6 +25,7 @@ from .tasks import process_job
 from .lifecycle import dispatch_job, record_event
 from . import telemetry
 from .validation import UploadLimitMiddleware, validate_video
+from .deployments import DEPLOYMENTS, get_deployment
 from .demo_ui import install_demo
 
 
@@ -46,11 +48,16 @@ def lock_job_admission(db):
         db.execute(text("SELECT pg_advisory_xact_lock(84192736)"))
 
 
-def require_job_capacity(db):
+def require_job_capacity(db, deployment_id="video-summary-v1"):
+    deployment = get_deployment(deployment_id)
+    limit = (settings.max_cpu_outstanding_jobs if deployment.resource == "cpu"
+             else settings.max_outstanding_jobs)
+    resource_deployments = [name for name, item in DEPLOYMENTS.items()
+                            if item.resource == deployment.resource]
     outstanding = db.scalar(select(func.count()).select_from(Job).where(
-        Job.status.in_(OUTSTANDING_STATUSES)))
-    if outstanding >= settings.max_outstanding_jobs:
-        raise HTTPException(429, "GPU job capacity reached; retry later",
+        Job.status.in_(OUTSTANDING_STATUSES), Job.deployment_id.in_(resource_deployments)))
+    if outstanding >= limit:
+        raise HTTPException(429, "Job capacity reached; retry later",
                             headers={"Retry-After": "10"})
 
 def require_auth(x_api_key: str | None = Header(default=None)):
@@ -158,8 +165,77 @@ async def submit_job(video: UploadFile = File(...), transcript: str | None = For
                 return SubmissionResponse(job_id=previous.id, status=previous.status)
         require_job_capacity(db)
         job = Job(id=job_id, status="QUEUED", input_path=input_path, generation=0,
+                  deployment_id="video-summary-v1",
                   idempotency_key=idempotency_key, request_hash=request_hash,
                   trace_id=telemetry.trace_id.get())
+        db.add(job)
+        record_event(db, job, "submitted")
+        try:
+            db.commit()
+        except IntegrityError:
+            db.rollback()
+            previous = db.scalar(select(Job).where(Job.idempotency_key == idempotency_key)) if idempotency_key else None
+            if previous is None:
+                raise
+            if previous.request_hash != request_hash:
+                raise HTTPException(409, "Idempotency key was used with different input") from None
+            return SubmissionResponse(job_id=previous.id, status=previous.status)
+    dispatch_job(job_id, 0)
+    return SubmissionResponse(job_id=job_id, status="QUEUED")
+
+
+app.add_api_route("/api/v1/deployments/video-summary-v1/jobs", submit_job,
+                  methods=["POST"], response_model=SubmissionResponse, status_code=202,
+                  dependencies=[Depends(require_auth)])
+
+
+class TextSubmission(BaseModel):
+    text: str = Field(min_length=1, max_length=10_000)
+
+
+@app.get("/api/v1/deployments", dependencies=[Depends(require_auth)])
+def list_deployments():
+    return [{"deployment_id": item.deployment_id, "input_kind": item.input_kind,
+             "resource": item.resource, "queue": item.queue, **item.describe()}
+            for item in DEPLOYMENTS.values()]
+
+
+@app.post("/api/v1/deployments/{deployment_id}/jobs", response_model=SubmissionResponse,
+          status_code=202, dependencies=[Depends(require_auth)])
+def submit_deployment_job(deployment_id: str, payload: TextSubmission,
+                          idempotency_key: str | None = Header(default=None, min_length=1, max_length=128)):
+    adapter = DEPLOYMENTS.get(deployment_id)
+    if adapter is None:
+        raise HTTPException(404, "Deployment not found")
+    if adapter.input_kind != "text":
+        raise HTTPException(415, "This deployment requires a video upload via /api/v1/jobs")
+    if not payload.text.strip():
+        raise HTTPException(400, "Text is empty")
+    request_hash = hashlib.sha256(json.dumps([deployment_id, payload.text]).encode()).hexdigest()
+    if idempotency_key:
+        with SessionLocal() as db:
+            previous = db.scalar(select(Job).where(Job.idempotency_key == idempotency_key))
+            if previous:
+                if previous.request_hash != request_hash:
+                    raise HTTPException(409, "Idempotency key was used with different input")
+                return SubmissionResponse(job_id=previous.id, status=previous.status)
+    job_id = str(uuid4())
+    try:
+        input_path = ArtifactStore().put_bytes(f"inputs/{job_id}/input.txt", payload.text.encode())
+    except (ArtifactStorageError, OSError):
+        raise HTTPException(503, "Artifact storage unavailable") from None
+    with SessionLocal() as db:
+        lock_job_admission(db)
+        if idempotency_key:
+            previous = db.scalar(select(Job).where(Job.idempotency_key == idempotency_key))
+            if previous:
+                if previous.request_hash != request_hash:
+                    raise HTTPException(409, "Idempotency key was used with different input")
+                return SubmissionResponse(job_id=previous.id, status=previous.status)
+        require_job_capacity(db, deployment_id)
+        job = Job(id=job_id, status="QUEUED", input_path=input_path,
+                  deployment_id=deployment_id, generation=0, idempotency_key=idempotency_key,
+                  request_hash=request_hash, trace_id=telemetry.trace_id.get())
         db.add(job)
         record_event(db, job, "submitted")
         try:
@@ -186,15 +262,23 @@ def get_job(job_id: str) -> JobResponse:
             result = ArtifactStore().get_json(job.result_path) if job.result_path else None
         except (ArtifactStorageError, OSError):
             raise HTTPException(503, "Result artifact unavailable") from None
-        return JobResponse(job_id=job.id, status=job.status, result=result, error=job.error_message,
+        return JobResponse(job_id=job.id, deployment_id=job.deployment_id,
+                           status=job.status, result=result, error=job.error_message,
                            created_at=job.created_at, finished_at=job.finished_at)
 
 
 @app.get("/jobs", response_model=list[JobResponse], dependencies=[Depends(require_auth)])
-def list_jobs(limit: int = Query(default=50, ge=1, le=100), offset: int = Query(default=0, ge=0)):
+def list_jobs(limit: int = Query(default=50, ge=1, le=100), offset: int = Query(default=0, ge=0),
+              deployment_id: str | None = Query(default=None)):
     with SessionLocal() as db:
-        jobs = db.scalars(select(Job).order_by(Job.created_at.desc(), Job.id).offset(offset).limit(limit)).all()
-        return [JobResponse(job_id=j.id, status=j.status, error=j.error_message,
+        query = select(Job)
+        if deployment_id:
+            if deployment_id not in DEPLOYMENTS:
+                raise HTTPException(404, "Deployment not found")
+            query = query.where(Job.deployment_id == deployment_id)
+        jobs = db.scalars(query.order_by(Job.created_at.desc(), Job.id).offset(offset).limit(limit)).all()
+        return [JobResponse(job_id=j.id, deployment_id=j.deployment_id,
+                            status=j.status, error=j.error_message,
                             created_at=j.created_at, finished_at=j.finished_at) for j in jobs]
 
 @app.get("/jobs/{job_id}/result", dependencies=[Depends(require_auth)])
@@ -249,7 +333,7 @@ def retry_job(job_id: str):
         if job.status != "FAILED" or job.attempts >= settings.max_job_attempts:
             raise HTTPException(409, "Job is not retryable or attempt limit reached")
         lock_job_admission(db)
-        require_job_capacity(db)
+        require_job_capacity(db, job.deployment_id)
         generation = job.generation + 1
         changed = db.execute(update(Job).where(
             Job.id == job_id, Job.status == "FAILED", Job.generation == job.generation,
@@ -277,18 +361,28 @@ def metrics():
     lines = telemetry.http_metrics()
     with SessionLocal() as db:
         lines.append("# TYPE video_jobs gauge")
-        for status, count in db.execute(select(Job.status, func.count()).group_by(Job.status)):
+        for status, count in db.execute(select(Job.status, func.count()).where(
+            Job.deployment_id == "video-summary-v1").group_by(Job.status)):
             lines.append(f'video_jobs{{status={json.dumps(status)}}} {count}')
+        lines.append("# TYPE model_jobs gauge")
+        for deployment_id, status, count in db.execute(select(Job.deployment_id, Job.status, func.count()).group_by(Job.deployment_id, Job.status)):
+            lines.append(f'model_jobs{{deployment={json.dumps(deployment_id)},status={json.dumps(status)}}} {count}')
         lines.append("# TYPE video_job_attempts gauge")
-        for status, count in db.execute(select(JobAttempt.status, func.count()).group_by(JobAttempt.status)):
+        for status, count in db.execute(select(JobAttempt.status, func.count()).join(
+            Job, JobAttempt.job_id == Job.id).where(
+            Job.deployment_id == "video-summary-v1").group_by(JobAttempt.status)):
             lines.append(f'video_job_attempts{{status={json.dumps(status)}}} {count}')
-        oldest = db.scalar(select(func.min(Job.created_at)).where(Job.status == "QUEUED"))
+        oldest = db.scalar(select(func.min(Job.created_at)).where(
+            Job.status == "QUEUED", Job.deployment_id == "video-summary-v1"))
         age = max(0, (datetime.now(timezone.utc) - oldest.replace(tzinfo=timezone.utc)).total_seconds()) if oldest else 0
         lines.append(f"video_oldest_queued_job_seconds {age}")
         lines.append("# TYPE video_job_capacity gauge")
         lines.append(f"video_job_capacity {settings.max_outstanding_jobs}")
+        lines.append("# TYPE model_job_capacity gauge")
+        lines.append(f'model_job_capacity{{resource="gpu"}} {settings.max_outstanding_jobs}')
+        lines.append(f'model_job_capacity{{resource="cpu"}} {settings.max_cpu_outstanding_jobs}')
         lines.append("# TYPE video_jobs_outstanding gauge")
-        lines.append(f"video_jobs_outstanding {db.scalar(select(func.count()).select_from(Job).where(Job.status.in_(OUTSTANDING_STATUSES)))}")
+        lines.append(f"video_jobs_outstanding {db.scalar(select(func.count()).select_from(Job).where(Job.status.in_(OUTSTANDING_STATUSES), Job.deployment_id == 'video-summary-v1'))}")
     return Response("\n".join(lines) + "\n", media_type="text/plain; version=0.0.4")
 
 # Versioned public routes; legacy paths remain available for existing clients.

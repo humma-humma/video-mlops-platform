@@ -19,7 +19,7 @@ function harness(fail=false){
     AbortSignal,setInterval:()=>1,clearInterval(){},
     fetch:async(path,options)=>{
       requests.push({path,options});
-      const value=path==='/metrics'?'video_jobs{status="FAILED"} 3\nvideo_oldest_queued_job_seconds 0':
+      const value=path==='/metrics'?'model_jobs{deployment="video-summary-v1",status="FAILED"} 3\nvideo_oldest_queued_job_seconds 0':
         path.startsWith('/api/')?[{job_id:'<script>bad</script>',status:'SUCCEEDED',created_at:'today'}]:
         path==='/local/gpu'?{available:true,devices:[{name:'GPU',utilization_percent:43,memory_used_mib:4000,memory_total_mib:8192,temperature_c:82}]}:{status:'ok'};
       return {ok:!fail,status:fail?401:200,json:async()=>value,text:async()=>value};

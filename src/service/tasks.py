@@ -11,9 +11,8 @@ from .db import SessionLocal
 from .models import Job, JobAttempt
 from .queue import celery_app
 from .storage import ArtifactStore
-from .inference import get_model_runner
+from .deployments import get_deployment
 from .lifecycle import classify_failure, record_event
-from .schemas import InferenceResult
 from .telemetry import event
 
 class WorkerFailure(RuntimeError):
@@ -38,9 +37,11 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
         db.commit()
         try:
             store = ArtifactStore()
+            adapter = get_deployment(job.deployment_id)
             if not store.exists(job.input_path):
-                raise FileNotFoundError("Input video artifact is missing")
-            if settings.use_fake_inference:
+                raise FileNotFoundError("Input video artifact is missing" if adapter.input_kind == "video"
+                                        else "Input artifact is missing")
+            if adapter.input_kind == "video" and settings.use_fake_inference:
                 result = {"schema_version": "1", "video_id": Path(job.input_path).stem,
                           "summary": "Fake inference result for local integration testing.",
                           "category": "Daily Life", "model_version": "fake",
@@ -50,22 +51,26 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
                 scratch_root = Path(settings.worker_scratch_root)
                 scratch_root.mkdir(parents=True, exist_ok=True)
                 with TemporaryDirectory(dir=scratch_root) as temporary:
-                    local_video = Path(temporary) / Path(job.input_path).name
-                    store.download_file(job.input_path, local_video)
-                    transcript_uri = (
-                        job.input_path.rsplit("/", 1)[0] + "/transcript.txt"
-                        if job.input_path.startswith("s3://")
-                        else str(Path(job.input_path).parent / "transcript.txt")
-                    )
-                    transcript = store.get_bytes(transcript_uri).decode("utf-8") if store.exists(transcript_uri) else ""
+                    local_input = Path(temporary) / Path(job.input_path).name
+                    store.download_file(job.input_path, local_input)
+                    transcript = ""
+                    if adapter.input_kind == "video":
+                        transcript_uri = (
+                            job.input_path.rsplit("/", 1)[0] + "/transcript.txt"
+                            if job.input_path.startswith("s3://")
+                            else str(Path(job.input_path).parent / "transcript.txt")
+                        )
+                        transcript = store.get_bytes(transcript_uri).decode("utf-8") if store.exists(transcript_uri) else ""
                     download_time = time.perf_counter() - start
-                    result = get_model_runner().run(local_video, transcript)
-                    result["input_sha256"] = sha256_file(local_video)
+                    result = adapter.run(local_input, {"transcript": transcript})
+                    result["input_sha256"] = sha256_file(local_input)
                     import hashlib
-                    result["transcript_sha256"] = hashlib.sha256(transcript.encode()).hexdigest()
+                    if adapter.input_kind == "video":
+                        result["transcript_sha256"] = hashlib.sha256(transcript.encode()).hexdigest()
                     result["timings"]["input_download"] = download_time
                     result["timings"]["total"] = time.perf_counter() - start
-            result = InferenceResult.model_validate(result).model_dump()
+            result = adapter.validate_result(result)
+            result["deployment_id"] = adapter.deployment_id
             result.update(attempt_id=attempt.id, trace_id=job.trace_id)
             result_path = store.put_json(f"results/{job.id}/attempt-{attempt.number}.json", result)
             finished = datetime.now(timezone.utc)

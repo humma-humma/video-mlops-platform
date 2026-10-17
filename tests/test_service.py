@@ -50,6 +50,49 @@ def submit(client):
     return client.post("/jobs", files={"video": ("sample.mp4", b"fixture", "video/mp4")})
 
 
+def test_text_deployment_uses_shared_durable_lifecycle(service, monkeypatch):
+    client, sessions, _ = service
+    routed = []
+    monkeypatch.setattr(tasks.process_job, "apply_async", lambda *args, **kwargs: routed.append((args, kwargs)))
+    deployments = client.get("/api/v1/deployments").json()
+    assert {item["deployment_id"] for item in deployments} == {"video-summary-v1", "text-topic-v1"}
+    response = client.post("/api/v1/deployments/text-topic-v1/jobs",
+                           json={"text": "Bake bread in the oven"},
+                           headers={"Idempotency-Key": "text-1"})
+    assert response.status_code == 202
+    job_id = response.json()["job_id"]
+    assert routed[0][1]["queue"] == "cpu-inference"
+    assert routed[0][1]["args"] == (job_id, 0)
+    with sessions() as db:
+        assert db.get(Job, job_id).deployment_id == "text-topic-v1"
+    tasks.process_job.run(job_id)
+    job = client.get(f"/api/v1/jobs/{job_id}").json()
+    assert job["status"] == "SUCCEEDED"
+    assert job["deployment_id"] == "text-topic-v1"
+    assert job["result"]["output"]["label"] == "cooking"
+    assert len(job["result"]["model_revision"]) == 64
+    assert job["result"]["input_sha256"]
+    assert client.get(f"/api/v1/jobs/{job_id}/attempts").json()[0]["status"] == "SUCCEEDED"
+    assert client.get("/api/v1/jobs?deployment_id=video-summary-v1").json() == []
+    assert len(client.get("/api/v1/jobs?deployment_id=text-topic-v1").json()) == 1
+    replay = client.post("/api/v1/deployments/text-topic-v1/jobs",
+                         json={"text": "Bake bread in the oven"},
+                         headers={"Idempotency-Key": "text-1"})
+    assert replay.json()["job_id"] == job_id
+    assert len(routed) == 1
+
+
+def test_text_deployment_validates_input_and_has_separate_capacity(service, monkeypatch):
+    client, _, _ = service
+    monkeypatch.setattr(tasks.process_job, "apply_async", lambda *args, **kwargs: None)
+    monkeypatch.setattr(api.settings, "max_cpu_outstanding_jobs", 1)
+    assert client.post("/api/v1/deployments/missing/jobs", json={"text": "hello"}).status_code == 404
+    assert client.post("/api/v1/deployments/text-topic-v1/jobs", json={"text": " "}).status_code == 400
+    assert client.post("/api/v1/deployments/text-topic-v1/jobs", json={"text": "server"}).status_code == 202
+    assert client.post("/api/v1/deployments/text-topic-v1/jobs", json={"text": "database"}).status_code == 429
+    assert submit(client).status_code == 202
+
+
 def test_service_serves_demo_without_bypassing_job_auth(service, monkeypatch):
     client, _, _ = service
     monkeypatch.setattr(api.settings, "api_key", SecretStr("test-demo-key"))
@@ -282,7 +325,8 @@ def test_real_worker_downloads_input_and_supplies_transcript(service, monkeypatc
         return {"schema_version": "1", "video_id": "sample", "summary": "real adapter result", "category": "Daily Life", "model_version": "test-model", "timings": {}}
 
     runner.run.side_effect = infer
-    monkeypatch.setattr(tasks, "get_model_runner", lambda: runner)
+    from src.service import inference
+    monkeypatch.setattr(inference, "get_model_runner", lambda: runner)
     tasks.process_job.run(job_id)
     result = client.get(f"/jobs/{job_id}").json()
     assert result["status"] == "SUCCEEDED"
@@ -298,7 +342,8 @@ def test_real_worker_records_inference_failure(service, monkeypatch, tmp_path):
     monkeypatch.setattr(tasks, "TemporaryDirectory", lambda **kwargs: nullcontext(str(tmp_path)))
     runner = Mock()
     runner.run.side_effect = RuntimeError("GPU inference failed at category: ValueError")
-    monkeypatch.setattr(tasks, "get_model_runner", lambda: runner)
+    from src.service import inference
+    monkeypatch.setattr(inference, "get_model_runner", lambda: runner)
     with pytest.raises(RuntimeError):
         tasks.process_job.run(job_id)
     result = client.get(f"/jobs/{job_id}").json()

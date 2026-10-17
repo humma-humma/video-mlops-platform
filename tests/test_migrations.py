@@ -28,7 +28,7 @@ def test_fresh_upgrade_is_repeatable(database):
     migrate(database, "head")
     migrate(database, "head")
     assert {"jobs", "job_attempts", "job_events", "alembic_version"} <= set(inspect(database).get_table_names())
-    assert {"generation", "idempotency_key", "trace_id"} <= {c["name"] for c in inspect(database).get_columns("jobs")}
+    assert {"generation", "idempotency_key", "trace_id", "deployment_id"} <= {c["name"] for c in inspect(database).get_columns("jobs")}
 
 
 def test_unversioned_legacy_rows_survive_upgrade_and_lifecycle_rollback(database):
@@ -39,7 +39,7 @@ def test_unversioned_legacy_rows_survive_upgrade_and_lifecycle_rollback(database
         connection.execute(text("DROP TABLE alembic_version"))
     migrate(database, "head")
     with database.connect() as connection:
-        assert connection.execute(text("SELECT status,generation FROM jobs WHERE id='old'")).one() == ("SUCCEEDED", 0)
+        assert connection.execute(text("SELECT status,generation,deployment_id FROM jobs WHERE id='old'")).one() == ("SUCCEEDED", 0, "video-summary-v1")
     migrate(database, "0001", downgrade=True)
     with database.connect() as connection:
         assert connection.scalar(text("SELECT count(*) FROM jobs WHERE id='old'")) == 1

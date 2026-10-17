@@ -22,7 +22,7 @@ async function health() {
   } catch (error) { $("health").textContent = "Service unavailable or authentication required"; $("dependencies").textContent = error.message; }
 }
 async function jobs() {
-  const data = await request("/api/v1/jobs?limit=12");
+  const data = await request("/api/v1/jobs?limit=12&deployment_id=video-summary-v1");
   $("jobs").replaceChildren();
   for (const job of data) {
     const button = document.createElement("button"); button.type = "button";
