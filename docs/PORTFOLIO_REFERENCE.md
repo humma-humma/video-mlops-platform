@@ -25,7 +25,7 @@ release](../reports/release_demo_20261017105931.json) then passed candidate and
 rollback GPU probes, restoring the prior image IDs and preserving both old and
 candidate results. [Remote CI](../reports/ci_acceptance_2026-10-17.md) then
 passed CPU/UI and fake-worker Compose checks. The [delivery report](../reports/delivery_status.md)
-records the remaining visual review and recording work. Older
+records the connected-browser review and remaining recording work. Older
 pending language below describes the original plan, not a fresh status claim.
 
 ## Navigation
@@ -164,7 +164,7 @@ the preview applies a 64 MiB upload cap. Artifact retention/cleanup remains open
 | Durable asynchronous service | [Local acceptance](../reports/local_acceptance.json), [service integration](../reports/service_integration_status.md) | Current rebuilt-image acceptance and all failure modes. |
 | Artifact persistence | [MinIO status](../reports/minio_integration_status.md) | Complete retention, restore and orphan-cleanup procedures. |
 | Real GPU serving/model reuse | [Current-image GPU smoke](../reports/gpu_service_smoke_current.json) | Sustained load and general capacity claims. |
-| UI submission and inspection | [Demo acceptance](../reports/local_demo_acceptance.json) | Visual browser QA and recorded walkthrough. |
+| UI submission and inspection | [Demo acceptance](../reports/local_demo_acceptance.json), [connected-browser review](../reports/browser_review_2026-10-17.md) | Recorded walkthrough. |
 | Read-only operations | [Operations acceptance](../reports/operations_acceptance.json) | Durable time-series storage, tested alerts and distributed tracing. |
 | Load measurement tooling | [Serving measurement report](../reports/serving_measurement_smoke.md) and [live admission burst](../reports/admission_demo.json) | Representative capacity/SLO evidence. |
 | Native GPU diagnostics | [GPU profile](../reports/gpu_profile.md), [JSON evidence](../reports/gpu_profile.json) | Container acceptance, exclusive-device conditions and general performance conclusions. |
@@ -406,7 +406,7 @@ The recording is identified as historical, not a live hosted service.
 - [x] A versioned local operational release and compatible rollback are executed.
 - [x] Persisted results survive the demonstrated upgrade/rollback sequence.
 - [x] CI execution is linked; simulated and real checks are distinguished.
-- [ ] UI receives visual review; architecture, setup and incident runbooks agree.
+- [x] UI receives connected-browser visual review; architecture, setup and incident runbooks agree.
 - [ ] A short recording and evidence index support offline review.
 - [ ] Cloud, scale, model-quality and security limitations are explicit.
 

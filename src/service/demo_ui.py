@@ -13,8 +13,15 @@ SECURITY_HEADERS = {
 }
 
 
+class DemoAssets(StaticFiles):
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-store"
+        return response
+
+
 def install_demo(app):
-    app.mount("/demo-assets", StaticFiles(directory=ASSETS), name="demo-assets")
+    app.mount("/demo-assets", DemoAssets(directory=ASSETS), name="demo-assets")
 
     @app.get("/", include_in_schema=False)
     def demo_page():

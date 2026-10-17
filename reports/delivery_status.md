@@ -32,7 +32,9 @@ no release ID, consistent with the restored baseline. This is a local operationa
 exercise with a dirty source tree, not model-quality promotion or a CI-linked
 immutable release. [Remote CI](ci_acceptance_2026-10-17.md) later passed CPU/UI
 and fake-worker Compose checks using S3Mock; it does not replay the real GPU
-release. Visual browser QA and a walkthrough recording are still open.
+release. A [connected Chrome review](browser_review_2026-10-17.md) later checked
+the desktop demo, persisted job detail, lineage, operations telemetry and narrow
+main-page layout. A walkthrough recording is still open.
 
 The project-created [six-second shapes sample](../assets/portfolio/demo_shapes.mp4)
 also [completed a real GPU submission](demo_shapes_probe.json) on the restored

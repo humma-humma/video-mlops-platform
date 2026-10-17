@@ -3,7 +3,9 @@
 [GitHub Actions run 39025177821](https://github.com/humma-humma/video-mlops-platform/actions/runs/39025177821)
 completed successfully on `main` after commit `9a12725`. The owner supplied
 the run result from GitHub CLI; the agent's session could not directly access
-GitHub. The `Checks` workflow runs the full Python CPU suite, six Node
+GitHub at that time. [Run 39026675296](https://github.com/humma-humma/video-mlops-platform/actions/runs/39026675296)
+later completed successfully on commit `00ba116`; both CPU and Compose jobs
+were confirmed in the connected browser. The `Checks` workflow runs the full Python CPU suite, six Node
 UI/dashboard behavior checks, `git diff --check`, Compose configuration and a
 fake-worker service smoke including worker restart, durable failure and S3 API
 input/result retrieval.

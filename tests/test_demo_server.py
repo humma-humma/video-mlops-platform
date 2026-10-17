@@ -49,7 +49,9 @@ def test_preview_serves_local_assets_with_restrictive_policy(preview):
     assert response.status_code == 200
     assert "frame-ancestors 'none'" in response.headers["content-security-policy"]
     assert response.headers["cache-control"] == "no-store"
-    assert client.get("/demo-assets/demo.js").status_code == 200
+    script = client.get("/demo-assets/demo.js")
+    assert script.status_code == 200
+    assert script.headers["cache-control"] == "no-store"
     assert client.get("/demo-assets/demo.css").status_code == 200
     assert client.get("/operations").status_code == 200
     assert client.get("/demo-assets/operations.js").status_code == 200
