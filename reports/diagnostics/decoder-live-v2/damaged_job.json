@@ -1,0 +1,67 @@
+{
+  "bundle_sha256": "4e755b16fe1f753a006075c1674ce96808dc103198a8fcace6f6e684f1cafd57",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": "decode_failed",
+        "finished_at": "2026-10-18T13:50:31.241846+00:00",
+        "number": 1,
+        "started_at": "2026-10-18T13:50:30.533345+00:00",
+        "status": "FAILED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-18T13:50:32.670218+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "video-summary-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-18T13:50:30.512514+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-18T13:50:30.532609+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-18T13:50:30.534681+00:00"
+      },
+      {
+        "event": "failed",
+        "generation": 0,
+        "timestamp": "2026-10-18T13:50:31.244089+00:00"
+      }
+    ],
+    "input_sha256": null,
+    "lineage_hashes": {},
+    "model_revision": null,
+    "status": "FAILED",
+    "timings_seconds": {}
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "8296d445b6ef65e193a47b054f65e9704dae152a77a172a5f5324e800cf72851",
+    "events": "431ce04aad4c9ca3bf89455ebc16cdc67d794635e07c4b40a1011e69873d6a7a",
+    "job": "63f9b104e8967ae2cfb134e4dcd7ff67f3a2b7bffcbdc4c25760210296b9fc4a",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "6cacdfd8c32f216929d4c681dc9ff73e6bdb35626cfaeca17ee46ae0a3cc672b"
+  }
+}

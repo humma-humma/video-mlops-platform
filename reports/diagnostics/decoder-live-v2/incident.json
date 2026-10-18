@@ -1,0 +1,20 @@
+{
+  "damaged_attempt_codes": [
+    "decode_failed"
+  ],
+  "damaged_bundle_sha256": "4e755b16fe1f753a006075c1674ce96808dc103198a8fcace6f6e684f1cafd57",
+  "damaged_status": "FAILED",
+  "fixture_ledger_sha256": "9c58456a9335f4992cb564304de46d6a829863651a1ed935e8c6cab876fb50c9",
+  "healthy_bundle_sha256": "3db188a6f98e28248f4ebeb68a56965cb779fb5233f8b94ea13c99d8b193e368",
+  "healthy_status": "SUCCEEDED",
+  "limits": [
+    "Different input bytes preclude a latency comparison.",
+    "The bounded FFmpeg preflight identifies a first-frame decode failure, not its underlying codec or data fault.",
+    "FFmpeg fixture decoding fails; this does not identify the worker's exact decoder exception."
+  ],
+  "pair_comparable": false,
+  "pair_diagnosis": "insufficient_evidence",
+  "purpose": "controlled damaged-video failure on the local GPU service",
+  "schema_version": "decoder-incident-v1",
+  "single_job_diagnosis": "reported_decode_failure"
+}

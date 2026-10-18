@@ -1,0 +1,35 @@
+{
+  "abstentions": 0,
+  "by_split": {
+    "development": {
+      "correct": 1,
+      "total": 1
+    },
+    "held_out": {
+      "correct": 0,
+      "total": 0
+    }
+  },
+  "case_manifest_sha256": "1ec52b084495464a572418ecac68fa895b3a876bb7074e4913f806162713ae4f",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "4e755b16fe1f753a006075c1674ce96808dc103198a8fcace6f6e684f1cafd57",
+      "case_id": "damaged_frame_payload_after_preflight_fix",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_decode_failure",
+      "origin": "controlled_live_api",
+      "predicted": "reported_decode_failure",
+      "split": "development"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 1,
+  "correct": 1,
+  "false_confident": 0,
+  "rules_sha256": "401a8950d6c58bd2b557ac44024120f5b24db684b716e3d61fec0654cb564d00",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Controlled local live cases; labels check evidence-level classification, not generalization",
+  "total": 1
+}

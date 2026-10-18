@@ -1,0 +1,15 @@
+{
+  "damage": "All mdat frame payload removed; moov metadata retained",
+  "damaged_sha256": "8c0eaf20fe85731930e7a94c2667207ca22ada1c1b0979999b8020a73486f284",
+  "ffmpeg_full_decode_succeeded": [
+    true,
+    false
+  ],
+  "ffprobe_metadata_accepted": [
+    true,
+    true
+  ],
+  "generation": "FFmpeg testsrc 224x224, 2 fps, 3 seconds, H.264 faststart",
+  "healthy_sha256": "9dff110aa3736810ed9215fa212dbba2c62916fca4004db35ecd4c3496111c1b",
+  "schema_version": "decoder-incident-fixture-v1"
+}
