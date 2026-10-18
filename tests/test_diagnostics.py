@@ -69,6 +69,19 @@ def test_reported_missing_input_requires_failed_attempt_and_generic_failure_abst
                                   observations))["diagnosis"] == "insufficient_evidence"
 
 
+def test_reported_decode_failure_requires_the_typed_worker_code():
+    observations = {"status": "FAILED", "attempts": safe_attempts([
+        {"number": 1, "status": "FAILED", "error_code": "decode_failed"}]),
+        "events": [], "admission": None, "timings_seconds": {}}
+    bundle = finish_bundle("synthetic_variant", {"parent_bundle": "a" * 64}, observations)
+    result = diagnose(bundle)
+    assert result["diagnosis"] == "reported_decode_failure"
+    assert result["citations"] == ["observations.status", "observations.attempts[0].error_code"]
+    observations["attempts"][0]["error_code"] = "decode_timeout"
+    assert diagnose(finish_bundle("synthetic_variant", {"parent_bundle": "a" * 64},
+                                  observations))["diagnosis"] == "insufficient_evidence"
+
+
 def test_structured_failure_stage_disambiguates_dependency_attempts():
     observations = {"status": "FAILED", "attempts": safe_attempts([
         {"number": 1, "status": "FAILED", "error_code": "dependency"}]),

@@ -61,7 +61,7 @@
   "cited_cases": 1,
   "correct": 4,
   "false_confident": 0,
-  "rules_sha256": "27add7050865c30e55ec3f0af37c04eaf4655d3ac76120c85bc23407f6efe6e8",
+  "rules_sha256": "401a8950d6c58bd2b557ac44024120f5b24db684b716e3d61fec0654cb564d00",
   "schema_version": "diagnostic-evaluation-v1",
   "scope": "Historical live jobs from one local service; insufficient incident diversity for generalization",
   "total": 4

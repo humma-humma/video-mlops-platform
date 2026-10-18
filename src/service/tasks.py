@@ -92,6 +92,8 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
             db.commit()
         except Exception as exc:
             code, message = classify_failure(exc)
+            if code in {"decode_failed", "decode_timeout", "decoder_unavailable"}:
+                stage = "decode_preflight"
             event("worker_failure", job_id=job_id, deployment_id=job.deployment_id,
                   generation=generation, attempt_id=attempt.id, stage=stage,
                   error_type=type(exc).__name__, error_code=code, trace_id=job.trace_id)

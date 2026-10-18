@@ -31,7 +31,9 @@ class VideoAdapter:
         return {"model_version": settings.model_name, "model_revision": settings.model_revision}
 
     def run(self, input_path: Path, metadata: dict) -> dict:
+        from .media import check_first_frame
         from .inference import get_model_runner
+        check_first_frame(input_path)
         return get_model_runner().run(input_path, metadata.get("transcript", ""))
 
     def validate_result(self, result: dict) -> dict:

@@ -5,6 +5,7 @@ from sqlalchemy import func, or_, select, text, update
 from .config import settings
 from .db import SessionLocal
 from .models import Job, JobAttempt, JobEvent
+from .media import VideoDecodeFailure, VideoDecodeTimeout, VideoDecoderUnavailable
 from .storage import ArtifactStorageError
 from . import telemetry
 from .deployments import DEPLOYMENTS, get_deployment
@@ -110,6 +111,12 @@ def retry_dependencies() -> int:
 
 def classify_failure(error):
     name = type(error).__name__
+    if isinstance(error, VideoDecodeFailure):
+        return "decode_failed", "Video frame preflight failed"
+    if isinstance(error, VideoDecodeTimeout):
+        return "decode_timeout", "Video frame preflight timed out"
+    if isinstance(error, VideoDecoderUnavailable):
+        return "decoder_unavailable", "Video decoder is unavailable"
     if isinstance(error, FileNotFoundError):
         return "missing_input", ("Input video artifact is missing" if "video" in str(error)
                                  else "Input artifact is missing")

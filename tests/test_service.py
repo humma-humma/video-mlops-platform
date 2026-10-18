@@ -326,6 +326,8 @@ def test_real_worker_downloads_input_and_supplies_transcript(service, monkeypatc
 
     runner.run.side_effect = infer
     from src.service import inference
+    from src.service import media
+    monkeypatch.setattr(media, "check_first_frame", lambda _: None)
     monkeypatch.setattr(inference, "get_model_runner", lambda: runner)
     tasks.process_job.run(job_id)
     result = client.get(f"/jobs/{job_id}").json()
@@ -343,6 +345,8 @@ def test_real_worker_records_inference_failure(service, monkeypatch, tmp_path):
     runner = Mock()
     runner.run.side_effect = RuntimeError("GPU inference failed at category: ValueError")
     from src.service import inference
+    from src.service import media
+    monkeypatch.setattr(media, "check_first_frame", lambda _: None)
     monkeypatch.setattr(inference, "get_model_runner", lambda: runner)
     with pytest.raises(RuntimeError):
         tasks.process_job.run(job_id)

@@ -121,6 +121,8 @@ def main(argv=None):
     parser.add_argument("--control-video", type=Path, required=True,
                         help="Known video that has previously succeeded on this deployment")
     parser.add_argument("--control-transcript", type=Path)
+    parser.add_argument("--expect-decode-preflight", action="store_true",
+                        help="Require the repaired worker's decode_failed attempt code")
     parser.add_argument("--timeout", type=float, default=600)
     parser.add_argument("--output-dir", type=Path, default=Path("reports/diagnostics/decoder-live"))
     args = parser.parse_args(argv)
@@ -154,14 +156,16 @@ def main(argv=None):
     write_json(args.output_dir / "damaged_job.json", damaged_bundle)
     if damaged_job["status"] != "FAILED":
         raise RuntimeError(f"Damaged GPU job ended {damaged_job['status']} instead of FAILED")
-    if [a["error_code"] for a in damaged_bundle["observations"]["attempts"]] != ["inference"]:
-        raise RuntimeError("Damaged GPU job did not record one inference failure")
+    expected_code = "decode_failed" if args.expect_decode_preflight else "inference"
+    if [a["error_code"] for a in damaged_bundle["observations"]["attempts"]] != [expected_code]:
+        raise RuntimeError(f"Damaged GPU job did not record one {expected_code} failure")
     finding = diagnose(damaged_bundle)
     pair = diagnose_pair(healthy_bundle, damaged_bundle)
     comparison = compare(healthy_bundle, damaged_bundle)
-    if (finding["diagnosis"] != "insufficient_evidence"
+    expected_finding = "reported_decode_failure" if args.expect_decode_preflight else "insufficient_evidence"
+    if (finding["diagnosis"] != expected_finding
             or pair["diagnosis"] != "insufficient_evidence"):
-        raise RuntimeError("Analyzer made an unsupported diagnosis")
+        raise RuntimeError("Analyzer did not match the expected evidence-level finding")
     if comparison["comparable"]:
         raise RuntimeError("Healthy and damaged bytes must not be treated as comparable")
     report = {"schema_version": "decoder-incident-v1",
@@ -174,10 +178,12 @@ def main(argv=None):
               "single_job_diagnosis": finding["diagnosis"],
               "pair_diagnosis": pair["diagnosis"], "pair_comparable": comparison["comparable"],
               "limits": ["Different input bytes preclude a latency comparison.",
+                         "The bounded FFmpeg preflight identifies a first-frame decode failure, not its underlying codec or data fault."
+                         if args.expect_decode_preflight else
                          "The live API does not expose a decoder-specific worker stage or error code.",
                          "FFmpeg fixture decoding fails; this does not identify the worker's exact decoder exception."]}
     write_json(args.output_dir / "incident.json", report)
-    print("PASS damaged GPU job failed; analyzer abstained without decoder-specific evidence", flush=True)
+    print(f"PASS damaged GPU job recorded {expected_code}; analyzer: {expected_finding}", flush=True)
     print(f"Evidence: {args.output_dir / 'incident.json'}")
 
 

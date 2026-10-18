@@ -17,3 +17,25 @@ The [fixture ledger](../reports/diagnostics/decoder-live/fixture_ledger.json) re
 The initial intact synthetic test-pattern clip decoded locally but failed the GPU job; its [redacted record](../reports/diagnostics/decoder-live/test_pattern_control.json) is a second example of a generic `inference` failure. The [two-case evaluation](../reports/diagnostics/decoder-live/evaluation.json) checks that the workbench abstains on both. These cases were selected after observation; 2/2 abstentions are a safety check, not a diagnosis-accuracy estimate.
 
 The injected defect is known from the fixture construction and FFmpeg controls. The exported job evidence does **not** show the worker's exact TorchCodec exception or a decoder-specific stage; the service reports only `inference`. Thus the result demonstrates an observability and admission gap, not independent decoder-root-cause identification. The fixture's metadata and full-decode checks can be reproduced without submitting jobs; the live job evidence depends on the local GPU stack. No raw video, generated text, transcript, job ID, free-form error or worker log is included in the published bundles.
+
+## Repair and acceptance
+
+The repaired `VideoAdapter` now uses FFmpeg to decode **one frame** from the downloaded video before loading the GPU model. The subprocess has a 15-second timeout, allows only local file/pipe protocols and discards decoder output. A nonzero decoder exit becomes the durable attempt code `decode_failed`; timeout and unavailable-executable conditions have separate codes. The worker's structured event uses `decode_preflight` as its stage. The workbench reports `reported_decode_failure` only for a failed attempt bearing `decode_failed`, with citations to status and code. Generic `inference` failures still cause abstention.
+
+This is a bounded guard, not exhaustive media validation. Damage in later frames or a TorchCodec-specific failure after FFmpeg succeeds can still surface as a generic inference failure. The code says only that FFmpeg could not produce the first frame; it does not establish whether the file is corrupt, the codec is unsupported or the decoder itself is faulty. API admission remains metadata-only, so an undecodable upload can still create a job; the worker now fails it before model loading. Full decoding at API admission would spend more CPU on every request and would delay asynchronous submission.
+
+After rebuilding the GPU worker, repeat the experiment without overwriting the historical evidence:
+
+```powershell
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build worker
+& '.\.venv\Scripts\python.exe' -m scripts.decoder_incident_demo `
+  --control-video data/inputs/videos/7203774185322188037.mp4 `
+  --control-transcript data/inputs/audio_transcripts/7203774185322188037.txt `
+  --expect-decode-preflight `
+  --output-dir reports/diagnostics/decoder-live-v2
+& '.\.venv\Scripts\python.exe' -m scripts.diagnostic_workbench evaluate `
+  --cases reports/diagnostics/decoder-live-v2/cases.json `
+  --output reports/diagnostics/decoder-live-v2/evaluation.json
+```
+
+The last command should match the [pre-specified v2 case](../reports/diagnostics/decoder-live-v2/cases.json) with valid citations. Do not claim the repair accepted live traffic until the new report and job history are checked. Rebuild only the worker; the API, dispatcher, CPU worker and named volumes do not need replacement.

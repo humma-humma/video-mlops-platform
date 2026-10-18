@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "damaged_frame_payload_after_preflight_fix",
+      "bundle": "damaged_job.json",
+      "expected": "reported_decode_failure",
+      "split": "development",
+      "origin": "controlled_live_api"
+    }
+  ],
+  "limits": "One controlled local first-frame failure after deploying the repaired GPU worker. The label was specified before the acceptance run. It identifies the bounded preflight result, not the underlying decoder/library fault or performance on independent incidents."
+}
