@@ -78,6 +78,8 @@ def test_structured_failure_stage_disambiguates_dependency_attempts():
     assert diagnose(bundle())["diagnosis"] == "reported_artifact_download_failure"
     observations["failure_stage"] = "result_storage"
     assert diagnose(bundle())["diagnosis"] == "reported_result_write_failure"
+    observations["failure_stage"] = "artifact_check"
+    assert diagnose(bundle())["diagnosis"] == "reported_artifact_check_failure"
     observations["failure_stage"] = "inference"
     assert diagnose(bundle())["diagnosis"] == "insufficient_evidence"
     observations["failure_stage"] = "input_download"

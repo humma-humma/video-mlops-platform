@@ -225,7 +225,8 @@ def validate_bundle(bundle: dict):
         raise ValueError("Unknown source kind")
     sources = bundle.get("source_sha256")
     if not isinstance(sources, dict) or not 1 <= len(sources) <= 6 or any(
-            key not in {"report", "job", "attempts", "events", "live", "metrics", "parent_bundle"}
+            key not in {"report", "job", "attempts", "events", "live", "metrics",
+                        "parent_bundle", "structured_log"}
             or not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value)
             for key, value in sources.items()):
         raise ValueError("Invalid source digests")
@@ -313,12 +314,13 @@ def diagnose(bundle: dict) -> dict:
                          if attempt.get("status") == "FAILED" and attempt.get("error_code") == "missing_input")
             citations = ["observations.status", f"observations.attempts[{index}].error_code"]
         elif observed.get("status") == "FAILED" and len(attempts) == 1 and observed.get("failure_stage") in {
-                "input_download", "result_storage"} and any(
+                "artifact_check", "input_download", "result_storage"} and any(
                 attempt.get("status") == "FAILED" and attempt.get("error_code") == "dependency"
                 for attempt in attempts):
             stage = observed["failure_stage"]
-            cause = ("reported_artifact_download_failure" if stage == "input_download"
-                     else "reported_result_write_failure")
+            cause = {"artifact_check": "reported_artifact_check_failure",
+                     "input_download": "reported_artifact_download_failure",
+                     "result_storage": "reported_result_write_failure"}[stage]
             index = next(i for i, attempt in enumerate(attempts)
                          if attempt.get("status") == "FAILED" and attempt.get("error_code") == "dependency")
             citations = ["observations.failure_stage", f"observations.attempts[{index}].error_code"]
@@ -328,6 +330,7 @@ def diagnose(bundle: dict) -> dict:
             "reason": {"worker_interruption": "Worker kill and timed-out attempt are both recorded.",
                        "gpu_admission_limit": "Accepted jobs reached the recorded capacity and another request received 429.",
                        "reported_missing_input": "A failed attempt records the service's missing_input error code; artifact deletion or its origin is not established.",
+                       "reported_artifact_check_failure": "A structured worker event places the dependency failure at the artifact check; the downstream storage fault is not independently identified.",
                        "reported_artifact_download_failure": "A structured worker event places the dependency failure at input download; the downstream storage fault is not independently identified.",
                        "reported_result_write_failure": "A structured worker event places the dependency failure at result storage; the downstream storage fault is not independently identified.",
                        "insufficient_evidence": "Available evidence does not distinguish a supported cause."}[cause]}

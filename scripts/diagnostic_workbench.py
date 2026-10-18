@@ -79,7 +79,8 @@ def main(argv=None):
         seen_hashes = set()
         for case in cases:
             if (case.get("expected") not in {"worker_interruption", "gpu_admission_limit",
-                    "reported_missing_input", "reported_artifact_download_failure",
+                    "reported_missing_input", "reported_artifact_check_failure",
+                    "reported_artifact_download_failure",
                     "reported_result_write_failure", "preparation_latency_regression",
                     "artifact_download_latency_regression", "insufficient_evidence"}
                     or case.get("split") not in {"development", "held_out"}):
