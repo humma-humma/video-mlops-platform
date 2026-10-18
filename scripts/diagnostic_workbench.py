@@ -119,6 +119,13 @@ def main(argv=None):
                                        "total": sum(row["split"] == split for row in rows)}
                                for split in ("development", "held_out")},
                   "abstentions": sum(row["predicted"] == "insufficient_evidence" for row in rows),
+                  "correct_abstentions": sum(row["expected"] == "insufficient_evidence" and
+                                             row["predicted"] == "insufficient_evidence" for row in rows),
+                  "supported_diagnoses": sum(row["expected"] != "insufficient_evidence" for row in rows),
+                  "correct_diagnoses": sum(row["expected"] != "insufficient_evidence" and
+                                           row["correct"] for row in rows),
+                  "missed_diagnoses": sum(row["expected"] != "insufficient_evidence" and
+                                          row["predicted"] == "insufficient_evidence" for row in rows),
                   "false_confident": sum(row["expected"] == "insufficient_evidence" and
                                          row["predicted"] != "insufficient_evidence" for row in rows),
                   "cited_cases": sum(row["predicted"] != "insufficient_evidence" for row in rows),
@@ -132,7 +139,7 @@ def main(argv=None):
                                    for row in rows)
                             else "Historical live jobs from one local service; insufficient incident diversity for generalization"
                             if all(row["origin"] == "live_api" for row in rows)
-                            else "Small pilot with report-derived variants; not independent generalization evidence")}
+                            else "Mixed retrospective or report-derived cases; not independent generalization evidence")}
         write_json(args.output, output)
         print(f"{output['correct']}/{output['total']} diagnoses matched labels; "
               f"citations valid: {output['citations_valid']}")

@@ -1,0 +1,160 @@
+{
+  "abstentions": 8,
+  "by_split": {
+    "development": {
+      "correct": 5,
+      "total": 5
+    },
+    "held_out": {
+      "correct": 7,
+      "total": 7
+    }
+  },
+  "case_manifest_sha256": "245d546e9e7c7fe73ceb87cd0d25a6c2c7ce0504a760c8e732c961213a71ac3f",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "b8f836a4952bf8ffe6eeb40e10613cd828ad4f560014836c2398ae042c21983f",
+      "case_id": "historical_missing_input",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_missing_input",
+      "origin": "live_api",
+      "predicted": "reported_missing_input",
+      "split": "development"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "12df7bbd870086bd0c2da82cf2e961a61c52d8a7d09d040880ce78dbd338292b",
+      "case_id": "generic_worker_failure",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "live_api",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "31eeae56e3b2d6efe1b439d554bec843a259d114d5dd0c053c12f29f12896992",
+      "case_id": "historical_failure_without_history_a",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "live_api",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "b198ed3dbd72c5c8dfc948f88583518e7c8085b6c742922b14549925f63be226",
+      "case_id": "historical_failure_without_history_b",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "live_api",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "632b9b0796a9e1dbfaa2bcc463c3f677eae964aad26c2c03a07099af37b0274c",
+      "case_id": "controlled_minio_outage",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_artifact_check_failure",
+      "origin": "controlled_live_api",
+      "predicted": "reported_artifact_check_failure",
+      "split": "development"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "92ece03c37d8f8b1b82aa8ed5e6054f67317a90e85e3d2d25b909f128b674260",
+      "case_id": "damaged_frame_payload",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_api",
+      "predicted": "insufficient_evidence",
+      "split": "development"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "712e367afbbdf0cd4707c646332122e7063547d2f3032e3e50e00d437b629217",
+      "case_id": "decodable_test_pattern_failure",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_api",
+      "predicted": "insufficient_evidence",
+      "split": "development"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "4e755b16fe1f753a006075c1674ce96808dc103198a8fcace6f6e684f1cafd57",
+      "case_id": "damaged_frame_payload_after_preflight_fix",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_decode_failure",
+      "origin": "controlled_live_api",
+      "predicted": "reported_decode_failure",
+      "split": "development"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "d8bda107ffe808e9d6dc16078c23b3e6db0c93e86ca06145dab9794fd49ce6c4",
+      "case_id": "fresh_gpu_burst_at_recorded_capacity",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "gpu_admission_limit",
+      "origin": "controlled_live_service",
+      "predicted": "gpu_admission_limit",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "9387eeb934f070ad336d5b0ed85dde5a461f900a209e0c8b6dcf5885b3a7c6e3",
+      "case_id": "successful_job_after_capacity_drains",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_service",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "5d1a12a40fe98ab36dbdb7a458dfa7429f8977978053df15c4dc82f624ab98c5",
+      "case_id": "http_429_without_gpu_capacity_evidence",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "isolated_http_middleware",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "13050d6d9eb4a763025e623f179244d1254f4d0ae4dab63d32511b46e8da72b7",
+      "case_id": "cpu_worker_interrupted_during_gpu_job",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_service",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 4,
+  "correct": 12,
+  "correct_abstentions": 8,
+  "correct_diagnoses": 4,
+  "false_confident": 0,
+  "missed_diagnoses": 0,
+  "rules_sha256": "738f38f1a5d6ea0e95b50e8789842f62db1ef79cc314ff7df1e56dc63ee131e2",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Mixed retrospective or report-derived cases; not independent generalization evidence",
+  "supported_diagnoses": 4,
+  "total": 12
+}

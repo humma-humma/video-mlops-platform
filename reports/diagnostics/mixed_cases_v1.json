@@ -1,0 +1,114 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "historical_missing_input",
+      "bundle": "observed/video_failure_a.json",
+      "expected": "reported_missing_input",
+      "split": "development",
+      "origin": "live_api",
+      "source_manifest": "observed/cases.json",
+      "incident_group": "historical_jobs"
+    },
+    {
+      "id": "generic_worker_failure",
+      "bundle": "observed/text_failure.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "live_api",
+      "source_manifest": "observed/cases.json",
+      "incident_group": "historical_jobs"
+    },
+    {
+      "id": "historical_failure_without_history_a",
+      "bundle": "observed/video_failure_b.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "live_api",
+      "source_manifest": "observed/cases.json",
+      "incident_group": "historical_jobs"
+    },
+    {
+      "id": "historical_failure_without_history_b",
+      "bundle": "observed/video_failure_c.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "live_api",
+      "source_manifest": "observed/cases.json",
+      "incident_group": "historical_jobs"
+    },
+    {
+      "id": "controlled_minio_outage",
+      "bundle": "minio-live/failed_job.json",
+      "expected": "reported_artifact_check_failure",
+      "split": "development",
+      "origin": "controlled_live_api",
+      "source_manifest": "minio-live/cases.json",
+      "incident_group": "minio_outage"
+    },
+    {
+      "id": "damaged_frame_payload",
+      "bundle": "decoder-live/damaged_job.json",
+      "expected": "insufficient_evidence",
+      "split": "development",
+      "origin": "controlled_live_api",
+      "source_manifest": "decoder-live/cases.json",
+      "incident_group": "decoder_before_preflight"
+    },
+    {
+      "id": "decodable_test_pattern_failure",
+      "bundle": "decoder-live/test_pattern_control.json",
+      "expected": "insufficient_evidence",
+      "split": "development",
+      "origin": "controlled_live_api",
+      "source_manifest": "decoder-live/cases.json",
+      "incident_group": "decoder_before_preflight"
+    },
+    {
+      "id": "damaged_frame_payload_after_preflight_fix",
+      "bundle": "decoder-live-v2/damaged_job.json",
+      "expected": "reported_decode_failure",
+      "split": "development",
+      "origin": "controlled_live_api",
+      "source_manifest": "decoder-live-v2/cases.json",
+      "incident_group": "decoder_after_preflight"
+    },
+    {
+      "id": "fresh_gpu_burst_at_recorded_capacity",
+      "bundle": "admission-live-v2/admission.json",
+      "expected": "gpu_admission_limit",
+      "split": "held_out",
+      "origin": "controlled_live_service",
+      "source_manifest": "admission-live-v2/cases.json",
+      "incident_group": "gpu_admission_burst"
+    },
+    {
+      "id": "successful_job_after_capacity_drains",
+      "bundle": "admission-live-v2/after_drain_job.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service",
+      "source_manifest": "admission-live-v2/cases.json",
+      "incident_group": "gpu_admission_burst"
+    },
+    {
+      "id": "http_429_without_gpu_capacity_evidence",
+      "bundle": "rate-limit-control/rate_limit.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "isolated_http_middleware",
+      "source_manifest": "rate-limit-control/cases.json",
+      "incident_group": "rate_limit_control"
+    },
+    {
+      "id": "cpu_worker_interrupted_during_gpu_job",
+      "bundle": "unrelated-worker-live/gpu_job_with_cpu_event.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service",
+      "source_manifest": "unrelated-worker-live/cases.json",
+      "incident_group": "unrelated_worker"
+    }
+  ],
+  "limits": "Retrospective aggregation of previously labeled cases across seven source collections. Splits are inherited from source manifests, not an independent holdout. Several cases share a mechanism or experiment. Labels classify what the redacted evidence supports, not verified root causes. Freeze this manifest and its hash before future rule changes."
+}
