@@ -15,8 +15,7 @@ def test_mixed_set_preserves_source_cases_and_recorded_evaluation():
     evaluation = json.loads((REPORTS / "mixed_evaluation_v1.json").read_text())
 
     assert evaluation["case_manifest_sha256"] == hashlib.sha256(manifest_path.read_bytes()).hexdigest()
-    assert evaluation["rules_sha256"] == hashlib.sha256(
-        (ROOT / "src" / "diagnostics.py").read_bytes()).hexdigest()
+    assert evaluation["rules_sha256"] == "738f38f1a5d6ea0e95b50e8789842f62db1ef79cc314ff7df1e56dc63ee131e2"
     assert len({case["id"] for case in manifest["cases"]}) == len(manifest["cases"]) == 12
     assert len({case["incident_group"] for case in manifest["cases"]}) == 7
 

@@ -1,0 +1,31 @@
+{
+  "schema_version": "prospective-incident-protocol-v1",
+  "registered_date": "2026-10-19",
+  "case_id": "deployed_http_429_without_gpu_admission",
+  "purpose": "Exercise a real local API request-rate 429 without GPU job admission or submission",
+  "expected": "insufficient_evidence",
+  "expected_observations": {
+    "first_probe_status": 200,
+    "limited_probe_status": 429,
+    "limited_response_kind": "request_rate_limit_exceeded",
+    "retry_after_seconds": 60,
+    "recovered_probe_status": 200,
+    "gpu_jobs_outstanding_before_and_after": 0
+  },
+  "route": "/openapi.json",
+  "method": "GET",
+  "max_requests_to_limit": 650,
+  "max_seconds_to_limit": 45,
+  "recovery_deadline_seconds": 75,
+  "stop_conditions": [
+    "API unavailable or release changes",
+    "GPU jobs outstanding before or after the probe",
+    "Unexpected response status, body or Retry-After",
+    "No rate-limit response within the request or time bound"
+  ],
+  "limits": [
+    "This is a prospective deployment-level replay of an already known isolated middleware mechanism, not a new failure family.",
+    "Requests briefly consume this local API's rate-limit budget; no jobs are submitted or changed.",
+    "The diagnostic bundle retains the 429 and omits the response body, so it cannot identify the middleware cause by itself."
+  ]
+}

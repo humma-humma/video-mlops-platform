@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "deployed_http_429_without_gpu_admission",
+      "bundle": "rate_limit.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    }
+  ],
+  "limits": "The expected evidence-level abstention was fixed before the live probe. Held-out means unseen deployment evidence, not an independent mechanism: the same middleware was exercised previously in an isolated control."
+}

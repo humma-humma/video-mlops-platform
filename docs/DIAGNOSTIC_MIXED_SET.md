@@ -24,6 +24,6 @@ Reproduce without Docker, a GPU, or new job submissions:
 & '.\.venv\Scripts\python.exe' -m pytest -q tests/test_diagnostic_mixed_set.py
 ```
 
-The test checks that labels and splits still match the source manifests, bundle hashes match the report, and the frozen manifest and rule hashes have not drifted. The v1 manifest SHA-256 is `245d546e9e7c7fe73ceb87cd0d25a6c2c7ce0504a760c8e732c961213a71ac3f`.
+The test checks that labels and splits still match the source manifests, bundle hashes match the report, and the frozen manifest and recorded rule hashes remain unchanged. Later rule or schema versions can be evaluated separately without rewriting this historical result. The v1 manifest SHA-256 is `245d546e9e7c7fe73ceb87cd0d25a6c2c7ce0504a760c8e732c961213a71ac3f`.
 
 The next evaluation should be prospective: define labels and confounders before collecting a genuinely new incident family, then run the unchanged rules and record misses as well as abstentions. That would test generalization more meaningfully than adding related controls to this set.

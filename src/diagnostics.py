@@ -231,6 +231,7 @@ def validate_bundle(bundle: dict):
     if bundle.get("schema_version") != SCHEMA:
         raise ValueError("Unknown bundle schema")
     if bundle.get("source_kind") not in {"recovery_report", "admission_report", "live_api",
+                                         "live_http_probe",
                                          "live_api_plus_controlled_event",
                                          "synthetic_variant", "isolated_replay"}:
         raise ValueError("Unknown source kind")
