@@ -8,7 +8,7 @@ From the project PowerShell with Docker Desktop and the stack running:
 & '.\.venv\Scripts\python.exe' -m scripts.minio_incident_demo
 ```
 
-The script checks service readiness, all three container states and an empty job backlog before acting. It queues a small text-model job while its CPU worker and dispatcher are stopped. It then stops MinIO and starts the CPU worker. A real S3 `head_object` request should fail, producing a durable failed attempt with service code `dependency`. The script correlates exactly one structured worker-failure log to that job, hashes the selected log line and exports a redacted bundle while the job is failed. It restarts MinIO, waits for readiness, requests an explicit retry and verifies a successful second attempt and persisted result.
+The script checks service readiness, all three container states and an empty job backlog before acting. It queues a small text-model job while its CPU worker and dispatcher are stopped. It then stops MinIO and starts **only the existing CPU-worker container** with `docker start`; Compose's `start cpu-worker` also starts MinIO as a dependency and would invalidate the experiment. A real S3 `head_object` request should fail, producing a durable failed attempt with service code `dependency`. The script correlates exactly one structured worker-failure log to that job, hashes the selected log line and exports a redacted bundle while the job is failed. It restarts MinIO, waits for readiness, requests an explicit retry and verifies a successful second attempt and persisted result.
 
 Expected terminal ending:
 

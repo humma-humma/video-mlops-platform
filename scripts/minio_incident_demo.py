@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import time
 from urllib.error import HTTPError
@@ -29,6 +30,17 @@ def compose(*args: str) -> str:
 
 def running_services() -> set[str]:
     return set(compose("ps", "--services", "--status", "running").splitlines())
+
+
+def start_existing_container(service: str) -> None:
+    """Start only the selected container; Compose start also starts its dependencies."""
+    if service != "cpu-worker":
+        raise ValueError("Only the CPU worker may bypass Compose dependencies")
+    ids = compose("ps", "-a", "-q", service).splitlines()
+    if len(ids) != 1 or not re.fullmatch(r"[0-9a-f]{12,64}", ids[0]):
+        raise RuntimeError("Expected exactly one existing CPU-worker container")
+    subprocess.run(["docker", "start", ids[0]], cwd=ROOT, text=True,
+                   capture_output=True, check=True, timeout=120)
 
 
 def request(base: str, path: str, payload: dict | None = None) -> tuple[int, dict]:
@@ -131,7 +143,7 @@ def main(argv=None):
         log_start = datetime.now(timezone.utc).isoformat()
         compose("stop", "minio")
         note("minio_stopped")
-        compose("start", "cpu-worker")
+        start_existing_container("cpu-worker")
         if "minio" in running_services():
             raise RuntimeError("MinIO restarted before the worker could observe the outage")
         note("cpu_worker_started_during_outage")
