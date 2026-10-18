@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "cpu_worker_interrupted_during_gpu_job",
+      "bundle": "gpu_job_with_cpu_event.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    }
+  ],
+  "limits": "Label fixed before the controlled run. The CPU worker is unrelated to the video-inference GPU queue. A successful GPU job with a CPU-worker interruption supports abstention about a GPU failure, not general root-cause accuracy."
+}

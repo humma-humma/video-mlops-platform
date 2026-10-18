@@ -54,6 +54,25 @@ def test_missing_evidence_abstains():
                                   observations))["diagnosis"] == "insufficient_evidence"
 
 
+def test_worker_interruption_requires_matching_worker_resource():
+    observations = {"status": "FAILED",
+                    "attempts": safe_attempts([{"number": 1, "status": "FAILED",
+                                                "error_code": "timeout",
+                                                "finished_at": "2026-10-18T10:01:00Z"}]),
+                    "events": [{"event": "worker_killed", "generation": None,
+                                "timestamp": "2026-10-18T10:00:00Z",
+                                "worker_resource": "cpu"}],
+                    "admission": None, "timings_seconds": {}}
+    def bundle():
+        return finish_bundle("live_api_plus_controlled_event", {"report": "a" * 64}, observations)
+    assert diagnose(bundle())["diagnosis"] == "insufficient_evidence"
+    observations["events"][0]["worker_resource"] = "gpu"
+    assert diagnose(bundle())["diagnosis"] == "worker_interruption"
+    observations["events"][0]["worker_resource"] = "other"
+    with pytest.raises(ValueError, match="operational fields"):
+        diagnose(bundle())
+
+
 def test_reported_missing_input_requires_failed_attempt_and_generic_failure_abstains():
     attempts = safe_attempts([{"number": 1, "status": "FAILED", "error_code": "missing_input"},
                               {"number": 2, "status": "FAILED", "error_code": "internal"}])

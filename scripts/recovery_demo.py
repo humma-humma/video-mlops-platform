@@ -86,9 +86,9 @@ def main(argv=None):
         else:
             raise TimeoutError("Job never entered RUNNING")
         compose("kill", "-s", "SIGKILL", "worker", env=demo_env)
-        note("worker_killed", signal="SIGKILL")
+        note("worker_killed", signal="SIGKILL", worker_resource="gpu")
         compose("up", "-d", "--no-deps", "worker", env=demo_env)
-        note("worker_restarted")
+        note("worker_restarted", worker_resource="gpu")
         seen = None
         while time.monotonic() < deadline:
             _, job = get_json(base, "/api/v1/jobs/" + job_id)

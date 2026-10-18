@@ -77,9 +77,18 @@ def safe_events(items):
     allowed = {"submitted", "dispatched", "running", "succeeded", "failed",
                "deadline_exceeded", "retry_requested", "cancelled", "worker_killed",
                "worker_restarted", "explicit_retry_requested", "job_status"}
-    return [{"event": limited(item.get("event"), allowed),
-             "generation": item.get("generation") if type(item.get("generation")) is int else None,
-             "timestamp": safe_time(item.get("timestamp") or item.get("at"))} for item in items]
+    result = []
+    for item in items:
+        event = limited(item.get("event"), allowed)
+        safe = {"event": event,
+                "generation": item.get("generation") if type(item.get("generation")) is int else None,
+                "timestamp": safe_time(item.get("timestamp") or item.get("at"))}
+        if event in {"worker_killed", "worker_restarted"} and item.get("worker_resource") is not None:
+            resource = limited(item.get("worker_resource"), {"gpu", "cpu"})
+            if resource is not None:
+                safe["worker_resource"] = resource
+        result.append(safe)
+    return result
 
 
 def safe_timings(value):
@@ -222,6 +231,7 @@ def validate_bundle(bundle: dict):
     if bundle.get("schema_version") != SCHEMA:
         raise ValueError("Unknown bundle schema")
     if bundle.get("source_kind") not in {"recovery_report", "admission_report", "live_api",
+                                         "live_api_plus_controlled_event",
                                          "synthetic_variant", "isolated_replay"}:
         raise ValueError("Unknown source kind")
     sources = bundle.get("source_sha256")
@@ -288,7 +298,10 @@ def diagnose(bundle: dict) -> dict:
     events = observed.get("events") or []
     attempts = observed.get("attempts") or []
     citations = []
-    kill = next((i for i, item in enumerate(events) if item.get("event") == "worker_killed"), None)
+    kill = next((i for i, item in enumerate(events) if item.get("event") == "worker_killed"
+                 and (item.get("worker_resource") == "gpu"
+                      or bundle["source_kind"] == "recovery_report"
+                      and item.get("worker_resource") is None)), None)
     timeout = next((i for i, item in enumerate(attempts) if item.get("error_code") == "timeout"), None)
     ordered = False
     if kill is not None and timeout is not None:
@@ -300,6 +313,8 @@ def diagnose(bundle: dict) -> dict:
     if ordered:
         cause = "worker_interruption"
         citations = [f"observations.events[{kill}].event", f"observations.attempts[{timeout}].error_code"]
+        if events[kill].get("worker_resource") == "gpu":
+            citations.append(f"observations.events[{kill}].worker_resource")
     else:
         admission = observed.get("admission") or {}
         statuses = admission.get("http_statuses") or []
