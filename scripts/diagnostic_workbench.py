@@ -124,7 +124,7 @@ def main(argv=None):
                   "citations_valid": all(row["citations_valid"] for row in rows),
                   "scope": ("Isolated service-task replay with simulated adapter and injected faults; not GPU or production evidence"
                             if all(row["origin"] == "isolated_replay" for row in rows)
-                            else "One controlled local live incident; label checks evidence-level classification, not generalization"
+                            else "Controlled local live cases; labels check evidence-level classification, not generalization"
                             if all(row["origin"] == "controlled_live_api" for row in rows)
                             else "Historical live jobs from one local service; insufficient incident diversity for generalization"
                             if all(row["origin"] == "live_api" for row in rows)

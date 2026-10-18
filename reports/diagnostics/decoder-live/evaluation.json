@@ -1,0 +1,46 @@
+{
+  "abstentions": 2,
+  "by_split": {
+    "development": {
+      "correct": 2,
+      "total": 2
+    },
+    "held_out": {
+      "correct": 0,
+      "total": 0
+    }
+  },
+  "case_manifest_sha256": "5aeea8be479d25b2a7346e8efc9f4461625d17bb3cfee1d3eeb8277efb267c2b",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "92ece03c37d8f8b1b82aa8ed5e6054f67317a90e85e3d2d25b909f128b674260",
+      "case_id": "damaged_frame_payload",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_api",
+      "predicted": "insufficient_evidence",
+      "split": "development"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "712e367afbbdf0cd4707c646332122e7063547d2f3032e3e50e00d437b629217",
+      "case_id": "decodable_test_pattern_failure",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_api",
+      "predicted": "insufficient_evidence",
+      "split": "development"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 0,
+  "correct": 2,
+  "false_confident": 0,
+  "rules_sha256": "27add7050865c30e55ec3f0af37c04eaf4655d3ac76120c85bc23407f6efe6e8",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Controlled local live cases; labels check evidence-level classification, not generalization",
+  "total": 2
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "damaged_frame_payload",
+      "bundle": "damaged_job.json",
+      "expected": "insufficient_evidence",
+      "split": "development",
+      "origin": "controlled_live_api"
+    },
+    {
+      "id": "decodable_test_pattern_failure",
+      "bundle": "test_pattern_control.json",
+      "expected": "insufficient_evidence",
+      "split": "development",
+      "origin": "controlled_live_api"
+    }
+  ],
+  "limits": "Two failed GPU jobs with generic inference codes. The fixture ledger establishes a full-decode failure in FFmpeg for one input, but neither exported bundle identifies a decoder exception. Cases were selected after observation and do not estimate generalization."
+}
