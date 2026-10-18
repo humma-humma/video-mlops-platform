@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 import pytest
 
-from src.diagnostics import (compare, diagnose, digest, finish_bundle, from_api, from_report,
+from src.diagnostics import (compare, diagnose, diagnose_pair, digest, finish_bundle, from_api, from_report,
                              safe_attempts, validate_bundle)
 
 
@@ -67,6 +67,49 @@ def test_reported_missing_input_requires_failed_attempt_and_generic_failure_abst
     observations["attempts"] = attempts[1:]
     assert diagnose(finish_bundle("synthetic_variant", {"parent_bundle": "a" * 64},
                                   observations))["diagnosis"] == "insufficient_evidence"
+
+
+def test_structured_failure_stage_disambiguates_dependency_attempts():
+    observations = {"status": "FAILED", "attempts": safe_attempts([
+        {"number": 1, "status": "FAILED", "error_code": "dependency"}]),
+        "events": [], "admission": None, "timings_seconds": {}, "failure_stage": "input_download"}
+    def bundle():
+        return finish_bundle("isolated_replay", {"report": "a" * 64}, observations)
+    assert diagnose(bundle())["diagnosis"] == "reported_artifact_download_failure"
+    observations["failure_stage"] = "result_storage"
+    assert diagnose(bundle())["diagnosis"] == "reported_result_write_failure"
+    observations["failure_stage"] = "inference"
+    assert diagnose(bundle())["diagnosis"] == "insufficient_evidence"
+    observations["failure_stage"] = "input_download"
+    observations["attempts"] = observations["attempts"] * 2
+    assert diagnose(bundle())["diagnosis"] == "insufficient_evidence"
+    observations["attempts"] = observations["attempts"][:1]
+    observations["failure_stage"] = "user_supplied_stage"
+    with pytest.raises(ValueError, match="failure stage"):
+        diagnose(bundle())
+
+
+def test_stage_regression_requires_comparable_pair_and_dominant_delta():
+    common = {"status": "SUCCEEDED", "deployment_id": "video-summary-v1",
+              "input_sha256": "b" * 64, "model_revision": "a" * 40,
+              "lineage_hashes": {"code_hash": "c" * 64},
+              "attempts": [], "events": [], "admission": None}
+    before = finish_bundle("isolated_replay", {"report": "d" * 64},
+                           {**common, "timings_seconds": {"input_preparation": 0.02,
+                                                          "input_download": 0.02, "total": 0.05}})
+    after = {**common, "timings_seconds": {"input_preparation": 0.12,
+                                          "input_download": 0.03, "total": 0.16}}
+    candidate = finish_bundle("isolated_replay", {"report": "e" * 64}, after)
+    assert diagnose_pair(before, candidate)["diagnosis"] == "preparation_latency_regression"
+    after["timings_seconds"] = {"input_preparation": 0.03, "input_download": 0.12, "total": 0.16}
+    assert diagnose_pair(before, finish_bundle("isolated_replay", {"report": "e" * 64}, after))[
+        "diagnosis"] == "artifact_download_latency_regression"
+    after["timings_seconds"] = {"input_preparation": 0.12, "input_download": 0.12, "total": 0.25}
+    assert diagnose_pair(before, finish_bundle("isolated_replay", {"report": "e" * 64}, after))[
+        "diagnosis"] == "insufficient_evidence"
+    after["input_sha256"] = "f" * 64
+    assert diagnose_pair(before, finish_bundle("isolated_replay", {"report": "e" * 64}, after))[
+        "diagnosis"] == "insufficient_evidence"
 
 
 def test_api_export_is_loopback_read_only_bounded_and_redacted():

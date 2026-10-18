@@ -1,0 +1,12 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {"id": "storage_read_fault", "bundle": "storage_read_fault.json", "expected": "reported_artifact_download_failure", "split": "development", "origin": "isolated_replay"},
+    {"id": "preparation_delay", "baseline": "baseline.json", "bundle": "preparation_delay.json", "expected": "preparation_latency_regression", "split": "development", "origin": "isolated_replay"},
+    {"id": "storage_write_fault", "bundle": "storage_write_fault.json", "expected": "reported_result_write_failure", "split": "held_out", "origin": "isolated_replay"},
+    {"id": "dependency_inside_adapter", "bundle": "dependency_inside_adapter.json", "expected": "insufficient_evidence", "split": "held_out", "origin": "isolated_replay"},
+    {"id": "download_delay", "baseline": "baseline.json", "bundle": "download_delay.json", "expected": "artifact_download_latency_regression", "split": "held_out", "origin": "isolated_replay"},
+    {"id": "mixed_delay", "baseline": "baseline.json", "bundle": "mixed_delay.json", "expected": "insufficient_evidence", "split": "held_out", "origin": "isolated_replay"}
+  ],
+  "limits": "Cases exercise the real service task with SQLite/filesystem and a simulated video adapter. They do not execute a decoder, GPU model, S3 or networked queue. Labels are evidence-level findings, not verified downstream root causes."
+}

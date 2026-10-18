@@ -13,6 +13,7 @@
   "case_manifest_sha256": "9cc1a34ee4e0ffba864227e9417cf8bee51f69420c3b910573fab38e3fe55378",
   "cases": [
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "3d6faef92a6a222ad969e36aeb6fe822ab05491109dc4899c59e62dedb89fb2e",
       "case_id": "recorded_worker_interruption",
       "citations_valid": true,
@@ -23,6 +24,7 @@
       "split": "development"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "06fd0bd28414dff80736a64b25ad913905b8ba810b368173090ed826d25f9714",
       "case_id": "recorded_gpu_admission",
       "citations_valid": true,
@@ -33,6 +35,7 @@
       "split": "development"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "d457ed1cecb0d4c30f10ed9af951ab7bcdb4317854aa10156f421ff15d81b72f",
       "case_id": "timeout_without_kill",
       "citations_valid": true,
@@ -43,6 +46,7 @@
       "split": "held_out"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "fb4a27895a41cbee4a66a640469f6107b8f62d6d90fc06aea7c4aef29cbd2c9a",
       "case_id": "kill_without_timeout",
       "citations_valid": true,
@@ -53,6 +57,7 @@
       "split": "held_out"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "c2a179c431de1be883f6254c819f9dd957fe72f649479eb255f28bcdbbb9c2e8",
       "case_id": "kill_after_timeout",
       "citations_valid": true,
@@ -63,6 +68,7 @@
       "split": "held_out"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "76e2dac15e10c9cb4a1958ebc0187988d19b0a196fbd3acd878d8574a8a97a20",
       "case_id": "rejection_below_capacity",
       "citations_valid": true,
@@ -73,6 +79,7 @@
       "split": "held_out"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "573be9baf210c39955e0b08bbc9e1f8f5399ad32a05f6eff11e1af22f754bed7",
       "case_id": "rejection_without_capacity",
       "citations_valid": true,
@@ -83,6 +90,7 @@
       "split": "held_out"
     },
     {
+      "baseline_bundle_sha256": null,
       "bundle_sha256": "312782c7b143a8566fb154ac7c331c970f5b13c922d38832fc0f476d6b42aea2",
       "case_id": "admission_without_drain_probe",
       "citations_valid": true,
@@ -97,7 +105,7 @@
   "cited_cases": 3,
   "correct": 8,
   "false_confident": 0,
-  "rules_sha256": "71e94722014ef98c1933419f32f2fb83da3b4f7e00dafbbd1f18ed53eedecb38",
+  "rules_sha256": "90dff29ad0cd7fb66b9fb072833e67579be4cad54061415eeb717dd7576e1309",
   "schema_version": "diagnostic-evaluation-v1",
   "scope": "Small pilot with report-derived variants; not independent generalization evidence",
   "total": 8

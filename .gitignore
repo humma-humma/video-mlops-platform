@@ -219,6 +219,8 @@ poetry.toml
 .service-test-work/
 worker-scratch/
 reports/edge-headless-profile/
+reports/diagnostics/scratch_*/
+reports/diagnostics/.pytest_temp*/
 
 # Local working status (intentionally not published)
 docs/PROJECT_STATUS.md

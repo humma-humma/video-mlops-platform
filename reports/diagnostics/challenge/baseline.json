@@ -1,0 +1,54 @@
+{
+  "bundle_sha256": "304eb48ab9ff0b566f1060d11f7bb91d91034fe0084628362f0bbc5c9039b5f4",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": null,
+        "finished_at": "2026-10-18T10:52:02.683351+00:00",
+        "number": 1,
+        "started_at": "2026-10-18T10:52:02.583538+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "deployment_id": "video-summary-v1",
+    "events": [
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-18T10:52:02+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 0,
+        "timestamp": "2026-10-18T10:52:02+00:00"
+      }
+    ],
+    "failure_stage": null,
+    "input_sha256": "9597d2d7b980b483169cbd30a11aca4d36677ebd670c81c155e6c26d7b665330",
+    "lineage_hashes": {
+      "code_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "inference_config_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "model_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "status": "SUCCEEDED",
+    "timings_seconds": {
+      "category": 0.0,
+      "inference_total": 0.02063050027936697,
+      "input_download": 0.0690871998667717,
+      "input_preparation": 0.020609500352293253,
+      "model_load": 0.0,
+      "summary": 0.0,
+      "total": 0.09150369977578521
+    }
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "isolated_replay",
+  "source_sha256": {
+    "report": "073a3e75d8ee5dcd0a8bf01922261d1349b9fe1e196d217442e3ea5a2bf8ff23"
+  }
+}

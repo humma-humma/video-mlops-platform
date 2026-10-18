@@ -120,7 +120,7 @@ See [delivery status](reports/delivery_status.md) for dated evidence and limits.
 
 The [two-minute walkthrough script](docs/WALKTHROUGH_SCRIPT.md) maps each claim to a live screen or saved report for a portfolio recording.
 
-The [offline diagnostic workbench pilot](docs/DIAGNOSTIC_WORKBENCH.md) exports bounded, redacted incident evidence and checks a deterministic diagnosis baseline against report-derived cases and four historical live-job records. The observed cases include a recorded missing-input code and three abstentions; this small local set is not an independent root-cause benchmark.
+The [offline diagnostic workbench pilot](docs/DIAGNOSTIC_WORKBENCH.md) exports bounded, redacted incident evidence and checks a deterministic diagnosis baseline against report-derived cases, four historical live-job records and a [controlled service-task walkthrough](docs/DIAGNOSTIC_WALKTHROUGH.md). The replay distinguishes storage failure stages and measured preparation/download slowdowns with two abstentions. Its simulated adapter and hand-designed cases are not an independent root-cause benchmark.
 
 ## Scope and limitations
 

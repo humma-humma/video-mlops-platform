@@ -6,7 +6,7 @@ import json
 import os
 from pathlib import Path
 
-from src.diagnostics import compare, diagnose, from_api, from_report, read_json, validate_bundle
+from src.diagnostics import compare, diagnose, diagnose_pair, from_api, from_report, read_json, validate_bundle
 
 
 def write_json(path: Path, value: dict):
@@ -33,6 +33,10 @@ def main(argv=None):
     analysis = sub.add_parser("analyze", help="Analyze an offline bundle")
     analysis.add_argument("--bundle", type=Path, required=True)
     analysis.add_argument("--output", type=Path)
+    pair_analysis = sub.add_parser("analyze-pair", help="Identify a measured regression between two offline bundles")
+    pair_analysis.add_argument("--baseline", type=Path, required=True)
+    pair_analysis.add_argument("--candidate", type=Path, required=True)
+    pair_analysis.add_argument("--output", type=Path)
     comparison = sub.add_parser("compare", help="Compare two offline job bundles")
     comparison.add_argument("--baseline", type=Path, required=True)
     comparison.add_argument("--candidate", type=Path, required=True)
@@ -55,6 +59,11 @@ def main(argv=None):
         if args.output:
             write_json(args.output, result)
         print(json.dumps(result, indent=2))
+    elif args.command == "analyze-pair":
+        result = diagnose_pair(read_bundle(args.baseline), read_bundle(args.candidate))
+        if args.output:
+            write_json(args.output, result)
+        print(json.dumps(result, indent=2))
     elif args.command == "compare":
         result = compare(read_bundle(args.baseline), read_bundle(args.candidate))
         if args.output:
@@ -69,7 +78,10 @@ def main(argv=None):
         rows = []
         seen_hashes = set()
         for case in cases:
-            if (case.get("expected") not in {"worker_interruption", "gpu_admission_limit", "reported_missing_input", "insufficient_evidence"}
+            if (case.get("expected") not in {"worker_interruption", "gpu_admission_limit",
+                    "reported_missing_input", "reported_artifact_download_failure",
+                    "reported_result_write_failure", "preparation_latency_regression",
+                    "artifact_download_latency_regression", "insufficient_evidence"}
                     or case.get("split") not in {"development", "held_out"}):
                 raise ValueError("Invalid case label or split")
             case_path = (root / case["bundle"]).resolve()
@@ -79,13 +91,21 @@ def main(argv=None):
             if bundle["bundle_sha256"] in seen_hashes:
                 raise ValueError("Duplicate bundle in evaluation")
             seen_hashes.add(bundle["bundle_sha256"])
-            predicted = diagnose(bundle)
-            citations_valid = all(resolve_path(bundle, path) is not None
+            baseline = None
+            if "baseline" in case:
+                baseline_path = (root / case["baseline"]).resolve()
+                if not baseline_path.is_relative_to(root):
+                    raise ValueError("Baseline bundle must stay inside the case directory")
+                baseline = read_bundle(baseline_path)
+            predicted = diagnose_pair(baseline, bundle) if baseline else diagnose(bundle)
+            citation_root = {"baseline": baseline, "candidate": bundle} if baseline else bundle
+            citations_valid = all(resolve_path(citation_root, path) is not None
                                   for path in predicted["citations"])
             rows.append({"case_id": case["id"], "split": case["split"],
                          "origin": case["origin"], "expected": case["expected"],
                          "predicted": predicted["diagnosis"],
                          "bundle_sha256": bundle["bundle_sha256"],
+                         "baseline_bundle_sha256": baseline["bundle_sha256"] if baseline else None,
                          "correct": predicted["diagnosis"] == case["expected"],
                          "citations_valid": citations_valid})
         output = {"schema_version": "diagnostic-evaluation-v1", "cases": rows,
@@ -101,7 +121,9 @@ def main(argv=None):
                                          row["predicted"] != "insufficient_evidence" for row in rows),
                   "cited_cases": sum(row["predicted"] != "insufficient_evidence" for row in rows),
                   "citations_valid": all(row["citations_valid"] for row in rows),
-                  "scope": ("Historical live jobs from one local service; insufficient incident diversity for generalization"
+                  "scope": ("Isolated service-task replay with simulated adapter and injected faults; not GPU or production evidence"
+                            if all(row["origin"] == "isolated_replay" for row in rows)
+                            else "Historical live jobs from one local service; insufficient incident diversity for generalization"
                             if all(row["origin"] == "live_api" for row in rows)
                             else "Small pilot with report-derived variants; not independent generalization evidence")}
         write_json(args.output, output)
@@ -111,6 +133,8 @@ def main(argv=None):
 
 def resolve_path(value, path):
     import re
+    if not re.fullmatch(r"[a-z_]+(?:\[\d+\])?(?:\.[a-z_]+(?:\[\d+\])?)*", path):
+        return None
     current = value
     for field, index in re.findall(r"([a-z_]+)(?:\[(\d+)\])?", path):
         if not isinstance(current, dict) or field not in current:

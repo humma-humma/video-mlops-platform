@@ -20,6 +20,8 @@ ERROR_CODES = {"timeout", "oom", "out_of_memory", "invalid_output", "dependency"
                "storage_error", "missing_input", "inference", "internal"}
 TIMING_KEYS = {"model_load", "input_preparation", "summary", "category", "inference_total",
                "input_download", "total"}
+FAILURE_STAGES = {"artifact_check", "scratch_setup", "input_download", "inference",
+                  "result_validation", "result_storage"}
 
 
 def digest(data: bytes) -> str:
@@ -218,7 +220,8 @@ def validate_bundle(bundle: dict):
         raise ValueError("Unknown bundle fields")
     if bundle.get("schema_version") != SCHEMA:
         raise ValueError("Unknown bundle schema")
-    if bundle.get("source_kind") not in {"recovery_report", "admission_report", "live_api", "synthetic_variant"}:
+    if bundle.get("source_kind") not in {"recovery_report", "admission_report", "live_api",
+                                         "synthetic_variant", "isolated_replay"}:
         raise ValueError("Unknown source kind")
     sources = bundle.get("source_sha256")
     if not isinstance(sources, dict) or not 1 <= len(sources) <= 6 or any(
@@ -234,7 +237,7 @@ def validate_bundle(bundle: dict):
     observed = bundle.get("observations")
     if not isinstance(observed, dict) or set(observed) - {"status", "attempts", "events", "admission",
                                                 "timings_seconds", "model_revision", "input_sha256", "deployment_id",
-                                                "lineage_hashes", "current_snapshot"}:
+                                                "lineage_hashes", "current_snapshot", "failure_stage"}:
         raise ValueError("Invalid observations")
     if (observed.get("status") is not None and observed["status"] not in STATUSES
             or observed.get("attempts") != safe_attempts(observed.get("attempts"))
@@ -249,6 +252,9 @@ def validate_bundle(bundle: dict):
         raise ValueError("Invalid input hash")
     if "lineage_hashes" in observed and observed["lineage_hashes"] != safe_lineage(observed["lineage_hashes"]):
         raise ValueError("Invalid lineage hashes")
+    if observed.get("failure_stage") is not None and limited(
+            observed["failure_stage"], FAILURE_STAGES) != observed["failure_stage"]:
+        raise ValueError("Invalid failure stage")
     admission = observed.get("admission")
     if admission is not None and (not isinstance(admission, dict) or set(admission) != {
             "capacity", "http_statuses", "after_drain_status"} or
@@ -306,13 +312,59 @@ def diagnose(bundle: dict) -> dict:
             index = next(i for i, attempt in enumerate(attempts)
                          if attempt.get("status") == "FAILED" and attempt.get("error_code") == "missing_input")
             citations = ["observations.status", f"observations.attempts[{index}].error_code"]
+        elif observed.get("status") == "FAILED" and len(attempts) == 1 and observed.get("failure_stage") in {
+                "input_download", "result_storage"} and any(
+                attempt.get("status") == "FAILED" and attempt.get("error_code") == "dependency"
+                for attempt in attempts):
+            stage = observed["failure_stage"]
+            cause = ("reported_artifact_download_failure" if stage == "input_download"
+                     else "reported_result_write_failure")
+            index = next(i for i, attempt in enumerate(attempts)
+                         if attempt.get("status") == "FAILED" and attempt.get("error_code") == "dependency")
+            citations = ["observations.failure_stage", f"observations.attempts[{index}].error_code"]
         else:
             cause = "insufficient_evidence"
     return {"diagnosis": cause, "citations": citations,
             "reason": {"worker_interruption": "Worker kill and timed-out attempt are both recorded.",
                        "gpu_admission_limit": "Accepted jobs reached the recorded capacity and another request received 429.",
                        "reported_missing_input": "A failed attempt records the service's missing_input error code; artifact deletion or its origin is not established.",
+                       "reported_artifact_download_failure": "A structured worker event places the dependency failure at input download; the downstream storage fault is not independently identified.",
+                       "reported_result_write_failure": "A structured worker event places the dependency failure at result storage; the downstream storage fault is not independently identified.",
                        "insufficient_evidence": "Available evidence does not distinguish a supported cause."}[cause]}
+
+
+def diagnose_pair(baseline: dict, candidate: dict) -> dict:
+    """Identify the dominant measured stage regression, without assigning root cause."""
+    comparison = compare(baseline, candidate)
+    if (not comparison.get("comparable") or comparison["model_revision_equal"] is not True
+            or comparison["lineage_hashes_equal"] is not True
+            or comparison["statuses"] != ["SUCCEEDED", "SUCCEEDED"]):
+        return {"diagnosis": "insufficient_evidence", "citations": [],
+                "reason": "Matching deployment, input, model and successful runs are required."}
+    stages = comparison["stage_differences"]
+    preparation = stages.get("input_preparation")
+    download = stages.get("input_download")
+    if not preparation or not download or not stages.get("total"):
+        return {"diagnosis": "insufficient_evidence", "citations": [],
+                "reason": "Both stage timings and total time are required."}
+    prep_delta, download_delta = preparation["delta_seconds"], download["delta_seconds"]
+    total_delta = stages["total"]["delta_seconds"]
+    if total_delta < 0.05:
+        return {"diagnosis": "insufficient_evidence", "citations": [],
+                "reason": "No material total-time increase was observed."}
+    if prep_delta >= 0.05 and prep_delta > 2 * max(download_delta, 0) and prep_delta > total_delta / 2:
+        stage, diagnosis = "input_preparation", "preparation_latency_regression"
+    elif download_delta >= 0.05 and download_delta > 2 * max(prep_delta, 0) and download_delta > total_delta / 2:
+        stage, diagnosis = "input_download", "artifact_download_latency_regression"
+    else:
+        return {"diagnosis": "insufficient_evidence", "citations": [],
+                "reason": "Competing stage changes prevent a single dominant finding."}
+    return {"diagnosis": diagnosis,
+            "citations": [f"baseline.observations.timings_seconds.{stage}",
+                          f"candidate.observations.timings_seconds.{stage}",
+                          "baseline.observations.timings_seconds.total",
+                          "candidate.observations.timings_seconds.total"],
+            "reason": f"The measured {stage} increase dominates the total-time increase; its underlying cause is not established."}
 
 
 def compare(baseline: dict, candidate: dict) -> dict:

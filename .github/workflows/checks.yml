@@ -17,6 +17,11 @@ jobs:
           cache-dependency-path: requirements-service-test.txt
       - run: python -m pip install -r requirements-service-test.txt
       - run: python -m pytest -q
+      - name: Replay and score diagnostic challenge
+        run: |
+          python -m scripts.build_diagnostic_challenge
+          python -m scripts.diagnostic_workbench evaluate --cases reports/diagnostics/challenge/cases.json --output /tmp/diagnostic-challenge-evaluation.json
+          python -c "import json; r=json.load(open('/tmp/diagnostic-challenge-evaluation.json')); assert r['correct'] == r['total'] == 6 and r['citations_valid'] and r['false_confident'] == 0, r"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
