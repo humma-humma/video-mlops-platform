@@ -1,0 +1,13 @@
+{
+  "bundle_sha256": "13050d6d9eb4a763025e623f179244d1254f4d0ae4dab63d32511b46e8da72b7",
+  "cpu_worker_interruption_overlapped_gpu_attempt": true,
+  "diagnosis": "insufficient_evidence",
+  "gpu_job_status": "SUCCEEDED",
+  "ledger_sha256": "89a19afce2165a302b322a3055c2e1c03df3405801ac56c2365645d90ad4d104",
+  "limits": [
+    "One local CPU worker interruption does not test a GPU worker failure.",
+    "The external event is recorded by this controlled script, not by the job API.",
+    "A successful GPU job has no failure cause to diagnose."
+  ],
+  "schema_version": "unrelated-worker-incident-v1"
+}

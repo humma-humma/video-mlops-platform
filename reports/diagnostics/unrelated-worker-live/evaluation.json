@@ -1,0 +1,35 @@
+{
+  "abstentions": 1,
+  "by_split": {
+    "development": {
+      "correct": 0,
+      "total": 0
+    },
+    "held_out": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "case_manifest_sha256": "69e883889b51bb3d77ccf3df145edbe17b961625d308ef3cca6ea8e4fab199a2",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "13050d6d9eb4a763025e623f179244d1254f4d0ae4dab63d32511b46e8da72b7",
+      "case_id": "cpu_worker_interrupted_during_gpu_job",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_service",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 0,
+  "correct": 1,
+  "false_confident": 0,
+  "rules_sha256": "738f38f1a5d6ea0e95b50e8789842f62db1ef79cc314ff7df1e56dc63ee131e2",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Controlled local live cases; labels check evidence-level classification, not generalization",
+  "total": 1
+}

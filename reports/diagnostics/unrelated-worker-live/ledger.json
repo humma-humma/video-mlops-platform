@@ -1,0 +1,17 @@
+{
+  "cpu_worker_killed_at": "2026-10-18T21:13:05.762873+00:00",
+  "cpu_worker_restarted_at": "2026-10-18T21:13:06.404052+00:00",
+  "cpu_worker_started_at_after": "2026-10-18T21:13:06.149787678Z",
+  "cpu_worker_started_at_before": "2026-10-18T11:39:35.138320338Z",
+  "gpu_attempt_status": "SUCCEEDED",
+  "gpu_job_status": "SUCCEEDED",
+  "input_sha256": "1156579fa383f24ffce558aad692366080aa5cf603306664b43b622038641c50",
+  "limits": [
+    "One local CPU worker interruption does not test a GPU worker failure.",
+    "The external event is recorded by this controlled script, not by the job API.",
+    "A successful GPU job has no failure cause to diagnose."
+  ],
+  "overlap_verified": true,
+  "purpose": "controlled CPU worker interruption during a GPU inference attempt",
+  "schema_version": "unrelated-worker-incident-v1"
+}
