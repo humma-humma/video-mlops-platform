@@ -53,6 +53,8 @@ def main(argv=None):
     if args.base_url not in {"http://127.0.0.1:8000", "http://localhost:8000"}:
         parser.error("This probe only accepts the local API on port 8000")
     output_dir = args.output_dir.resolve()
+    if any((output_dir / name).exists() for name in ("ledger.json", "rate_limit.json", "incident.json")):
+        raise FileExistsError("Existing incident evidence must not be overwritten; use a fresh output directory")
     protocol, protocol_hash = read_json(output_dir / "protocol.json")
     if protocol["expected"] != "insufficient_evidence" or protocol["route"] != "/openapi.json":
         raise RuntimeError("Unexpected pre-registered protocol")

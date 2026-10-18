@@ -1,0 +1,32 @@
+{
+  "after": {
+    "gpu_job_capacity": 2,
+    "gpu_jobs_outstanding": 0,
+    "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+  },
+  "before": {
+    "gpu_job_capacity": 2,
+    "gpu_jobs_outstanding": 0,
+    "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+  },
+  "finished_at": "2026-10-18T23:07:35.981686+00:00",
+  "limited_response_kind": "request_rate_limit_exceeded",
+  "limits": [
+    "This is a prospective deployment-level replay of an already known isolated middleware mechanism, not a new failure family.",
+    "Requests briefly consume this local API's rate-limit budget; no jobs are submitted or changed.",
+    "The diagnostic bundle retains the 429 and omits the response body, so it cannot identify the middleware cause by itself."
+  ],
+  "liveness_during_limit": 200,
+  "method": "GET",
+  "probe_status_counts_to_limit": {
+    "200": 599,
+    "429": 1
+  },
+  "protocol_sha256": "6436c8c7753ed9d807cbc4cad6fa69bcc20d67766f6bca19c16eb049247bc044",
+  "recovered_probe_status": 200,
+  "registered_commit": "7c6e3720d1234404dc6638e2dbce1dbcc3118cb4",
+  "retry_after_seconds": 60,
+  "route": "/openapi.json",
+  "schema_version": "live-rate-limit-incident-v1",
+  "started_at": "2026-10-18T23:06:35.824804+00:00"
+}

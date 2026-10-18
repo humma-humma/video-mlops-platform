@@ -1,0 +1,8 @@
+{
+  "bundle_sha256": "04dc94901e68de4bc7047929b331c7ee0bc6ed7d808c100c59a6c671cfb9c473",
+  "diagnosis": "insufficient_evidence",
+  "ledger_sha256": "2dfeaf8b96b6f97fafc33f48dd065f43713fbd031e772c761c621fc2ea9bd1f9",
+  "protocol_sha256": "6436c8c7753ed9d807cbc4cad6fa69bcc20d67766f6bca19c16eb049247bc044",
+  "registered_commit": "7c6e3720d1234404dc6638e2dbce1dbcc3118cb4",
+  "schema_version": "live-rate-limit-incident-v1"
+}
