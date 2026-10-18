@@ -109,6 +109,7 @@ deployment. Do not use `docker compose down -v` if you want to keep job data.
 | Model-independent job infrastructure | [CPU text-model job](reports/multi_model_smoke_2026-10-17.json) with persisted result, attempt history and artifact revision; [deployment contract](docs/MULTI_MODEL_SERVING.md) |
 | GPU backlog protection | [Concurrent admission burst](reports/admission_demo.json): two accepted, one 429, acceptance resumes after drain |
 | Active-worker failure and recovery | [Interruption timeline and attempt history](reports/recovery_demo.json), [incident explanation](docs/INCIDENT_REVIEW_2026-10-17.md) |
+| Live storage-dependency failure and retry | [MinIO outage ledger](reports/diagnostics/minio-live/incident.json), [failed](reports/diagnostics/minio-live/failed_job.json) and [recovered](reports/diagnostics/minio-live/recovered_job.json) redacted bundles; [runbook](docs/MINIO_INCIDENT_RUNBOOK.md) |
 | Honest evaluation gate | [Rejected measured candidate](reports/local_demo_gate.json) under a [provisional policy](configs/gates/local-demo.json) |
 | GPU and request measurements | [GPU profile](reports/gpu_profile.md), [bounded serving measurements](reports/serving_measurement_smoke.md) |
 | Operational release and rollback | [Executed release report](reports/release_demo_20261017105931.json), [candidate probe](reports/release_candidate_20261017105931.json), [rollback probe](reports/release_rollback_20261017105931.json) |
@@ -120,7 +121,7 @@ See [delivery status](reports/delivery_status.md) for dated evidence and limits.
 
 The [two-minute walkthrough script](docs/WALKTHROUGH_SCRIPT.md) maps each claim to a live screen or saved report for a portfolio recording.
 
-The [offline diagnostic workbench pilot](docs/DIAGNOSTIC_WORKBENCH.md) exports bounded, redacted incident evidence and checks a deterministic diagnosis baseline against report-derived cases, four historical live-job records and a [controlled service-task walkthrough](docs/DIAGNOSTIC_WALKTHROUGH.md). The replay distinguishes storage failure stages and measured preparation/download slowdowns with two abstentions. Its simulated adapter and hand-designed cases are not an independent root-cause benchmark.
+The [offline diagnostic workbench pilot](docs/DIAGNOSTIC_WORKBENCH.md) exports bounded, redacted incident evidence and checks a deterministic diagnosis baseline against report-derived cases, four historical live-job records, a [controlled service-task walkthrough](docs/DIAGNOSTIC_WALKTHROUGH.md) and one [live MinIO interruption](docs/MINIO_INCIDENT_RUNBOOK.md). The live case demonstrates a durable dependency failure and successful retry with the real local object store. The replay distinguishes storage failure stages and measured preparation/download slowdowns with two abstentions. Neither collection is an independent root-cause benchmark.
 
 ## Scope and limitations
 

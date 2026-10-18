@@ -1,0 +1,60 @@
+{
+  "attempt_statuses": [
+    "FAILED",
+    "SUCCEEDED"
+  ],
+  "failure_bundle_sha256": "632b9b0796a9e1dbfaa2bcc463c3f677eae964aad26c2c03a07099af37b0274c",
+  "first_attempt_error_code": "dependency",
+  "first_attempt_stage": "artifact_check",
+  "input_sha256": "9ac1175af88d4a5496e8da2ad1a1cf1b286e02497fbf812bbc2773d0cc0fec5a",
+  "job_id_sha256": "56b28cd0759de15284526ecaef3327c1ee169ac7d8f3411cb8187523d895980d",
+  "limits": [
+    "One local MinIO outage and CPU job; no GPU or decoder claim.",
+    "Stage is from one job-correlated structured worker log, not the ordinary API exporter."
+  ],
+  "purpose": "controlled local MinIO interruption with CPU inference",
+  "recovery_bundle_sha256": "e09e71a8d22b840c12da9550e5b5720a249af9601c806db9a1a289762f5d07ad",
+  "schema_version": "minio-incident-v1",
+  "timeline": [
+    {
+      "event": "dispatch_and_cpu_worker_stopped",
+      "timestamp": "2026-10-18T11:39:33.993135+00:00"
+    },
+    {
+      "event": "test_job_queued",
+      "timestamp": "2026-10-18T11:39:34.082407+00:00"
+    },
+    {
+      "event": "minio_stopped",
+      "timestamp": "2026-10-18T11:39:34.785598+00:00"
+    },
+    {
+      "event": "cpu_worker_started_during_outage",
+      "timestamp": "2026-10-18T11:39:35.638808+00:00"
+    },
+    {
+      "event": "job_failed_during_outage",
+      "timestamp": "2026-10-18T11:39:51.993912+00:00"
+    },
+    {
+      "event": "redacted_failure_bundle_saved",
+      "timestamp": "2026-10-18T11:39:52.315146+00:00"
+    },
+    {
+      "event": "minio_restored",
+      "timestamp": "2026-10-18T11:39:53.893460+00:00"
+    },
+    {
+      "event": "retry_requested",
+      "timestamp": "2026-10-18T11:39:53.932945+00:00"
+    },
+    {
+      "event": "result_persisted",
+      "timestamp": "2026-10-18T11:39:54.983087+00:00"
+    },
+    {
+      "event": "services_restored",
+      "timestamp": "2026-10-18T11:40:00.964271+00:00"
+    }
+  ]
+}

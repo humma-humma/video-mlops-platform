@@ -1,0 +1,35 @@
+{
+  "abstentions": 0,
+  "by_split": {
+    "development": {
+      "correct": 1,
+      "total": 1
+    },
+    "held_out": {
+      "correct": 0,
+      "total": 0
+    }
+  },
+  "case_manifest_sha256": "f69a6ccc3a16ee08d467486a6bc625e8c64d585cec7df7bcc19a5cf38cc95625",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "632b9b0796a9e1dbfaa2bcc463c3f677eae964aad26c2c03a07099af37b0274c",
+      "case_id": "controlled_minio_outage",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_artifact_check_failure",
+      "origin": "controlled_live_api",
+      "predicted": "reported_artifact_check_failure",
+      "split": "development"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 1,
+  "correct": 1,
+  "false_confident": 0,
+  "rules_sha256": "27add7050865c30e55ec3f0af37c04eaf4655d3ac76120c85bc23407f6efe6e8",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "One controlled local live incident; label checks evidence-level classification, not generalization",
+  "total": 1
+}

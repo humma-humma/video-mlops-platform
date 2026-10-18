@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "controlled_minio_outage",
+      "bundle": "failed_job.json",
+      "expected": "reported_artifact_check_failure",
+      "split": "development",
+      "origin": "controlled_live_api"
+    }
+  ],
+  "limits": "One intentionally induced MinIO outage on a local CPU job. The rule and expected evidence-level label were specified before this run. This is acceptance evidence, not an independent diagnosis benchmark."
+}

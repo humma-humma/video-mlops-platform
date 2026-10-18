@@ -1,0 +1,48 @@
+{
+  "completed": true,
+  "job_id_sha256": "56b28cd0759de15284526ecaef3327c1ee169ac7d8f3411cb8187523d895980d",
+  "restoration_errors": [],
+  "schema_version": "minio-incident-run-state-v1",
+  "timeline": [
+    {
+      "event": "dispatch_and_cpu_worker_stopped",
+      "timestamp": "2026-10-18T11:39:33.993135+00:00"
+    },
+    {
+      "event": "test_job_queued",
+      "timestamp": "2026-10-18T11:39:34.082407+00:00"
+    },
+    {
+      "event": "minio_stopped",
+      "timestamp": "2026-10-18T11:39:34.785598+00:00"
+    },
+    {
+      "event": "cpu_worker_started_during_outage",
+      "timestamp": "2026-10-18T11:39:35.638808+00:00"
+    },
+    {
+      "event": "job_failed_during_outage",
+      "timestamp": "2026-10-18T11:39:51.993912+00:00"
+    },
+    {
+      "event": "redacted_failure_bundle_saved",
+      "timestamp": "2026-10-18T11:39:52.315146+00:00"
+    },
+    {
+      "event": "minio_restored",
+      "timestamp": "2026-10-18T11:39:53.893460+00:00"
+    },
+    {
+      "event": "retry_requested",
+      "timestamp": "2026-10-18T11:39:53.932945+00:00"
+    },
+    {
+      "event": "result_persisted",
+      "timestamp": "2026-10-18T11:39:54.983087+00:00"
+    },
+    {
+      "event": "services_restored",
+      "timestamp": "2026-10-18T11:40:00.964271+00:00"
+    }
+  ]
+}

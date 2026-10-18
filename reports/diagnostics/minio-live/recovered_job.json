@@ -1,0 +1,98 @@
+{
+  "bundle_sha256": "e09e71a8d22b840c12da9550e5b5720a249af9601c806db9a1a289762f5d07ad",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": "dependency",
+        "finished_at": "2026-10-18T11:39:50.964888+00:00",
+        "number": 1,
+        "started_at": "2026-10-18T11:39:37.372285+00:00",
+        "status": "FAILED"
+      },
+      {
+        "error_code": null,
+        "finished_at": "2026-10-18T11:39:53.971535+00:00",
+        "number": 2,
+        "started_at": "2026-10-18T11:39:53.923577+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-18T11:39:55.098956+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "text-topic-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:34.045286+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:34.070348+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:37.417564+00:00"
+      },
+      {
+        "event": "failed",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:50.967140+00:00"
+      },
+      {
+        "event": "retry_requested",
+        "generation": 1,
+        "timestamp": "2026-10-18T11:39:53.898911+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 1,
+        "timestamp": "2026-10-18T11:39:53.922884+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 1,
+        "timestamp": "2026-10-18T11:39:53.924742+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 1,
+        "timestamp": "2026-10-18T11:39:53.973353+00:00"
+      }
+    ],
+    "input_sha256": "9ac1175af88d4a5496e8da2ad1a1cf1b286e02497fbf812bbc2773d0cc0fec5a",
+    "lineage_hashes": {},
+    "model_revision": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+    "status": "SUCCEEDED",
+    "timings_seconds": {
+      "inference_total": 0.00045200600288808346,
+      "input_download": 0.004765262012369931,
+      "total": 0.006069279043003917
+    }
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "ea763e29ae8e942a42e835d45f3dcdc1056c497817ca7d67577cffbda36750fb",
+    "events": "169430f3fa929db2b083359d1a231d5e557119487d24087b7e106571f2457011",
+    "job": "2a64e105b4068a3e4ef177b5244f9d8016adfb0ea6f3b9a3bad2d9e8a590dea4",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "7893309a691592c47c8396692d215c188a7ea4ef2cba056dc6b15e99eb7e0cf9"
+  }
+}

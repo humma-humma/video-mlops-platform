@@ -191,7 +191,6 @@ def main(argv=None):
                   "recovery_bundle_sha256": final_bundle["bundle_sha256"],
                   "limits": ["One local MinIO outage and CPU job; no GPU or decoder claim.",
                              "Stage is from one job-correlated structured worker log, not the ordinary API exporter."]}
-        write_json(args.output_dir / "incident.json", report)
     finally:
         restore_errors = []
         for service in SERVICES:

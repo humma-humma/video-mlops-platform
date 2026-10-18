@@ -1,0 +1,69 @@
+{
+  "bundle_sha256": "632b9b0796a9e1dbfaa2bcc463c3f677eae964aad26c2c03a07099af37b0274c",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": "dependency",
+        "finished_at": "2026-10-18T11:39:50.964888+00:00",
+        "number": 1,
+        "started_at": "2026-10-18T11:39:37.372285+00:00",
+        "status": "FAILED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-18T11:39:52.312462+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "text-topic-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:34.045286+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:34.070348+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:37.417564+00:00"
+      },
+      {
+        "event": "failed",
+        "generation": 0,
+        "timestamp": "2026-10-18T11:39:50.967140+00:00"
+      }
+    ],
+    "failure_stage": "artifact_check",
+    "input_sha256": null,
+    "lineage_hashes": {},
+    "model_revision": null,
+    "status": "FAILED",
+    "timings_seconds": {}
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "925c7070908732eda850273c710a78ba2cd2625200d71536c68b5f2357cecf05",
+    "events": "429572f3f01b1434be86a8c647b0ca9b38f4297d93c12edcfa450252d24e982b",
+    "job": "4796ec27ad60797cd03170776dcf09471dcadcb055bec870f748a324f8174be5",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "d374ab42229a933d64bcb547cd11076873d5501872205a24fe91d3c3330af25a",
+    "structured_log": "35900d85e4994ef37bc882e9e605bdb3793329a291d3bebf57609f73e56004ff"
+  }
+}
