@@ -1,0 +1,21 @@
+{
+  "schema_version": "admission-incident-v1",
+  "purpose": "fresh local GPU capacity burst and after-drain negative control",
+  "admission_bundle_sha256": "d8bda107ffe808e9d6dc16078c23b3e6db0c93e86ca06145dab9794fd49ce6c4",
+  "after_drain_bundle_sha256": "9387eeb934f070ad336d5b0ed85dde5a461f900a209e0c8b6dcf5885b3a7c6e3",
+  "capacity": 2,
+  "accepted_during_burst": 2,
+  "rejected_during_burst": 1,
+  "after_drain_submission_status": 202,
+  "after_drain_job_status": "SUCCEEDED",
+  "case_manifest_frozen_before_submissions": true,
+  "evaluation_correct": 2,
+  "evaluation_total": 2,
+  "evaluation_citations_valid": true,
+  "limits": [
+    "This repeats the already known GPU capacity mechanism, so it is not an independent incident type.",
+    "The after-drain job is a negative control from the same experiment, not an unrelated incident.",
+    "The bundle omits request traces, raw logs and per-job GPU telemetry.",
+    "One local burst does not establish sustained throughput or general diagnosis accuracy."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "http_429_without_gpu_capacity_evidence",
+      "bundle": "rate_limit.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "isolated_http_middleware"
+    }
+  ],
+  "limits": "Label fixed before replay. This uses the real API rate-limit middleware in an isolated process, not the deployed service or an independent production incident. The diagnostic bundle deliberately exposes 429 but no GPU-capacity observation."
+}

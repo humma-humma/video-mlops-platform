@@ -125,8 +125,11 @@ def main(argv=None):
                   "citations_valid": all(row["citations_valid"] for row in rows),
                   "scope": ("Isolated service-task replay with simulated adapter and injected faults; not GPU or production evidence"
                             if all(row["origin"] == "isolated_replay" for row in rows)
+                            else "Isolated API middleware replay; no deployed service or GPU-capacity observation"
+                            if all(row["origin"] == "isolated_http_middleware" for row in rows)
                             else "Controlled local live cases; labels check evidence-level classification, not generalization"
-                            if all(row["origin"] == "controlled_live_api" for row in rows)
+                            if all(row["origin"] in {"controlled_live_api", "controlled_live_service"}
+                                   for row in rows)
                             else "Historical live jobs from one local service; insufficient incident diversity for generalization"
                             if all(row["origin"] == "live_api" for row in rows)
                             else "Small pilot with report-derived variants; not independent generalization evidence")}

@@ -1,0 +1,16 @@
+{
+  "configured_requests_per_minute": 1,
+  "execution": "in-process TestClient; deployed service unchanged",
+  "http_statuses": [
+    200,
+    429
+  ],
+  "limits": [
+    "No GPU job or capacity measurement was involved.",
+    "This is an isolated middleware replay, not a live deployment incident."
+  ],
+  "purpose": "isolated API middleware 429 confounder",
+  "retry_after_seconds": 60,
+  "route": "/openapi.json",
+  "schema_version": "rate-limit-control-v1"
+}

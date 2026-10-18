@@ -1,0 +1,46 @@
+{
+  "abstentions": 1,
+  "by_split": {
+    "development": {
+      "correct": 0,
+      "total": 0
+    },
+    "held_out": {
+      "correct": 2,
+      "total": 2
+    }
+  },
+  "case_manifest_sha256": "20cdd28814612c02fedc124a2f9004d90d010394e909529b9d4c4f18e1d62a21",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "d8bda107ffe808e9d6dc16078c23b3e6db0c93e86ca06145dab9794fd49ce6c4",
+      "case_id": "fresh_gpu_burst_at_recorded_capacity",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "gpu_admission_limit",
+      "origin": "controlled_live_service",
+      "predicted": "gpu_admission_limit",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "9387eeb934f070ad336d5b0ed85dde5a461f900a209e0c8b6dcf5885b3a7c6e3",
+      "case_id": "successful_job_after_capacity_drains",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_service",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 1,
+  "correct": 2,
+  "false_confident": 0,
+  "rules_sha256": "401a8950d6c58bd2b557ac44024120f5b24db684b716e3d61fec0654cb564d00",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Controlled local live cases; labels check evidence-level classification, not generalization",
+  "total": 2
+}

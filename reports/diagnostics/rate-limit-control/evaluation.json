@@ -1,0 +1,35 @@
+{
+  "abstentions": 1,
+  "by_split": {
+    "development": {
+      "correct": 0,
+      "total": 0
+    },
+    "held_out": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "case_manifest_sha256": "3fff0ea067f69b726191782561980ec697df55a3bc999809ac953165890f3bf9",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "5d1a12a40fe98ab36dbdb7a458dfa7429f8977978053df15c4dc82f624ab98c5",
+      "case_id": "http_429_without_gpu_capacity_evidence",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "isolated_http_middleware",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 0,
+  "correct": 1,
+  "false_confident": 0,
+  "rules_sha256": "401a8950d6c58bd2b557ac44024120f5b24db684b716e3d61fec0654cb564d00",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Isolated API middleware replay; no deployed service or GPU-capacity observation",
+  "total": 1
+}

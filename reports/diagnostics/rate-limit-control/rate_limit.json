@@ -1,0 +1,27 @@
+{
+  "bundle_sha256": "5d1a12a40fe98ab36dbdb7a458dfa7429f8977978053df15c4dc82f624ab98c5",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry"
+  ],
+  "observations": {
+    "admission": {
+      "after_drain_status": null,
+      "capacity": null,
+      "http_statuses": [
+        429
+      ]
+    },
+    "attempts": [],
+    "events": [],
+    "input_sha256": null,
+    "model_revision": null,
+    "status": null,
+    "timings_seconds": {}
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "isolated_replay",
+  "source_sha256": {
+    "report": "341b5aa515a683a934e53a764034ef441cb20e3888dd098d99855f2bcd4842da"
+  }
+}

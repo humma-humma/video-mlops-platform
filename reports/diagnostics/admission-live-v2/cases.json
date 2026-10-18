@@ -1,0 +1,20 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "fresh_gpu_burst_at_recorded_capacity",
+      "bundle": "admission.json",
+      "expected": "gpu_admission_limit",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    },
+    {
+      "id": "successful_job_after_capacity_drains",
+      "bundle": "after_drain_job.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    }
+  ],
+  "limits": "Labels fixed before the October 18 rerun. Both cases come from one local admission experiment; the 429 mechanism was already used to develop the baseline. The successful job is a negative control, not an unrelated incident. This checks repeatability and abstention, not independent diagnosis accuracy."
+}
