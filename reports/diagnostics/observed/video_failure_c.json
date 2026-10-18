@@ -1,0 +1,38 @@
+{
+  "bundle_sha256": "b198ed3dbd72c5c8dfc948f88583518e7c8085b6c742922b14549925f63be226",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-18T07:54:36.578543+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "video-summary-v1",
+    "events": [],
+    "input_sha256": null,
+    "lineage_hashes": {},
+    "model_revision": null,
+    "status": "FAILED",
+    "timings_seconds": {}
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "job": "1474a02d99fe2caaac1ba70dda2eec4df2b26f94f26a1b8b5bac578afc8bd1ce",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "7eda73039a2e50f51aac1b24b8cd1374cfce32606d65c6a4ba4d2275f74596bc"
+  }
+}

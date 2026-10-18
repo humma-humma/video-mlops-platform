@@ -97,7 +97,7 @@
   "cited_cases": 3,
   "correct": 8,
   "false_confident": 0,
-  "rules_sha256": "c2449c41196bcc592abd8f5b8046e1da6d36295428563a2e393dbdb57012aa40",
+  "rules_sha256": "71e94722014ef98c1933419f32f2fb83da3b4f7e00dafbbd1f18ed53eedecb38",
   "schema_version": "diagnostic-evaluation-v1",
   "scope": "Small pilot with report-derived variants; not independent generalization evidence",
   "total": 8

@@ -8,7 +8,8 @@ from unittest.mock import patch
 
 import pytest
 
-from src.diagnostics import compare, diagnose, digest, finish_bundle, from_api, from_report, validate_bundle
+from src.diagnostics import (compare, diagnose, digest, finish_bundle, from_api, from_report,
+                             safe_attempts, validate_bundle)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,6 +51,21 @@ def test_missing_evidence_abstains():
     observations = deepcopy(admission["observations"])
     observations["admission"]["capacity"] = 3
     assert diagnose(finish_bundle("synthetic_variant", {"parent_bundle": admission["bundle_sha256"]},
+                                  observations))["diagnosis"] == "insufficient_evidence"
+
+
+def test_reported_missing_input_requires_failed_attempt_and_generic_failure_abstains():
+    attempts = safe_attempts([{"number": 1, "status": "FAILED", "error_code": "missing_input"},
+                              {"number": 2, "status": "FAILED", "error_code": "internal"}])
+    assert [attempt["error_code"] for attempt in attempts] == ["missing_input", "internal"]
+    observations = {"status": "FAILED", "attempts": attempts, "events": [],
+                    "admission": None, "timings_seconds": {}}
+    bundle = finish_bundle("synthetic_variant", {"parent_bundle": "a" * 64}, observations)
+    result = diagnose(bundle)
+    assert result["diagnosis"] == "reported_missing_input"
+    assert result["citations"] == ["observations.status", "observations.attempts[0].error_code"]
+    observations["attempts"] = attempts[1:]
+    assert diagnose(finish_bundle("synthetic_variant", {"parent_bundle": "a" * 64},
                                   observations))["diagnosis"] == "insufficient_evidence"
 
 

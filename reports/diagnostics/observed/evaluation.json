@@ -1,0 +1,64 @@
+{
+  "abstentions": 3,
+  "by_split": {
+    "development": {
+      "correct": 1,
+      "total": 1
+    },
+    "held_out": {
+      "correct": 3,
+      "total": 3
+    }
+  },
+  "case_manifest_sha256": "b7c3c6337c03e67d0e6e8ffcb1d502d2f292ba8193a31beaee6e0dbdaf2fe568",
+  "cases": [
+    {
+      "bundle_sha256": "b8f836a4952bf8ffe6eeb40e10613cd828ad4f560014836c2398ae042c21983f",
+      "case_id": "historical_missing_input",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_missing_input",
+      "origin": "live_api",
+      "predicted": "reported_missing_input",
+      "split": "development"
+    },
+    {
+      "bundle_sha256": "12df7bbd870086bd0c2da82cf2e961a61c52d8a7d09d040880ce78dbd338292b",
+      "case_id": "generic_worker_failure",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "live_api",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "31eeae56e3b2d6efe1b439d554bec843a259d114d5dd0c053c12f29f12896992",
+      "case_id": "historical_failure_without_history_a",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "live_api",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "bundle_sha256": "b198ed3dbd72c5c8dfc948f88583518e7c8085b6c742922b14549925f63be226",
+      "case_id": "historical_failure_without_history_b",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "live_api",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 1,
+  "correct": 4,
+  "false_confident": 0,
+  "rules_sha256": "71e94722014ef98c1933419f32f2fb83da3b4f7e00dafbbd1f18ed53eedecb38",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Historical live jobs from one local service; insufficient incident diversity for generalization",
+  "total": 4
+}

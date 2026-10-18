@@ -16,7 +16,8 @@ MAX_SOURCE_BYTES = 2_000_000
 MAX_RECORDS = 100
 SCHEMA = "diagnostic-bundle-v1"
 STATUSES = {"PENDING", "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"}
-ERROR_CODES = {"timeout", "out_of_memory", "invalid_output", "storage_error", "missing_input"}
+ERROR_CODES = {"timeout", "oom", "out_of_memory", "invalid_output", "dependency",
+               "storage_error", "missing_input", "inference", "internal"}
 TIMING_KEYS = {"model_load", "input_preparation", "summary", "category", "inference_total",
                "input_download", "total"}
 
@@ -298,11 +299,19 @@ def diagnose(bundle: dict) -> dict:
         if type(capacity) is int and capacity > 0 and statuses.count(202) >= capacity and 429 in statuses:
             cause = "gpu_admission_limit"
             citations = ["observations.admission.capacity", "observations.admission.http_statuses"]
+        elif observed.get("status") == "FAILED" and any(
+                attempt.get("status") == "FAILED" and attempt.get("error_code") == "missing_input"
+                for attempt in attempts):
+            cause = "reported_missing_input"
+            index = next(i for i, attempt in enumerate(attempts)
+                         if attempt.get("status") == "FAILED" and attempt.get("error_code") == "missing_input")
+            citations = ["observations.status", f"observations.attempts[{index}].error_code"]
         else:
             cause = "insufficient_evidence"
     return {"diagnosis": cause, "citations": citations,
             "reason": {"worker_interruption": "Worker kill and timed-out attempt are both recorded.",
                        "gpu_admission_limit": "Accepted jobs reached the recorded capacity and another request received 429.",
+                       "reported_missing_input": "A failed attempt records the service's missing_input error code; artifact deletion or its origin is not established.",
                        "insufficient_evidence": "Available evidence does not distinguish a supported cause."}[cause]}
 
 

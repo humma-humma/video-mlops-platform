@@ -69,7 +69,7 @@ def main(argv=None):
         rows = []
         seen_hashes = set()
         for case in cases:
-            if (case.get("expected") not in {"worker_interruption", "gpu_admission_limit", "insufficient_evidence"}
+            if (case.get("expected") not in {"worker_interruption", "gpu_admission_limit", "reported_missing_input", "insufficient_evidence"}
                     or case.get("split") not in {"development", "held_out"}):
                 raise ValueError("Invalid case label or split")
             case_path = (root / case["bundle"]).resolve()
@@ -101,7 +101,9 @@ def main(argv=None):
                                          row["predicted"] != "insufficient_evidence" for row in rows),
                   "cited_cases": sum(row["predicted"] != "insufficient_evidence" for row in rows),
                   "citations_valid": all(row["citations_valid"] for row in rows),
-                  "scope": "Small pilot with report-derived variants; not independent generalization evidence"}
+                  "scope": ("Historical live jobs from one local service; insufficient incident diversity for generalization"
+                            if all(row["origin"] == "live_api" for row in rows)
+                            else "Small pilot with report-derived variants; not independent generalization evidence")}
         write_json(args.output, output)
         print(f"{output['correct']}/{output['total']} diagnoses matched labels; "
               f"citations valid: {output['citations_valid']}")

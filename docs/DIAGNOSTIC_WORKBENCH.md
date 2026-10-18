@@ -14,6 +14,19 @@ From the project PowerShell with the service `.venv`:
 
 The source reports are the [controlled worker interruption](../reports/recovery_demo.json) and [GPU admission burst](../reports/admission_demo.json). The builder exports sanitized versions and six explicitly labeled synthetic variants. The [pilot evaluation](../reports/diagnostics/pilot/evaluation.json) matches all eight labels and verifies that its citations resolve to bundle fields. The two parent incidents were observed locally; variants are edited copies, **not additional real incidents**. The development/held-out split prevents the evaluator from reading labels at inference time, but these variants share their parent reports and were designed with the rules. The 8/8 figure only shows the initial contract works; it is not a meaningful estimate of diagnosis accuracy on independent incidents.
 
+### Historical live-job challenge
+
+The [observed-case manifest](../reports/diagnostics/observed/cases.json) adds four distinct historical failed jobs exported from the local API on 2026-10-18. These are actual job records, not variants of the two pilot reports. One failed attempt explicitly reports `missing_input`; one text-deployment failure reports only `internal`; two older service-smoke failures retain a failed job status but no attempt or event history through the current API. The last two are related controlled checks, so four jobs do **not** imply four independent failure mechanisms. The exported [evaluation](../reports/diagnostics/observed/evaluation.json) matches 4/4 evidence-level labels, with three abstentions and no false-confident diagnoses. The missing-input case is development data: we added its rule after inspecting it. The other three are held out from that rule, but this small local collection is not a generalization benchmark.
+
+Run the frozen cases offline without starting Docker or submitting a video:
+
+```powershell
+& '.\.venv\Scripts\python.exe' -m scripts.diagnostic_workbench evaluate --cases reports/diagnostics/observed/cases.json --output reports/diagnostics/observed/evaluation.json
+& '.\.venv\Scripts\python.exe' -m scripts.diagnostic_workbench analyze --bundle reports/diagnostics/observed/text_failure.json
+```
+
+`reported_missing_input` means the service recorded that exact code on a failed attempt; it does not prove who deleted an artifact or why it was unavailable. `internal` identifies only a generic failure, so the workbench abstains. The current capacity and release fields in these historical bundles were collected days later; they cannot explain the old jobs. Source-response hashes identify what the exporter read, but the original API records are not independently signed. No raw job IDs, error messages, user content or credentials are stored in the bundles.
+
 To export one existing job from the running service without submitting or retrying work:
 
 ```powershell
@@ -36,9 +49,9 @@ The bundle includes status, bounded attempt/event history, known error codes, st
 
 ## Diagnostic rules and evaluation boundary
 
-The baseline reports `worker_interruption` only when a recorded worker kill precedes a timed-out attempt. It reports `gpu_admission_limit` when the recorded number of accepted jobs reaches recorded capacity and another submission receives 429. Otherwise it returns `insufficient_evidence`. Each non-abstaining result cites exact paths in the bundle. A 429 alone is not enough to prove GPU saturation, and a timeout alone is not enough to blame a worker kill.
+The baseline reports `worker_interruption` only when a recorded worker kill precedes a timed-out attempt. It reports `gpu_admission_limit` when the recorded number of accepted jobs reaches recorded capacity and another submission receives 429. It reports `reported_missing_input` when a failed job has a failed attempt with that exact service error code. Otherwise it returns `insufficient_evidence`. Each non-abstaining result cites exact paths in the bundle. A 429 alone is not enough to prove GPU saturation, and a timeout alone is not enough to blame a worker kill.
 
-The next useful experiment is to collect **independent** incidents with genuine confounders: a decoder/preprocessing slowdown, storage fault, rate-limit 429, memory pressure and an unrelated worker restart. Freeze a held-out set before changing the rules. Score cause identification, citation correctness, false confidence and abstention separately. Only then consider configuration proposals or an agent challenger. The agent would consume these bounded bundles and propose a reviewable diff; it would not receive production mutation rights or shell access. The [feasibility analysis](DIAGNOSTIC_WORKBENCH_FEASIBILITY.md) explains the larger scope and kill criterion.
+The next useful experiment is to collect **different failure mechanisms** with genuine confounders: a decoder/preprocessing slowdown, storage fault, rate-limit 429, memory pressure and an unrelated worker restart. Freeze a held-out set before changing the rules. Score cause identification, citation correctness, false confidence and abstention separately. Only then consider configuration proposals or an agent challenger. The agent would consume these bounded bundles and propose a reviewable diff; it would not receive production mutation rights or shell access. The [feasibility analysis](DIAGNOSTIC_WORKBENCH_FEASIBILITY.md) explains the larger scope and kill criterion.
 
 ## Current limits
 
