@@ -80,6 +80,7 @@ def main(argv=None):
         for case in cases:
             if (case.get("expected") not in {"worker_interruption", "gpu_admission_limit",
                     "reported_missing_input", "reported_artifact_check_failure",
+                    "reported_model_artifact_unavailable",
                     "reported_decode_failure",
                     "reported_artifact_download_failure",
                     "reported_result_write_failure", "preparation_latency_regression",

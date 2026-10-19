@@ -7,6 +7,7 @@ from .db import SessionLocal
 from .models import Job, JobAttempt, JobEvent
 from .media import VideoDecodeFailure, VideoDecodeTimeout, VideoDecoderUnavailable
 from .storage import ArtifactStorageError
+from .text_model import ModelArtifactUnavailable
 from . import telemetry
 from .deployments import DEPLOYMENTS, get_deployment
 
@@ -111,6 +112,8 @@ def retry_dependencies() -> int:
 
 def classify_failure(error):
     name = type(error).__name__
+    if isinstance(error, ModelArtifactUnavailable):
+        return "model_artifact_unavailable", "Packaged model artifact unavailable"
     if isinstance(error, VideoDecodeFailure):
         return "decode_failed", "Video frame preflight failed"
     if isinstance(error, VideoDecodeTimeout):

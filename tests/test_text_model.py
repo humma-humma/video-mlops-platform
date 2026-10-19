@@ -4,7 +4,9 @@ from pydantic import ValidationError
 
 from scripts.train_text_topic import build_model
 from src.service.deployments import TextTopicAdapter
-from src.service.text_model import MODEL_PATH, predict
+from src.service import text_model
+from src.service.lifecycle import classify_failure
+from src.service.text_model import MODEL_PATH, ModelArtifactUnavailable, predict
 
 
 def test_committed_model_artifact_is_reproducible_and_distinct_from_video():
@@ -28,3 +30,15 @@ def test_text_adapter_validates_its_own_output():
     result["output"]["scores"] = {"cooking": 1.0}
     with pytest.raises(ValidationError):
         adapter.validate_result(result)
+
+
+def test_missing_packaged_model_is_not_classified_as_missing_job_input(monkeypatch):
+    monkeypatch.setattr(text_model, "MODEL_PATH", MODEL_PATH.with_name("absent-test-model.json"))
+    text_model.load_model.cache_clear()
+    try:
+        with pytest.raises(ModelArtifactUnavailable) as caught:
+            text_model.predict("The server runs Python")
+        assert classify_failure(caught.value)[0] == "model_artifact_unavailable"
+        assert classify_failure(FileNotFoundError("Input artifact is missing"))[0] == "missing_input"
+    finally:
+        text_model.load_model.cache_clear()

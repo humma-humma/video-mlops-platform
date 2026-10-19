@@ -18,7 +18,7 @@ SCHEMA = "diagnostic-bundle-v1"
 STATUSES = {"PENDING", "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"}
 ERROR_CODES = {"timeout", "oom", "out_of_memory", "invalid_output", "dependency",
                "storage_error", "missing_input", "inference", "internal", "decode_failed",
-               "decode_timeout", "decoder_unavailable"}
+               "decode_timeout", "decoder_unavailable", "model_artifact_unavailable"}
 TIMING_KEYS = {"model_load", "input_preparation", "summary", "category", "inference_total",
                "input_download", "total"}
 FAILURE_STAGES = {"artifact_check", "scratch_setup", "input_download", "inference",
@@ -326,6 +326,13 @@ def diagnose(bundle: dict) -> dict:
             cause = "gpu_admission_limit"
             citations = ["observations.admission.capacity", "observations.admission.http_statuses"]
         elif observed.get("status") == "FAILED" and any(
+                attempt.get("status") == "FAILED" and attempt.get("error_code") == "model_artifact_unavailable"
+                for attempt in attempts):
+            cause = "reported_model_artifact_unavailable"
+            index = next(i for i, attempt in enumerate(attempts)
+                         if attempt.get("status") == "FAILED" and attempt.get("error_code") == "model_artifact_unavailable")
+            citations = ["observations.status", f"observations.attempts[{index}].error_code"]
+        elif observed.get("status") == "FAILED" and any(
                 attempt.get("status") == "FAILED" and attempt.get("error_code") == "missing_input"
                 for attempt in attempts):
             cause = "reported_missing_input"
@@ -356,6 +363,7 @@ def diagnose(bundle: dict) -> dict:
             "reason": {"worker_interruption": "Worker kill and timed-out attempt are both recorded.",
                        "gpu_admission_limit": "Accepted jobs reached the recorded capacity and another request received 429.",
                        "reported_missing_input": "A failed attempt records the service's missing_input error code; artifact deletion or its origin is not established.",
+                       "reported_model_artifact_unavailable": "A failed attempt records that the worker could not read its packaged model artifact; the underlying packaging or filesystem cause is not established.",
                        "reported_decode_failure": "A failed attempt records that the bounded frame preflight could not decode the first frame; the underlying codec or data fault is not identified.",
                        "reported_artifact_check_failure": "A structured worker event places the dependency failure at the artifact check; the downstream storage fault is not independently identified.",
                        "reported_artifact_download_failure": "A structured worker event places the dependency failure at input download; the downstream storage fault is not independently identified.",

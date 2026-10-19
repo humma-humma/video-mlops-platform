@@ -88,6 +88,19 @@ def test_reported_missing_input_requires_failed_attempt_and_generic_failure_abst
                                   observations))["diagnosis"] == "insufficient_evidence"
 
 
+def test_model_artifact_code_is_distinct_from_input_and_generic_inference_failures():
+    observations = {"status": "FAILED", "attempts": safe_attempts([
+        {"number": 1, "status": "FAILED", "error_code": "model_artifact_unavailable"}]),
+        "events": [], "admission": None, "timings_seconds": {}}
+    def bundle():
+        return finish_bundle("synthetic_variant", {"parent_bundle": "a" * 64}, observations)
+    result = diagnose(bundle())
+    assert result["diagnosis"] == "reported_model_artifact_unavailable"
+    assert result["citations"] == ["observations.status", "observations.attempts[0].error_code"]
+    observations["attempts"][0]["error_code"] = "internal"
+    assert diagnose(bundle())["diagnosis"] == "insufficient_evidence"
+
+
 def test_reported_decode_failure_requires_the_typed_worker_code():
     observations = {"status": "FAILED", "attempts": safe_attempts([
         {"number": 1, "status": "FAILED", "error_code": "decode_failed"}]),

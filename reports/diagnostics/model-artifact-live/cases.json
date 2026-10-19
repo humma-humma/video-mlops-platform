@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "cpu_model_artifact_unavailable",
+      "bundle": "failed_job.json",
+      "expected": "reported_model_artifact_unavailable",
+      "split": "development",
+      "origin": "controlled_live_service"
+    }
+  ],
+  "limits": "The label is registered before injection, but the rule was developed for this mechanism. This is an acceptance check, not an independent held-out accuracy estimate."
+}

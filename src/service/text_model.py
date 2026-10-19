@@ -11,13 +11,20 @@ import re
 MODEL_PATH = Path(__file__).parent / "model_artifacts" / "text_topic_v1.json"
 
 
+class ModelArtifactUnavailable(RuntimeError):
+    """The worker could not read its packaged model artifact."""
+
+
 def tokens(text: str) -> list[str]:
     return re.findall(r"[a-z]+", text.lower())
 
 
 @lru_cache(maxsize=1)
 def load_model() -> tuple[dict, str]:
-    payload = MODEL_PATH.read_bytes()
+    try:
+        payload = MODEL_PATH.read_bytes()
+    except OSError as error:
+        raise ModelArtifactUnavailable("Packaged text model artifact unavailable") from error
     model = json.loads(payload)
     if model.get("schema_version") != 1 or not model.get("labels"):
         raise ValueError("Invalid text model artifact")
