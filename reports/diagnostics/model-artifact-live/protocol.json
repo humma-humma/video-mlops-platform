@@ -1,0 +1,26 @@
+{
+  "schema_version": "prospective-incident-protocol-v1",
+  "registered_date": "2026-10-19",
+  "case_id": "cpu_model_artifact_unavailable",
+  "purpose": "Distinguish a missing CPU model artifact from a missing submitted input artifact",
+  "injected_mechanism": "Temporarily hide only the text-topic-v1 model artifact inside the local CPU worker, restart that worker to clear its model cache, and submit one new synthetic text job",
+  "control": "After exact artifact restoration and worker restart, submit the same synthetic text through a new job and require success",
+  "expected_observations_before_repair": {
+    "failed_job_status": "FAILED",
+    "attempt_error_code": "missing_input",
+    "diagnosis": "reported_missing_input"
+  },
+  "expected_observations_after_repair": {
+    "failed_job_status": "FAILED",
+    "attempt_error_code": "model_artifact_unavailable",
+    "diagnosis": "reported_model_artifact_unavailable",
+    "control_job_status": "SUCCEEDED"
+  },
+  "confounder": "A separate missing input artifact must continue to report missing_input; generic inference FileNotFoundError must not become a model-artifact claim",
+  "limits": [
+    "The pre-repair prediction follows current source code and has not yet been observed in a live worker.",
+    "The post-repair rule is developed for this registered mechanism; its eventual run is an acceptance check, not held-out accuracy.",
+    "This local intervention must wait for zero outstanding CPU jobs and must restore the model bytes even if the test fails.",
+    "No GPU model, user video, remote environment or production worker is modified."
+  ]
+}
