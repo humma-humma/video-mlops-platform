@@ -1,0 +1,13 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "successful_job_with_missing_result_object",
+      "bundle": "missing_result.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    }
+  ],
+  "limits": "Expected abstention and restoration conditions were committed before the live intervention. One injected job tests an unsupported, distinct read-time artifact-loss mechanism, not population-level accuracy."
+}

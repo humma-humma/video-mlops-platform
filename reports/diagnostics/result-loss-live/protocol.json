@@ -1,0 +1,24 @@
+{
+  "schema_version": "prospective-incident-protocol-v1",
+  "registered_date": "2026-10-19",
+  "case_id": "successful_job_with_missing_result_object",
+  "purpose": "Test read-time result loss while the local object store and durable job record remain available",
+  "expected": "insufficient_evidence",
+  "expected_observations": {
+    "submission_status": 202,
+    "job_status": "SUCCEEDED",
+    "read_before": 200,
+    "read_during_object_loss": 503,
+    "job_list_status_during_object_loss": "SUCCEEDED",
+    "read_after_restore": 200,
+    "successful_attempts": 1,
+    "object_bytes_restored_exactly": true
+  },
+  "intervention": "Delete only the result object of a newly submitted synthetic text-topic-v1 job, then restore its exact bytes in a finally block",
+  "limits": [
+    "This is one deliberately injected local object loss, not a spontaneous storage incident.",
+    "The object store remains healthy; deleting one result differs from the earlier MinIO outage during input checking.",
+    "The workbench has no rule for read-time result loss; abstention is expected even though the external intervention ledger identifies the injected cause.",
+    "No user video or existing job artifact is modified."
+  ]
+}

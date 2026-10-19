@@ -250,9 +250,11 @@ def validate_bundle(bundle: dict):
     observed = bundle.get("observations")
     if not isinstance(observed, dict) or set(observed) - {"status", "attempts", "events", "admission",
                                                 "timings_seconds", "model_revision", "input_sha256", "deployment_id",
-                                                "lineage_hashes", "current_snapshot", "failure_stage"}:
+                                                "lineage_hashes", "current_snapshot", "failure_stage",
+                                                "result_read_http_status"}:
         raise ValueError("Invalid observations")
     if (observed.get("status") is not None and observed["status"] not in STATUSES
+            or observed.get("result_read_http_status") not in (None, 200, 503)
             or observed.get("attempts") != safe_attempts(observed.get("attempts"))
             or observed.get("events") != safe_events(observed.get("events"))
             or observed.get("timings_seconds") != safe_timings(observed.get("timings_seconds"))):
