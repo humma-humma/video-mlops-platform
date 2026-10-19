@@ -1,0 +1,19 @@
+{
+  "artifact_restored_exactly": true,
+  "control_job_id_sha256": "7d20c7ec11065278cd9520951ad0160b067bc19f0af4542b7c8b357b72c3b0b8",
+  "control_status": "SUCCEEDED",
+  "diagnosis": "reported_model_artifact_unavailable",
+  "failed_job_id_sha256": "ba84f0cfd3b7fbee716f24b7ff5364109ce8de0f0c931138a3bebbccedc83fdb",
+  "injected_attempt_error_code": "model_artifact_unavailable",
+  "limits": [
+    "The pre-repair prediction follows current source code and has not yet been observed in a live worker.",
+    "The post-repair rule is developed for this registered mechanism; its eventual run is an acceptance check, not held-out accuracy.",
+    "This local intervention must wait for zero outstanding CPU jobs and must restore the model bytes even if the test fails.",
+    "No GPU model, user video, remote environment or production worker is modified."
+  ],
+  "model_artifact_sha256": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+  "observed_at": "2026-10-19T10:03:28.478448+00:00",
+  "protocol_sha256": "eb971d05d524241ba3d4e40e982b382fedf4b3b5d66816cea57c85e9db2fb24e",
+  "registered_commit": "1d1c69c25e29b03b7ff1947efaffd001002e5fe6",
+  "schema_version": "model-artifact-incident-v1"
+}

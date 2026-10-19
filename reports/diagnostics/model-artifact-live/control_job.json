@@ -1,0 +1,71 @@
+{
+  "bundle_sha256": "ac3b2fa8a46b585a837070a6baa74f300320154db1168cc588d7e49c9794e349",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": null,
+        "finished_at": "2026-10-19T10:03:28.125464+00:00",
+        "number": 1,
+        "started_at": "2026-10-19T10:03:27.855323+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-19T10:03:28.476251+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "text-topic-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-19T10:03:26.245540+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-19T10:03:26.258059+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-19T10:03:27.885234+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 0,
+        "timestamp": "2026-10-19T10:03:28.127320+00:00"
+      }
+    ],
+    "input_sha256": "b4f47df443352ca10cd6475a916ffdbc559bcc1aed22cd56daa8c562636bb1c6",
+    "lineage_hashes": {},
+    "model_revision": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+    "status": "SUCCEEDED",
+    "timings_seconds": {
+      "inference_total": 0.000328446039929986,
+      "input_download": 0.004545932984910905,
+      "total": 0.004996995907276869
+    }
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "1d7d1971464365102c31b8f13ca7a620e4f52af3b51a4c56eaffa83c03f533e5",
+    "events": "a7b27557813f6fd04927e0ebdf4bab5101a517305ffb7705e3d515b20e23d20e",
+    "job": "8357e34d9939c384aa8658055c5fa9c3dcb5df764825544a98c83726d3eb90bb",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "cf203fb2b2810086adaf81152b8eb2016e5e818c9dedafc582683ca074267dff"
+  }
+}

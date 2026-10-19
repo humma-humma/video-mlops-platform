@@ -1,0 +1,9 @@
+{
+  "control_bundle_sha256": "ac3b2fa8a46b585a837070a6baa74f300320154db1168cc588d7e49c9794e349",
+  "diagnosis": "reported_model_artifact_unavailable",
+  "failure_bundle_sha256": "d237592dba9e5d478b6f05dd88efbd8f7783891e9917a28a9ec93d8f0aa422dc",
+  "ledger_sha256": "0c4ae84304462f0aa8600d3a5e0f42e0c1e8c673d6353d5185b5d29806d77a11",
+  "protocol_sha256": "eb971d05d524241ba3d4e40e982b382fedf4b3b5d66816cea57c85e9db2fb24e",
+  "run_state_sha256": "8c949b49dd29ddd8709a6e800e82483e478a3d7f5881ccd77a63aac0d6a409d2",
+  "schema_version": "model-artifact-incident-v1"
+}

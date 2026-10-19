@@ -1,0 +1,6 @@
+{
+  "artifact_restored_exactly": true,
+  "failed_job_id_sha256": "ba84f0cfd3b7fbee716f24b7ff5364109ce8de0f0c931138a3bebbccedc83fdb",
+  "model_artifact_sha256": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+  "schema_version": "model-artifact-restoration-v1"
+}
