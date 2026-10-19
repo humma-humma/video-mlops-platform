@@ -1,0 +1,39 @@
+{
+  "abstentions": 1,
+  "by_split": {
+    "development": {
+      "correct": 0,
+      "total": 0
+    },
+    "held_out": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "case_manifest_sha256": "1c106fea6b09bfd8d7dfcc8bdeae80c24b08651d0c399a61ad3a4de7ec385f50",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "f4c14c09b38adbb2e4177e69f342d7f6aeeb4e5a1342d8681ba18fbfbe907630",
+      "case_id": "successful_job_with_missing_result_object",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_service",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 0,
+  "correct": 1,
+  "correct_abstentions": 1,
+  "correct_diagnoses": 0,
+  "false_confident": 0,
+  "missed_diagnoses": 0,
+  "rules_sha256": "c6f4da5a47c307005c9aec21724cd55f45bcfdf8447b6954311ee2968ca8b6aa",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Controlled local live cases; labels check evidence-level classification, not generalization",
+  "supported_diagnoses": 0,
+  "total": 1
+}

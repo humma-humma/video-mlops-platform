@@ -1,0 +1,73 @@
+{
+  "bundle_sha256": "f4c14c09b38adbb2e4177e69f342d7f6aeeb4e5a1342d8681ba18fbfbe907630",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": null,
+        "finished_at": "2026-10-19T06:58:39.499682+00:00",
+        "number": 1,
+        "started_at": "2026-10-19T06:58:38.882788+00:00",
+        "status": "SUCCEEDED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-19T06:58:39.994831+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "text-topic-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-19T06:58:38.702202+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-19T06:58:38.798629+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-19T06:58:39.027851+00:00"
+      },
+      {
+        "event": "succeeded",
+        "generation": 0,
+        "timestamp": "2026-10-19T06:58:39.501730+00:00"
+      }
+    ],
+    "input_sha256": "02d8198a1ba7261dfd90b746a604339b6a353e839728a57b9cc74e7e2bf99b71",
+    "lineage_hashes": {},
+    "model_revision": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+    "result_read_http_status": 503,
+    "status": "SUCCEEDED",
+    "timings_seconds": {
+      "inference_total": 0.0006366920424625278,
+      "input_download": 0.006415529060177505,
+      "total": 0.008277398999780416
+    }
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api_plus_controlled_event",
+  "source_sha256": {
+    "attempts": "68196445f4719b84d75faa4771156eedf82f8d06a3e6aa2284111ae3ea4c3fb5",
+    "events": "b4a8e11849c2fceb5a366390417dfbca4d79b12f3cbd4e39ca72ffd347a98bed",
+    "job": "62a4f181e5fe362d3f3f302a57e27a7a254cf54fcf7e250e242be9cc8666b3d8",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "340ef6d70ca8737ccb818b9f09c3d3c942244b3d3a3cbb17acb632811c144331",
+    "report": "31a118e6f9d01601cca1c3f8eef2039ad020aed932b553d4f0b20000ded3eb49"
+  }
+}

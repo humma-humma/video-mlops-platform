@@ -58,7 +58,8 @@ def main(argv=None):
     if args.base_url not in {"http://127.0.0.1:8000", "http://localhost:8000"}:
         parser.error("This intervention only accepts the local API on port 8000")
     output = args.output_dir.resolve()
-    if any((output / name).exists() for name in ("ledger.json", "missing_result.json", "incident.json")):
+    if any((output / name).exists() for name in (
+            "run_state.json", "ledger.json", "missing_result.json", "incident.json")):
         raise FileExistsError("Existing incident evidence must not be overwritten")
     protocol, protocol_hash = read_json(output / "protocol.json")
     if protocol["expected"] != "insufficient_evidence":

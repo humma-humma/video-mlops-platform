@@ -1,0 +1,6 @@
+{
+  "job_id_sha256": "ca1551741e026092e8f8f821a6d874e785acb8b01a70b6ecb2fb3efaba45585b",
+  "object_restored_exactly": true,
+  "result_object_sha256": "188a21ad2ccb13da77ec81c3a90a2874ce45102fe559a3e2dbaa8e02e13ecd79",
+  "schema_version": "result-loss-restoration-v1"
+}

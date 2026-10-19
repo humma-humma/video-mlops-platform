@@ -1,0 +1,26 @@
+{
+  "bucket_available_during_object_loss": true,
+  "job_id_sha256": "ca1551741e026092e8f8f821a6d874e785acb8b01a70b6ecb2fb3efaba45585b",
+  "job_list_status_during_object_loss": "SUCCEEDED",
+  "job_status_before": "SUCCEEDED",
+  "limits": [
+    "This is one deliberately injected local object loss, not a spontaneous storage incident.",
+    "The object store remains healthy; deleting one result differs from the earlier MinIO outage during input checking.",
+    "The workbench has no rule for read-time result loss; abstention is expected even though the external intervention ledger identifies the injected cause.",
+    "No user video or existing job artifact is modified."
+  ],
+  "observed_at": "2026-10-19T06:58:40.274143+00:00",
+  "protocol_sha256": "891e9975d2102cd9fc6b389b96257051e5ad4c2ba149c285aa1ebb6107058732",
+  "read_after_restore": 200,
+  "read_before": 200,
+  "read_during_object_loss": 503,
+  "registered_commit": "edbe7c3175895ccd039851fcf13a8fde04d05e63",
+  "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee",
+  "result_object_deleted_at": "2026-10-19T06:58:40.006064+00:00",
+  "result_object_restored_at": "2026-10-19T06:58:40.097170+00:00",
+  "result_object_restored_exactly": true,
+  "result_object_sha256": "188a21ad2ccb13da77ec81c3a90a2874ce45102fe559a3e2dbaa8e02e13ecd79",
+  "schema_version": "result-loss-incident-v1",
+  "submission_status": 202,
+  "successful_attempts": 1
+}

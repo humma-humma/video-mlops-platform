@@ -1,0 +1,9 @@
+{
+  "bundle_sha256": "f4c14c09b38adbb2e4177e69f342d7f6aeeb4e5a1342d8681ba18fbfbe907630",
+  "diagnosis": "insufficient_evidence",
+  "ledger_sha256": "31a118e6f9d01601cca1c3f8eef2039ad020aed932b553d4f0b20000ded3eb49",
+  "protocol_sha256": "891e9975d2102cd9fc6b389b96257051e5ad4c2ba149c285aa1ebb6107058732",
+  "registered_commit": "edbe7c3175895ccd039851fcf13a8fde04d05e63",
+  "run_state_sha256": "26e6403a15e11d42ca2afd9f24bccfa92f6f2d617b690249c7cd82a1ba29146d",
+  "schema_version": "result-loss-incident-v1"
+}
