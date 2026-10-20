@@ -28,7 +28,7 @@ if ($postgresId) {
     Invoke-Checked -Program docker -Arguments @('compose', 'exec', '-T', 'postgres', 'pg_dump', '-U', 'video', '-d', 'video', '-Fc', '-f', '/tmp/video-before-upgrade.dump')
     Invoke-Checked -Program docker -Arguments @('compose', 'cp', 'postgres:/tmp/video-before-upgrade.dump', (Join-Path $backupRoot $backupName))
 }
-Invoke-Checked -Program $python -Arguments @('-m', 'pip', 'install', '-r', 'requirements-service-test.txt')
+Invoke-Checked -Program $python -Arguments @('-m', 'pip', 'install', '-r', 'requirements-service-test.lock.txt')
 Invoke-Checked -Program $python -Arguments @('-m', 'pytest', '-q')
 Invoke-Checked -Program $python -Arguments @('-m', 'scripts.verify_manifest')
 Invoke-Checked -Program docker -Arguments @('compose', 'up', '-d', '--build', '--wait', '--wait-timeout', '180')

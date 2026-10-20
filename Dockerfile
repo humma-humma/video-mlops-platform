@@ -1,9 +1,9 @@
-FROM python:3.12-slim AS dependencies
+FROM python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1 AS dependencies
 WORKDIR /app
-COPY requirements-service.txt ./
-RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements-service.txt
+COPY requirements-service.lock.txt ./
+RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements-service.lock.txt
 
-FROM python:3.12-slim
+FROM python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
 COPY --from=dependencies /wheels /wheels

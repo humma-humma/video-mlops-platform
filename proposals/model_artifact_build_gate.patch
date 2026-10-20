@@ -1,0 +1,11 @@
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
+ COPY --from=dependencies /wheels /wheels
+ RUN pip install --no-cache-dir --no-index /wheels/* && rm -rf /wheels && useradd --uid 10001 --create-home app
+ COPY src ./src
++COPY scripts ./scripts
++RUN python -m scripts.verify_text_model_artifact --artifact src/service/model_artifacts/text_topic_v1.json --sha256 def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b
+ COPY main.py ./main.py
+ ENV PYTHONPATH=/app
+ USER app

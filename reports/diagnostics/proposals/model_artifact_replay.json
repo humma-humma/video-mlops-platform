@@ -1,0 +1,21 @@
+{
+  "baseline": "Current Dockerfile has no packaged-model build check; baseline acceptance is inferred from its steps, not measured by this replay",
+  "candidate": "Proposed verifier command executed in a local subprocess, not in a Docker image build",
+  "limits": "This demonstrates the proposed preflight command only; actual candidate image builds and rollout are untested",
+  "reviewed_model_sha256": "def24351069fc96d699543399d264104e6b0a963ca6e8d02acc13052b2450f4b",
+  "scenarios": {
+    "healthy_artifact": {
+      "candidate_gate": {
+        "accepted": true,
+        "exit_code": 0
+      }
+    },
+    "missing_artifact": {
+      "candidate_gate": {
+        "accepted": false,
+        "exit_code": 1
+      }
+    }
+  },
+  "schema_version": "diagnostic-proposal-replay-v1"
+}

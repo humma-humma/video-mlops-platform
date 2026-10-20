@@ -1,4 +1,4 @@
--r requirements-service.txt
+-r requirements-service.lock.txt
 transformers==4.56.1
 accelerate==1.10.1
 pandas==2.3.2

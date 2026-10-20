@@ -3,6 +3,7 @@
 Submit a video, follow its GPU job, and retrieve a summary and category from a small browser UI. Behind that user flow, this **ML infrastructure portfolio** demonstrates durable asynchronous jobs, bounded GPU admission, recovery, model lineage, operations views and an exercised local rollback. The video model is an existing workload used to test the service design, not the main contribution. A separate CPU text-model deployment exercises the same job platform through the API. The demo runs on one local RTX 2080, with no cloud deployment or hosting charges.
 
 Read the [service evolution and setup timeline](docs/SERVICE_EVOLUTION.md) for what each addition solved, how a person's request moves through the system, and which claims have recorded evidence.
+For the incident-diagnostic pilot, start with the [case index](docs/DIAGNOSTIC_CASE_INDEX.md) and [40-second recorded-evidence walkthrough](assets/portfolio/diagnostic_walkthrough.mp4).
 
 ![Video-MLOps portfolio banner](assets/portfolio/video_mlops_banner.png)
 
@@ -62,7 +63,7 @@ separate from the GPU worker container and the original research `uv.lock`:
 
 ```powershell
 py -3.12 -m venv .venv
-& '.\.venv\Scripts\python.exe' -m pip install -r requirements-service-test.txt
+& '.\.venv\Scripts\python.exe' -m pip install -r requirements-service-test.lock.txt
 ```
 
 If `.venv` already exists with the service-test dependencies, keep it. The
@@ -115,6 +116,9 @@ deployment. Do not use `docker compose down -v` if you want to keep job data.
 | Live storage-dependency failure and retry | [MinIO outage ledger](reports/diagnostics/minio-live/incident.json), [failed](reports/diagnostics/minio-live/failed_job.json) and [recovered](reports/diagnostics/minio-live/recovered_job.json) redacted bundles; [runbook](docs/MINIO_INCIDENT_RUNBOOK.md) |
 | Damaged-video GPU failure and diagnostic abstention | [Fixture and job evidence](reports/diagnostics/decoder-live/incident.json), [runbook](docs/DECODER_INCIDENT_RUNBOOK.md): metadata admission accepted damaged frames, while the exported job only reported `inference` |
 | Repaired decoder failure observability | [Live rerun](reports/diagnostics/decoder-live-v2/incident.json) on the same damaged input records `decode_failed` before model inference; [prespecified case](reports/diagnostics/decoder-live-v2/evaluation.json) reports `reported_decode_failure` with valid citations (1/1) |
+| Read-time result loss and honest abstention | [Prospective local incident](reports/diagnostics/result-loss-live/incident.json): a successful job's result read returned 503, then the exact object was restored; the workbench abstained (1/1) |
+| Packaged CPU model failure | [Live incident](reports/diagnostics/model-artifact-live/incident.json) recorded `model_artifact_unavailable`; [development evaluation](reports/diagnostics/model-artifact-live/evaluation.json) matched 1/1 and the restored worker completed a control job |
+| Safe diagnostic proposal | [Unapplied model-artifact build gate](reports/diagnostics/proposals/model_artifact_build_gate.json) and [offline command replay](reports/diagnostics/proposals/model_artifact_replay.json) |
 | Honest evaluation gate | [Rejected measured candidate](reports/local_demo_gate.json) under a [provisional policy](configs/gates/local-demo.json) |
 | GPU and request measurements | [GPU profile](reports/gpu_profile.md), [bounded serving measurements](reports/serving_measurement_smoke.md) |
 | Operational release and rollback | [Executed release report](reports/release_demo_20261017105931.json), [candidate probe](reports/release_candidate_20261017105931.json), [rollback probe](reports/release_rollback_20261017105931.json) |
@@ -125,11 +129,12 @@ deployment. Do not use `docker compose down -v` if you want to keep job data.
 See [delivery status](reports/delivery_status.md) for dated evidence and limits. The [reliability/release runbook](docs/LOCAL_RELEASE.md) reproduces the controlled worker interruption and operational rollout/rollback sequence. GitHub Actions runs the Python and Node checks and a fake-worker Compose smoke on a fresh runner; real GPU acceptance is separate local evidence.
 
 The [two-minute walkthrough script](docs/WALKTHROUGH_SCRIPT.md) maps each claim to a live screen or saved report for a portfolio recording.
+The separate [short diagnostic walkthrough](docs/DIAGNOSTIC_VIDEO_WALKTHROUGH.md) is a silent video rendered from saved evidence; it is not live-browser footage.
 
 The [offline diagnostic workbench pilot](docs/DIAGNOSTIC_WORKBENCH.md) exports bounded, redacted incident evidence and checks a deterministic diagnosis baseline against report-derived cases, four historical live-job records, a [controlled service-task walkthrough](docs/DIAGNOSTIC_WALKTHROUGH.md), a [live MinIO interruption](docs/MINIO_INCIDENT_RUNBOOK.md) and a [damaged-video GPU run](docs/DECODER_INCIDENT_RUNBOOK.md). The live storage case demonstrates a durable dependency failure and successful retry. The damaged-video case shows abstention when the old worker exposed only a broad `inference` code; its [repaired live rerun](reports/diagnostics/decoder-live-v2/incident.json) records a bounded first-frame `decode_failed` attempt and a cited diagnosis. These small controlled collections are not an independent root-cause benchmark.
 
 ## Scope and limitations
 
-This deployment has one host and one GPU. Short bursts establish admission behavior, not sustained capacity or production p95 latency. The gate rejection uses 2.2B experiment reports and does not approve the distinct 500M serving model. GPU usage on the dashboard is device-wide. CI exercises fake inference with an S3 API test double; the real GPU and MinIO checks are local. Python service dependencies use version ranges and some container tags are mutable, so the setup is functionally tested rather than byte-for-byte reproducible from a fresh clone. A recorded walkthrough remains open. AWS and an external restricted-access deployment are deferred; see the [portfolio direction](docs/PORTFOLIO_REFERENCE.md).
+This deployment has one host and one GPU. Short bursts establish admission behavior, not sustained capacity or production p95 latency. The gate rejection uses 2.2B experiment reports and does not approve the distinct 500M serving model. GPU usage on the dashboard is device-wide. CI exercises fake inference with an S3 API test double; the real GPU and MinIO checks are local. The [Python 3.12 snapshots and pinned base image](docs/REPRODUCIBILITY.md) improve repeatability, but mutable Compose dependency tags, uncaptured GPU transitive packages and system libraries prevent a byte-for-byte claim. The live-browser recording remains open; the saved-evidence video is available. AWS and an external restricted-access deployment are deferred; see the [portfolio direction](docs/PORTFOLIO_REFERENCE.md).
 
 The video model and dataset came from an [earlier assignment and research workflow](docs/ORIGINAL_ASSIGNMENT.md). That document preserves its original objective, data instructions, examples and optimization commands; those runs are separate from the serving demo.

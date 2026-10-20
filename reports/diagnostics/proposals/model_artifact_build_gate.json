@@ -1,0 +1,16 @@
+{
+  "schema_version": "diagnostic-proposal-v1",
+  "status": "human_review_required",
+  "incident": "../model-artifact-live/incident.json",
+  "observed_evidence": [
+    "../model-artifact-live/failed_job.json#/observations/attempts/0/error_code",
+    "../model-artifact-live/run_state.json#/artifact_restored_exactly"
+  ],
+  "proposed_patch": "../../../proposals/model_artifact_build_gate.patch",
+  "change": "Check the packaged text model's SHA-256 and schema during image build, before a candidate image can be deployed",
+  "expected_effect": "A missing or mismatched packaged CPU model fails the candidate build instead of failing its first text job",
+  "risk": "An intentional model revision requires updating the reviewed digest; this gate does not prove runtime dependencies, GPU model availability or service health",
+  "next_experiment": "Build a candidate image from an isolated context with the model file removed, then confirm the build fails; build the unchanged context and run the CPU deployment smoke",
+  "rollback": "Discard the candidate image or revert this Dockerfile patch and redeploy the previously recorded image ID; no database or object-store migration is involved",
+  "scope": "Offline proposal and command-level replay only; patch is not applied to the deployed Dockerfile"
+}
