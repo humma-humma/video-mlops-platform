@@ -217,6 +217,10 @@ def from_api(base_url: str, job_id: str, api_key: str = "") -> dict:
                                          "release_id_sha256": digest(release_id.encode()) if
                                          isinstance(release_id, str) and len(release_id) <= 64 else None,
                                          "metrics": metrics_snapshot(metrics)}}
+    if observations["status"] == "FAILED" and len(attempts) == 1 and attempts[0].get("status") == "FAILED":
+        stage = limited(attempts[0].get("failure_stage"), FAILURE_STAGES)
+        if stage is not None:
+            observations["failure_stage"] = stage
     # Current state is deliberately distinct from the old job's producer identity.
     bundle = finish_bundle("live_api", source_hashes, observations)
     bundle["missing_evidence"].extend(["producer_release_id", "external_worker_lifecycle_events"])

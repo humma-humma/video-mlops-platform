@@ -234,6 +234,9 @@ def test_result_upload_failure_is_persisted_as_failed_job(service, monkeypatch):
     assert job["status"] == "FAILED"
     assert job["error"] == "Artifact store request failed"
     assert job["result"] is None
+    attempt = client.get(f"/jobs/{job_id}/attempts").json()[0]
+    assert attempt["error_code"] == "dependency"
+    assert attempt["failure_stage"] == "result_storage"
 
 
 def test_api_and_worker_use_s3_artifact_uris(service, monkeypatch):

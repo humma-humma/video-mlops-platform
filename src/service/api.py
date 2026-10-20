@@ -295,7 +295,8 @@ def get_attempts(job_id: str):
             raise HTTPException(404, "Job not found")
         attempts = db.scalars(select(JobAttempt).where(JobAttempt.job_id == job_id).order_by(JobAttempt.number)).all()
         return [{"attempt_id": a.id, "number": a.number, "status": a.status,
-                 "error_code": a.error_code, "error": a.error_message,
+                 "error_code": a.error_code, "failure_stage": a.failure_stage,
+                 "error": a.error_message,
                  "started_at": a.started_at, "finished_at": a.finished_at} for a in attempts]
 
 @app.get("/jobs/{job_id}/events", dependencies=[Depends(require_auth)])

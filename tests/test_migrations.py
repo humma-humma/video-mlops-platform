@@ -29,6 +29,7 @@ def test_fresh_upgrade_is_repeatable(database):
     migrate(database, "head")
     assert {"jobs", "job_attempts", "job_events", "alembic_version"} <= set(inspect(database).get_table_names())
     assert {"generation", "idempotency_key", "trace_id", "deployment_id"} <= {c["name"] for c in inspect(database).get_columns("jobs")}
+    assert "failure_stage" in {c["name"] for c in inspect(database).get_columns("job_attempts")}
 
 
 def test_unversioned_legacy_rows_survive_upgrade_and_lifecycle_rollback(database):

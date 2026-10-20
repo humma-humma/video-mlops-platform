@@ -1,0 +1,28 @@
+{
+  "schema_version": "prospective-incident-protocol-v1",
+  "registered_date": "2026-10-20",
+  "purpose": "Challenge frozen diagnostic rules with two new local CPU-input failures",
+  "rules_sha256": "c4c8c3afebff94bb8e00de1cb057ef05c1869f64ff6e7faa7581329304004ca9",
+  "intervention": "Queue two new synthetic text jobs while only the CPU worker is stopped; replace one new input object with invalid UTF-8 and temporarily remove the other new input object; then restart the worker",
+  "cases": {
+    "undecodable_text_input": {
+      "expected_status": "FAILED",
+      "expected_attempt_code": "internal",
+      "expected_failure_stage": "inference",
+      "expected_diagnosis": "insufficient_evidence"
+    },
+    "missing_cpu_input": {
+      "expected_status": "FAILED",
+      "expected_attempt_code": "missing_input",
+      "expected_failure_stage": "artifact_check",
+      "expected_diagnosis": "reported_missing_input"
+    }
+  },
+  "control": "Restore both objects byte-for-byte and verify a third new text job succeeds",
+  "limits": [
+    "The corrupt-encoding mechanism is new live evidence, but the expected abstention and missing-input rule are known in advance.",
+    "The missing-input case tests a CPU-deployment confounder against model-artifact loss; it is not a novel diagnosis class.",
+    "The intervention is restricted to new synthetic jobs and must preserve named volumes and restore both input objects in a finally block.",
+    "This two-case local check does not estimate population-level root-cause accuracy."
+  ]
+}

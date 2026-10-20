@@ -221,3 +221,45 @@ def test_api_export_is_loopback_read_only_bounded_and_redacted():
     later["input_sha256"] = "c" * 64
     other_input = finish_bundle("synthetic_variant", {"parent_bundle": bundle["bundle_sha256"]}, later)
     assert compare(bundle, other_input)["comparable"] is False
+
+
+def test_api_export_includes_only_allowlisted_stage_for_one_failed_attempt():
+    job_id = "48168988-af5a-4f1d-97eb-16f8cccc5ffd"
+    prefix = "/api/v1/jobs/" + job_id
+    responses = {
+        prefix: {"status": "FAILED", "deployment_id": "text-topic-v1", "result": None},
+        prefix + "/attempts": [{"number": 1, "status": "FAILED", "error_code": "dependency",
+                                  "failure_stage": "result_storage", "error": "SECRET"}],
+        prefix + "/events": [],
+        "/health/live": {"status": "ok", "release_id": "local-unversioned"},
+        "/metrics": "",
+    }
+
+    class FakeResponse:
+        def __init__(self, value):
+            self.stream = io.BytesIO((value if isinstance(value, str) else json.dumps(value)).encode())
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *unused):
+            pass
+
+        def read(self, count):
+            return self.stream.read(count)
+
+    class FakeOpener:
+        def open(self, request, timeout):
+            return FakeResponse(responses[request.full_url.removeprefix("http://127.0.0.1:8000")])
+
+    with patch("src.diagnostics.build_opener", return_value=FakeOpener()):
+        bundle = from_api("http://127.0.0.1:8000", job_id)
+    assert bundle["observations"]["failure_stage"] == "result_storage"
+    assert "SECRET" not in json.dumps(bundle)
+    assert diagnose(bundle)["diagnosis"] == "reported_result_write_failure"
+    responses[prefix + "/attempts"][0]["failure_stage"] = "arbitrary_secret_stage"
+    with patch("src.diagnostics.build_opener", return_value=FakeOpener()):
+        ambiguous = from_api("http://127.0.0.1:8000", job_id)
+    assert "failure_stage" not in ambiguous["observations"]
+    assert diagnose(ambiguous)["diagnosis"] == "insufficient_evidence"
+

@@ -104,7 +104,7 @@ def process_job(self, job_id: str, generation: int = 0) -> None:
             if not changed.rowcount:
                 db.rollback()
                 raise WorkerFailure("Stale job execution failed") from None
-            attempt.status, attempt.error_code = "FAILED", code
+            attempt.status, attempt.error_code, attempt.failure_stage = "FAILED", code, stage
             attempt.error_message, attempt.finished_at = message, finished
             record_event(db, job, "failed", attempt.id)
             db.commit()

@@ -1,0 +1,20 @@
+{
+  "schema_version": "diagnostic-cases-v1",
+  "cases": [
+    {
+      "id": "undecodable_text_input",
+      "bundle": "undecodable_input.json",
+      "expected": "insufficient_evidence",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    },
+    {
+      "id": "missing_cpu_input",
+      "bundle": "missing_input.json",
+      "expected": "reported_missing_input",
+      "split": "held_out",
+      "origin": "controlled_live_service"
+    }
+  ],
+  "limits": "Labels and frozen rules hash were registered before the live intervention. Both cases use one local service and related controlled jobs; they are not independent deployment incidents."
+}
