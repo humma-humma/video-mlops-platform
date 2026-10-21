@@ -1,0 +1,10 @@
+{
+  "bundle_sha256": {
+    "missing_cpu_input": "50e0b5b7c5f45ddb78c08b329ce3b6b6c47cc5019dcb70b9d45312b4e24c1aa7",
+    "undecodable_text_input": "ffd823fa6e42c6b6c5a9d643667dde386b49ef113781630a124fb8dfde14c41f"
+  },
+  "ledger_sha256": "6d361c6a5a7790dcd8fcfc30ae11097d85927606c6107474f041229cccec657a",
+  "protocol_sha256": "0dba8591e19bd459693d96183232e45778d106a93d631d3b29d3bdc91d599afd",
+  "run_state_sha256": "7bba96d200a1ac673e131eb37d396076bf7b499f08b49f6759e2be2df898cc14",
+  "schema_version": "cpu-input-challenge-recovered-v1"
+}

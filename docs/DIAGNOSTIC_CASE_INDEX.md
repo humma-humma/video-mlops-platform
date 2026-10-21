@@ -12,6 +12,6 @@ Start with the [40-second recorded-evidence walkthrough](../assets/portfolio/dia
 | [Unrelated worker](UNRELATED_WORKER_RUNBOOK.md) | CPU worker interrupted during successful GPU job | Abstention | External kill event is script-recorded |
 | [Result object loss](RESULT_LOSS_RUNBOOK.md) | One completed job's result object disappears | Abstention; exact result restored | Bundle cannot infer object deletion |
 | [Model artifact loss](MODEL_ARTIFACT_INCIDENT_RUNBOOK.md) | Packaged CPU model unavailable; control succeeds after restoration | Cited typed code, 1/1 development | Rule built for this mechanism |
-| [New CPU-input challenge](INPUT_CONFOUNDER_RUNBOOK.md) | Undecodable bytes versus missing input object | Pre-registered; live run pending | Frozen rules, two related synthetic jobs |
+| [New CPU-input challenge](INPUT_CONFOUNDER_RUNBOOK.md) | Undecodable bytes versus missing input object | 2/2 registered diagnoses; one attempt-code expectation missed | Frozen rules, two related synthetic jobs |
 
 The [proposal and replay](../reports/diagnostics/proposals/model_artifact_build_gate.json) uses the model-artifact incident to suggest a build-time artifact gate. Its patch remains unapplied and requires human review. Score supported findings, correct abstentions, citation accuracy and false confidence separately; do not sum all passes into a root-cause accuracy percentage.

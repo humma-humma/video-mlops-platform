@@ -1,0 +1,68 @@
+{
+  "bundle_sha256": "50e0b5b7c5f45ddb78c08b329ce3b6b6c47cc5019dcb70b9d45312b4e24c1aa7",
+  "missing_evidence": [
+    "raw_logs",
+    "per_job_gpu_telemetry",
+    "producer_release_id",
+    "external_worker_lifecycle_events"
+  ],
+  "observations": {
+    "admission": null,
+    "attempts": [
+      {
+        "error_code": "missing_input",
+        "finished_at": "2026-10-21T09:40:50.421253+00:00",
+        "number": 1,
+        "started_at": "2026-10-21T09:40:50.402079+00:00",
+        "status": "FAILED"
+      }
+    ],
+    "current_snapshot": {
+      "metrics": {
+        "video_job_capacity": 2.0,
+        "video_jobs_outstanding": 0.0,
+        "video_oldest_queued_job_seconds": 0.0
+      },
+      "observed_at": "2026-10-21T15:52:17.586902+00:00",
+      "release_id_sha256": "d27d8e4f2d97f4c707b5f8ace0e8bff88c2868abef798181a9dd2f014af631ee"
+    },
+    "deployment_id": "text-topic-v1",
+    "events": [
+      {
+        "event": "submitted",
+        "generation": 0,
+        "timestamp": "2026-10-21T09:40:47.911811+00:00"
+      },
+      {
+        "event": "dispatched",
+        "generation": 0,
+        "timestamp": "2026-10-21T09:40:47.922325+00:00"
+      },
+      {
+        "event": "running",
+        "generation": 0,
+        "timestamp": "2026-10-21T09:40:50.403228+00:00"
+      },
+      {
+        "event": "failed",
+        "generation": 0,
+        "timestamp": "2026-10-21T09:40:50.422606+00:00"
+      }
+    ],
+    "failure_stage": "artifact_check",
+    "input_sha256": null,
+    "lineage_hashes": {},
+    "model_revision": null,
+    "status": "FAILED",
+    "timings_seconds": {}
+  },
+  "schema_version": "diagnostic-bundle-v1",
+  "source_kind": "live_api",
+  "source_sha256": {
+    "attempts": "31bab1913e1fcc4c9528cdf6e4f53fa9697989a9757502c5dd1b65800bed866a",
+    "events": "dd99a694a3b71a2ff21a0415562f3d9bfc6976a5655e6fb8c868a0cc5b9fcb80",
+    "job": "148a895fe90e4c710fd0f86f6fa1041dd7421806b81d07febb2458211e324070",
+    "live": "99262c5a478523a6ec1f86969f42900a575c81857e18e76d3ad1f6b5317f11ea",
+    "metrics": "2c97c3ab3e9e540b6188675671b5f2efa0d219f7bd6745f8f5d4ad806bf13055"
+  }
+}

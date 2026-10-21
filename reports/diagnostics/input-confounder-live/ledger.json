@@ -1,0 +1,37 @@
+{
+  "case_manifest_sha256": "5f9f823e49333a23903865e8ab2d3a033db22e05f458d6a4514f2672f1a40daa",
+  "control_status": "SUCCEEDED",
+  "job_id_sha256": {
+    "missing_cpu_input": "7ac5f5113bbda7cd81ae04942cffd0bff032bcd92fb4450ef4776c793bc16085",
+    "undecodable_text_input": "6d22677da56cccedb0dc2ee26dd891f47f7865d674947ae8eaf0e58428da8d47"
+  },
+  "limits": [
+    "The corrupt-encoding mechanism is new live evidence, but the expected abstention and missing-input rule are known in advance.",
+    "The missing-input case tests a CPU-deployment confounder against model-artifact loss; it is not a novel diagnosis class.",
+    "The intervention is restricted to new synthetic jobs and must preserve named volumes and restore both input objects in a finally block.",
+    "This two-case local check does not estimate population-level root-cause accuracy."
+  ],
+  "observations": {
+    "missing_cpu_input": {
+      "attempt_code": "missing_input",
+      "attempt_code_matches_registration": true,
+      "diagnosis": "reported_missing_input",
+      "diagnosis_matches_registration": true,
+      "failure_stage": "artifact_check",
+      "failure_stage_matches_registration": true
+    },
+    "undecodable_text_input": {
+      "attempt_code": "invalid_output",
+      "attempt_code_matches_registration": false,
+      "diagnosis": "insufficient_evidence",
+      "diagnosis_matches_registration": true,
+      "failure_stage": "inference",
+      "failure_stage_matches_registration": true
+    }
+  },
+  "observed_at": "2026-10-21T15:52:18.900523+00:00",
+  "protocol_sha256": "0dba8591e19bd459693d96183232e45778d106a93d631d3b29d3bdc91d599afd",
+  "recovery_note": "Original runner stopped at a preregistered attempt-code mismatch after restoring inputs; no faults were rerun.",
+  "rules_sha256": "c4c8c3afebff94bb8e00de1cb057ef05c1869f64ff6e7faa7581329304004ca9",
+  "schema_version": "cpu-input-challenge-recovered-v1"
+}

@@ -1,0 +1,50 @@
+{
+  "abstentions": 1,
+  "by_split": {
+    "development": {
+      "correct": 0,
+      "total": 0
+    },
+    "held_out": {
+      "correct": 2,
+      "total": 2
+    }
+  },
+  "case_manifest_sha256": "5f9f823e49333a23903865e8ab2d3a033db22e05f458d6a4514f2672f1a40daa",
+  "cases": [
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "ffd823fa6e42c6b6c5a9d643667dde386b49ef113781630a124fb8dfde14c41f",
+      "case_id": "undecodable_text_input",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "insufficient_evidence",
+      "origin": "controlled_live_service",
+      "predicted": "insufficient_evidence",
+      "split": "held_out"
+    },
+    {
+      "baseline_bundle_sha256": null,
+      "bundle_sha256": "50e0b5b7c5f45ddb78c08b329ce3b6b6c47cc5019dcb70b9d45312b4e24c1aa7",
+      "case_id": "missing_cpu_input",
+      "citations_valid": true,
+      "correct": true,
+      "expected": "reported_missing_input",
+      "origin": "controlled_live_service",
+      "predicted": "reported_missing_input",
+      "split": "held_out"
+    }
+  ],
+  "citations_valid": true,
+  "cited_cases": 1,
+  "correct": 2,
+  "correct_abstentions": 1,
+  "correct_diagnoses": 1,
+  "false_confident": 0,
+  "missed_diagnoses": 0,
+  "rules_sha256": "c4c8c3afebff94bb8e00de1cb057ef05c1869f64ff6e7faa7581329304004ca9",
+  "schema_version": "diagnostic-evaluation-v1",
+  "scope": "Controlled local live cases; labels check evidence-level classification, not generalization",
+  "supported_diagnoses": 1,
+  "total": 2
+}

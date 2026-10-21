@@ -1,0 +1,16 @@
+{
+  "cpu_worker_started": true,
+  "input_sha256": {
+    "missing_cpu_input": "eb11d23ce86dde648cf4d8210cda64e7d7d5ca0c305b118f82b97dd24e54d4a1",
+    "undecodable_text_input": "eb11d23ce86dde648cf4d8210cda64e7d7d5ca0c305b118f82b97dd24e54d4a1"
+  },
+  "job_id_sha256": {
+    "missing_cpu_input": "7ac5f5113bbda7cd81ae04942cffd0bff032bcd92fb4450ef4776c793bc16085",
+    "undecodable_text_input": "6d22677da56cccedb0dc2ee26dd891f47f7865d674947ae8eaf0e58428da8d47"
+  },
+  "object_restored_exactly": {
+    "missing_cpu_input": true,
+    "undecodable_text_input": true
+  },
+  "schema_version": "cpu-input-challenge-restoration-v1"
+}
