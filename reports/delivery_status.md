@@ -1,5 +1,9 @@
 # Delivery evidence — 2026-10-09
 
+## Diagnostic workbench update — 2026-10-21
+
+The five bounded portfolio additions are implemented: a preregistered live CPU-input challenge, allowlisted failure-stage evidence, a reviewer case index and recorded-evidence walkthrough, an unapplied model-artifact build-gate proposal with local command replay, and a version-pinned Python 3.12 CPU delivery path with CI checks. The [live challenge ledger](diagnostics/input-confounder-live/ledger.json) preserves the original job hashes and an attempt-code expectation miss. Its [evaluation](diagnostics/input-confounder-live/evaluation.json) matched 2/2 registered diagnoses: one cited missing-input finding and one correct abstention. Both changed input objects were restored exactly, and a fresh CPU control job succeeded. These are two related local incidents, not an independent root-cause benchmark. The walkthrough is rendered from saved reports, not live browser footage. The full GPU dependency closure and mutable Compose dependency tags remain outside the pinned CPU boundary; see [reproducibility limits](../docs/REPRODUCIBILITY.md). Remote CI for this newest evidence commit is pending publication from the portfolio branch.
+
 ## Local demo completion update — 2026-10-17
 
 The rebuilt GPU stack accepted two real jobs and reused one model instance:
